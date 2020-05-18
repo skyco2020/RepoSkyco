@@ -5,6 +5,10 @@ using Swashbuckle.Application;
 using Swashbuckle.Swagger;
 using System.Collections.Generic;
 using System.Web.Http.Description;
+using System;
+using System.Reflection;
+using System.IO;
+using SkyCoApi.App_Start.Swagger;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
@@ -19,8 +23,25 @@ namespace SkyCoApi
             GlobalConfiguration.Configuration
                 .EnableSwagger(c =>
                 {
-                    c.SingleApiVersion("v1", "WebApiSegura con soporte Token JWT");
+                    var baseDirectory = AppDomain.CurrentDomain.BaseDirectory + @"\bin\";
+                    var commentsFileName = Assembly.GetExecutingAssembly().GetName().Name + ".xml";
+                    var commentsFile = Path.Combine(baseDirectory, commentsFileName);
+
+                    c.SingleApiVersion("v1", "WebApiSegura con soporte Token JWT")
+                     .Description("Sky co")
+                          .TermsOfService("Some terms")
+                          .Contact(cc => cc
+                          .Name("Sky co")
+                          .Url("https://somostechies.com/contact")
+                          .Email("skyco2020streaming@gmail.com"))
+                          .License(lc => lc
+                          .Name("Some License")
+                          .Url("https://somostechies.com/license"));
+                    //c.DocumentFilter<AuthTokenOperation>();
+
+                    c.OperationFilter<HalResponseType>();
                     c.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
+                    c.IncludeXmlComments(commentsFile);
                 })
                 .EnableSwaggerUi();
         }

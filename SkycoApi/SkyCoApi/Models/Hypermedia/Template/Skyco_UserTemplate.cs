@@ -58,6 +58,18 @@ namespace SkyCoApi.Models.Hypermedia.Template
         public static Link UpdateSkyco_User { get { return new Link("update", baseaddress + "/Skyco_Users/{id}"); } }
         public static Link DeleteSkyco_User { get { return new Link("delete", baseaddress + "/Skyco_Users/{id}"); } }
         public static Link GetSkyco_UserPagination { get { return new Link("Skyco_Users", baseaddress + "/Skyco_Users/{?page}"); } }
+
+        public static Link GetSkyco_Account { get { return new Link("Skyco_Accounts", baseaddress + "/Skyco_Accounts/{id}"); } }
+        public static Link GetMySkyco_Account { get { return new Link("Skyco_Accounts", baseaddress + "/Skyco_Users/{id}" + "/Skyco_Accounts/{id2}"); } }
+        public static Link GetMySkyco_Accounts { get { return new Link("Skyco_Accounts", baseaddress + "/Skyco_Users/{id}" + "/Skyco_Accounts"); } }
+
+        public static Link GetSkyco_Address { get { return new Link("Skyco_Addresses", baseaddress + "/Skyco_Addresses/{id}"); } }
+        public static Link GetMySkyco_Address { get { return new Link("Skyco_Addresses", baseaddress + "/Skyco_Users/{id}" + "/Skyco_Addresses/{id2}"); } }
+        public static Link GetMySkyco_Addresses { get { return new Link("Skyco_Addresses", baseaddress + "/Skyco_Users/{id}" + "/Skyco_Addresses"); } }
+
+        public static Link GetSkyco_Phone { get { return new Link("Skyco_Phones", baseaddress + "/Skyco_Phones/{id}"); } }
+        public static Link GetMySkyco_Phone { get { return new Link("Skyco_Phones", baseaddress + "/Skyco_Users/{id}" + "/Skyco_Phones/{id2}"); } }
+        public static Link GetMySkyco_Phones { get { return new Link("Skyco_Phones", baseaddress + "/Skyco_Users/{id}" + "/Skyco_Phones"); } }
         #endregion
     }
 }

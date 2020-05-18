@@ -1,10 +1,18 @@
+using SkyCoApi.Models.Hypermedia.Template;
+using SkyCoApi.Models.Representations;
 using System;
 using System.Collections.Generic;
 
 namespace SkyCoApi.Models.DTO.Single
 {
-    public partial class Skyco_AddressDTO
+    public partial class Skyco_AddressDTO : BaseRepresentation
     {
+        #region Constructor
+        public Skyco_AddressDTO()
+        {
+            Rel = Mytemplate.GetMyRelationReference().Rel;
+        }
+        #endregion
 
         #region Properties
         public Int64 AddressId { get; set; }
@@ -26,5 +34,31 @@ namespace SkyCoApi.Models.DTO.Single
         public Skyco_UserDTO Skyco_User { get; set; }
         #endregion
 
+        #region Override & Hypermedia
+        public override BaseTemplate Mytemplate
+        {
+            get
+            {
+                if (_mytemplate == null)
+                    _mytemplate = Skyco_AddressTemplate.GetInstance();
+                return _mytemplate;
+            }
+
+            set
+            {
+                _mytemplate = value;
+            }
+        }
+
+        public override Int64 IDRepresentation()
+        {
+            return AddressId;
+        }
+
+        protected override void CreateHypermedia()
+        {
+            Href = Skyco_AddressTemplate.Skyco_Address.CreateLink(new { id = AddressId }).Href;
+        }
+        #endregion
     }
 }

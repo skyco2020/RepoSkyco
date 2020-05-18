@@ -40,6 +40,7 @@ namespace SkyCoApi.Models.DTO.Single
         public List<Skyco_AddressDTO> Skyco_Address { get; set; }
         public List<Skyco_PhoneDTO> Skyco_Phone { get; set; }
         #endregion
+       
         #region Override & Hypermedia
         public override BaseTemplate Mytemplate
         {
@@ -64,6 +65,21 @@ namespace SkyCoApi.Models.DTO.Single
         protected override void CreateHypermedia()
         {
             Href = Skyco_UserTemplate.Skyco_User.CreateLink(new { id = UserId }).Href;
+        }
+        #endregion
+
+        #region Relations
+        public void MySkyco_AccountRelations()
+        {
+            Links.Add(Skyco_UserTemplate.GetMySkyco_Account.CreateLink(new { id = UserId }));
+        }
+        public void MySkyco_AddressRelations()
+        {
+            Links.Add(Skyco_UserTemplate.GetMySkyco_Address.CreateLink(new { id = UserId }));
+        }
+        public void MySkyco_PhoneRelations()
+        {
+            Links.Add(Skyco_UserTemplate.GetMySkyco_Phone.CreateLink(new { id = UserId }));
         }
         #endregion
     }

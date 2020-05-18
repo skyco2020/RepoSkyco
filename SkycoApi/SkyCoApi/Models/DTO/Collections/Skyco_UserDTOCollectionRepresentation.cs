@@ -30,19 +30,25 @@ namespace SkyCoApi.Models.DTO.Collections
         #region Representations
         public Skyco_UserDTOCollectionRepresentation(IList<Skyco_UserDTO> list) : base(list)
         {
-            foreach (var l in list)
+            foreach (Skyco_UserDTO usr in list)
             {
-                l.CreateUpdateLink();
-                l.CreateDeleteLink();
+                usr.CreateUpdateLink();
+                usr.CreateDeleteLink();
+                usr.MySkyco_AccountRelations();
+                usr.MySkyco_AddressRelations();
+                usr.MySkyco_PhoneRelations();
             }
         }
 
         public Skyco_UserDTOCollectionRepresentation(IList<Skyco_UserDTO> list, String filters, Int32 pagenumber, Int32 count, Int32 top) : base(list, filters, pagenumber, count, top)
         {
-            foreach (var l in list)
+            foreach (Skyco_UserDTO usr in list)
             {
-                l.CreateUpdateLink();
-                l.CreateDeleteLink();
+                usr.CreateUpdateLink();
+                usr.CreateDeleteLink();
+                usr.MySkyco_AccountRelations();
+                usr.MySkyco_AddressRelations();
+                usr.MySkyco_PhoneRelations();
             }
         }
         #endregion

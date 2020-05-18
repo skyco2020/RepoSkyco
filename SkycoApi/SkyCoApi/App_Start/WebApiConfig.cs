@@ -1,4 +1,8 @@
-﻿using SkyCoApi.Controllers.Token;
+﻿using Microsoft.AspNet.WebApi.MessageHandlers.Compression;
+using Microsoft.AspNet.WebApi.MessageHandlers.Compression.Compressors;
+using Microsoft.Owin.Security.OAuth;
+using SkyCoApi.ActionFilters;
+using SkyCoApi.Controllers.Token;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +15,11 @@ namespace SkyCoApi
     {
         public static void Register(HttpConfiguration config)
         {
-          
+
+            // Web API configuration and services
+            // Configure Web API to use only bearer token authentication.
+            config.Filters.Add(new LoggingFilterAttribute());
+            config.Filters.Add(new GlobalExceptionAttribute());
 
             config.MapHttpAttributeRoutes();
             config.MessageHandlers.Add(new TokenValidationHandler());

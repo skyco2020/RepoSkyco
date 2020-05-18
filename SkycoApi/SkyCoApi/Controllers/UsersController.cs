@@ -69,60 +69,32 @@ namespace SkyCoApi.Controllers
         [System.Web.Http.HttpPost]
         public async Task<IHttpActionResult> Post(Skyco_UserBE be)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-                _services.Create(be);
-                return Created(new Uri(Url.Link("DefaultApi", new { Id = be.UserId })), be);
+                return BadRequest(ModelState);
             }
-            catch (Exception ex)
-            {
-                var except = (ApiBusinessException)HandlerErrorExceptions.GetInstance().RunCustomExceptions(ex);
-                var resp = BadRequest(Convert.ToString(except.ErrorDescription));
-                return resp;
-            }
-           
+            _services.Create(be);
+            return Created(new Uri(Url.Link("DefaultApi", new { Id = be.UserId })), be); 
         }
 
         [AllowAnonymous]
         [System.Web.Http.HttpPut]
         public async Task<IHttpActionResult> Put(Skyco_UserBE bE)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-                _services.Update(bE);
-                return Ok();
+                return BadRequest(ModelState);
             }
-            catch (Exception ex)
-            {
-                var except = (ApiBusinessException)HandlerErrorExceptions.GetInstance().RunCustomExceptions(ex);
-                var resp = BadRequest(Convert.ToString(except.ErrorDescription));
-                return resp;
-            }         
+            _services.Update(bE);
+            return Ok();       
         }
         [Authorize]
         [System.Web.Http.HttpDelete]
         public async Task<IHttpActionResult> Delete(Int64 id)
         {
-            try
-            {
-                ClaimsIdentity identityClaims = (ClaimsIdentity)User.Identity;
-                _services.Delete(id, identityClaims.FindFirst("username").Value);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                var except = (ApiBusinessException)HandlerErrorExceptions.GetInstance().RunCustomExceptions(ex);
-                var resp = BadRequest(Convert.ToString(except.ErrorDescription));
-                return resp;
-            }           
+            ClaimsIdentity identityClaims = (ClaimsIdentity)User.Identity;
+            _services.Delete(id, identityClaims.FindFirst("username").Value);
+            return Ok();                   
         }
     }
 }
