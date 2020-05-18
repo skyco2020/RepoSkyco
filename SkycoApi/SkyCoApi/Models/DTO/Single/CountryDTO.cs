@@ -1,14 +1,14 @@
 using System;
 using System.Collections.Generic;
 
-namespace SkyCoApi.Models.DTO
+namespace SkyCoApi.Models.DTO.Single
 {
-    public partial class Skyco_AddressDTO
+    public partial class CountryDTO
     {
-
         #region Properties
-        public Int64 AddressId { get; set; }
-        public Int64 UserId { get; set; }
+        public Int64 CountryId { get; set; }
+        public string CountryCode { get; set; }
+        public string CountryName { get; set; }
 
         public DateTime? CreatedAt { get; set; }
         public string CreatedBy { get; set; }
@@ -22,9 +22,9 @@ namespace SkyCoApi.Models.DTO
         public byte? Voided { get; set; }
         #endregion
 
-        #region Relation
-        public Skyco_UserDTO Skyco_User { get; set; }
+        #region List
+        public List<LocationDTO> Location { get; set; }
+        public List<ProvinceDTO> Provinces { get; set; }
         #endregion
-
     }
 }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace SkyCoApi.Models.DTO
+namespace SkyCoApi.Models.DTO.Single
 {
     public class CreateRoleBindingModel
     {

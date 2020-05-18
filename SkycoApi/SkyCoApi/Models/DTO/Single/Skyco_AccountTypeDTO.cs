@@ -1,13 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace SkyCoApi.Models.DTO
-{
-    public class BaseInf
+namespace SkyCoApi.Models.DTO.Single
+{   
+    public partial class Skyco_AccountTypeDTO
     {
-        public long UserId { get; set; }
+        #region Properties
+        public Int64 AccountTypeId { get; set; }
+        public string AccountTypeName { get; set; }
+
         public DateTime CreatedAt { get; set; }
         public string CreatedBy { get; set; }
 
@@ -18,6 +19,10 @@ namespace SkyCoApi.Models.DTO
         public string VoidedBy { get; set; }
 
         public byte? Voided { get; set; }
+        #endregion
 
+        #region List
+        public List<Skyco_AccountDTO> Skyco_Account { get; set; }
+        #endregion
     }
 }

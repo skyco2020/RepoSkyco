@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace SkyCoApi.Models.DTO
+namespace SkyCoApi.Models.DTO.Single
 {
     public partial class Skyco_AccountDTO
     {

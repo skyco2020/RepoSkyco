@@ -1,6 +1,6 @@
 ﻿using BusinessEntities.BE;
 using BusinessServices.Interfaces;
-using SkyCoApi.Models.DTO;
+using SkyCoApi.Models.DTO.Single;
 using System;
 using System.Collections.Generic;
 using System.Linq;

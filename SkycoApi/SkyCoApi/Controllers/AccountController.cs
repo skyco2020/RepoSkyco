@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using SkyCoApi.Infraestructure;
-using SkyCoApi.Models.DTO;
+using SkyCoApi.Models.DTO.Single;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
