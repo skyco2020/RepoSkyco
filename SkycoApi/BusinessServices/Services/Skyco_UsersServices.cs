@@ -3,6 +3,7 @@ using BusinessServices.Interfaces;
 using BusinessServices.Patterns.Factories;
 using DataModal.DataClasses;
 using DataModal.UnitOfWork;
+using Resolver.Cryptography;
 using Resolver.Enumerations;
 using Resolver.Exceptions;
 using Resolver.Mailing;
@@ -43,7 +44,10 @@ namespace BusinessServices.Services
                     List<DataModal.DataClasses.Skyco_Accounts> entity1 = _unitOfWork.SkycoAccountRepository.GetAllByFilters(predicate, null).ToList();
                     if (entity1.Count > 0)
                     {
-                        if (entity1.FirstOrDefault().Voided == (Int32)StateEnum.Deleted)
+                        String encrypt = MD5Base.GetInstance().Encypt("subscribe");
+                        if (entity1.FirstOrDefault().PasswordHash == encrypt)
+                            throw new ApiBusinessException(44, "Welcome to Sky co", System.Net.HttpStatusCode.NotFound, "Http");
+                        else if (entity1.FirstOrDefault().Voided == (Int32)StateEnum.Deleted)
                              throw new ApiBusinessException(44, "Welcome Back at Sky co", System.Net.HttpStatusCode.NotFound, "Http");
                         else
                             throw new ApiBusinessException(45, "There is already an account with this email", System.Net.HttpStatusCode.NotFound, "Http");
@@ -52,11 +56,11 @@ namespace BusinessServices.Services
 
                 _unitOfWork.Skyco_UserRepository.Create(entity);
                 _unitOfWork.Commit();
-                if(Username != String.Empty && Password != String.Empty)
-                {
-                    RegisterUserStateMail registerUserMail = new RegisterUserStateMail(Be.Firstname + " " + Be.Lastname, Username, Password, mail);
-                    new SimpleMail().SendMail(registerUserMail);
-                }             
+                ////if(Username != String.Empty && Password != String.Empty)
+                ////{
+                ////    RegisterUserStateMail registerUserMail = new RegisterUserStateMail(Be.Firstname + " " + Be.Lastname, Username, Password, mail);
+                ////    new SimpleMail().SendMail(registerUserMail);
+                ////}             
                 return entity.UserId;
 
             }
