@@ -48,7 +48,7 @@ namespace SkyCoApi.Controllers
             return Ok(dto);
         }
 
-        [Authorize]
+        [AllowAnonymous]
         [System.Web.Http.HttpGet]
         [ResponseType(typeof(Skyco_UserDTOCollectionRepresentation))]
         public async Task<IHttpActionResult> GetAll(Int32 state = (Int32)StateEnum.Activated, int page = 1, Int32 top = 12, String orderby = nameof(Skyco_UserDTO.UserId), String ascending = "asc")

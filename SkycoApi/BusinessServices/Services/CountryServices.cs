@@ -44,21 +44,21 @@ namespace BusinessServices.Services
             try
             {
                 Countries entity = Patterns.Factories.FactoryCountry.GetInstance().CreateEntity(Be);
-                Countries country = _unitOfWork.Countryrepository.GetOneByFilters(u => u.CountryName == entity.CountryName);
+                Countries country = _unitOfWork.Countryrepository.GetOneByFilters(u => u.CountryName.Trim().ToLower() == entity.CountryName.Trim().ToLower());
                 if (country != null)
                 {
                     if (entity.Provinces != null)
                     {
                         foreach (Provinces prov in entity.Provinces)
                         {
-                            Provinces province = _unitOfWork.ProvinceRepository.GetOneByFilters(u => u.ProvinceName == prov.ProvinceName);
+                            Provinces province = _unitOfWork.ProvinceRepository.GetOneByFilters(u => u.ProvinceName.Trim().ToLower() == prov.ProvinceName.Trim().ToLower());
                             if (province != null)
                             {
                                 if (prov.City != null)
                                 {
                                     foreach (Cities city in prov.City)
                                     {
-                                        Cities cit = _unitOfWork.CityRepository.GetOneByFilters(u => u.CityName == city.CityName);
+                                        Cities cit = _unitOfWork.CityRepository.GetOneByFilters(u => u.CityName.Trim().ToLower() == city.CityName.Trim().ToLower());
                                         if (cit == null)
                                         {
                                             city.ProvinceId = prov.ProvinceId;

@@ -25,6 +25,13 @@ namespace BusinessEntities.BE
         public string VoidedBy { get; set; }
 
         public byte? Voided { get; set; }
+
+        public string Country { get; set; }
+
+        public string province { get; set; }
+
+        public string city { get; set; }
+
         #endregion
 
         #region List       

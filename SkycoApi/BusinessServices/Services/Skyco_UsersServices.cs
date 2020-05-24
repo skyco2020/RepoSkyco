@@ -27,10 +27,26 @@ namespace BusinessServices.Services
             _unitOfWork = unitOfWork;
         }
         #endregion
+
+        #region location
+        private Int64 CountryId = 0;
+        private Int64 ProvinceId = 0;
+        private Int64 CityId = 0;
+        #endregion
         public long Create(Skyco_UserBE Be)
         {
             try
             {
+
+                if(this.GetLocation(Be.Country, Be.province, Be.city))
+                {
+                    foreach (var item in Be.Skyco_Account)
+                    {
+                        item.Location.CityId = this.CityId;
+                        item.Location.CountryId = this.CountryId;
+                        item.Location.ProvinceId = this.ProvinceId;
+                    }
+                }
                 Skyco_Users entity = Patterns.Factories.FactorySkyco_User.GetInstance().CreateEntity(Be);
                 String Username = "";
                 String Password = "";
@@ -138,7 +154,7 @@ namespace BusinessServices.Services
         {
             try
             {
-                Expression<Func<DataModal.DataClasses.Skyco_Users, Boolean>> predicate = u => u.Voided == (Int32)StateEnum.Activated;
+                Expression<Func<DataModal.DataClasses.Skyco_Users, Boolean>> predicate = u => u.Voided == state;
                 IQueryable<DataModal.DataClasses.Skyco_Users> entities = _unitOfWork.Skyco_UserRepository.GetAllByFilters(predicate, new string[] { "Skyco_Account", "Skyco_Address", "Skyco_Phone" });
                
                 count = entities.Count();
@@ -212,5 +228,26 @@ namespace BusinessServices.Services
                 throw HandlerExceptions.GetInstance().RunCustomExceptions(ex);
             }
         }
+        #region Private Method
+        private Boolean GetLocation(String Country, String province, String city)
+        {
+            Countries country = _unitOfWork.Countryrepository.GetOneByFilters(u => u.CountryName == Country, new string[] { "Provinces", "Provinces.City" });
+            if (country != null)
+            {
+                this.CountryId = country.CountryId;
+                if (country.Provinces != null)
+                {
+                    Provinces pro = country.Provinces.Find(p => p.ProvinceName.Trim().ToLower() == province.Trim().ToLower());
+                    this.ProvinceId = pro.ProvinceId;
+                    if (pro.City != null)
+                    {
+                        this.CityId = pro.City.Find(x => x.CityName.Trim().ToLower() == city.Trim().ToLower()).CityId;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        #endregion
     }
 }
