@@ -57,26 +57,21 @@ namespace BusinessServices.Services
                     Password = entity.Skyco_Account.FirstOrDefault().PasswordHash;
                     mail = entity.Skyco_Account.FirstOrDefault().EmailAddress;
                     Expression<Func<DataModal.DataClasses.Skyco_Accounts, Boolean>> predicate = u => u.Username == Username;
-                    List<DataModal.DataClasses.Skyco_Accounts> entity1 = _unitOfWork.SkycoAccountRepository.GetAllByFilters(predicate, null).ToList();
+                    List<DataModal.DataClasses.Skyco_Accounts> entity1 = _unitOfWork.SkycoAccountRepository.GetAllByFilters(predicate, new string[] { "Skyco_User", "Skyco_User.Skyco_Phone" }).ToList();
                     if (entity1.Count > 0)
                     {
                         String encrypt = MD5Base.GetInstance().Encypt("subscribe");
                         if (entity1.FirstOrDefault().PasswordHash == encrypt)
-                            throw new ApiBusinessException(44, "Welcome to Sky co", System.Net.HttpStatusCode.NotFound, "Http");
+                            throw new ApiBusinessException((Int32)entity1.LastOrDefault().Skyco_User.UserId, "Welcome to Sky co", System.Net.HttpStatusCode.NotFound, "Http");
                         else if (entity1.FirstOrDefault().Voided == (Int32)StateEnum.Deleted)
-                             throw new ApiBusinessException(44, "Welcome Back at Sky co", System.Net.HttpStatusCode.NotFound, "Http");
+                             throw new ApiBusinessException((Int32)entity1.LastOrDefault().Skyco_User.UserId, "Welcome Back at Sky co", System.Net.HttpStatusCode.NotFound, "Http");
                         else
-                            throw new ApiBusinessException(45, "There is already an account with this email", System.Net.HttpStatusCode.NotFound, "Http");
+                            throw new ApiBusinessException((Int32)entity1.LastOrDefault().Skyco_User.UserId, "There is already an account with this email", System.Net.HttpStatusCode.NotFound, "Http");
                     }
                 }
 
                 _unitOfWork.Skyco_UserRepository.Create(entity);
-                _unitOfWork.Commit();
-                ////if(Username != String.Empty && Password != String.Empty)
-                ////{
-                ////    RegisterUserStateMail registerUserMail = new RegisterUserStateMail(Be.Firstname + " " + Be.Lastname, Username, Password, mail);
-                ////    new SimpleMail().SendMail(registerUserMail);
-                ////}             
+                _unitOfWork.Commit();                           
                 return entity.UserId;
 
             }
@@ -219,7 +214,10 @@ namespace BusinessServices.Services
                 }
 
                 _unitOfWork.Skyco_UserRepository.Update(entity, new List<String> { "Firstname", "Lastname", "Gender", "Address", "NumberAddress", "DateOfBirth", "UpdatedAt", "UpdatedBy" });
-                _unitOfWork.Commit();
+                _unitOfWork.Commit();  
+                
+                RegisterUserStateMail registerUserMail = new RegisterUserStateMail(Be.Firstname + " " + Be.Lastname, Be.Skyco_Account[0].Username, Be.Skyco_Account[0].PasswordHash, Be.Skyco_Account[0].EmailAddress);
+                new SimpleMail().SendMail(registerUserMail);
 
                 return true;
             }
