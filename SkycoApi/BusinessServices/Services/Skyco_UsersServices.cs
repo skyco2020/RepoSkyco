@@ -150,7 +150,7 @@ namespace BusinessServices.Services
             try
             {
                 Expression<Func<DataModal.DataClasses.Skyco_Users, Boolean>> predicate = u => u.Voided == state;
-                IQueryable<DataModal.DataClasses.Skyco_Users> entities = _unitOfWork.Skyco_UserRepository.GetAllByFilters(predicate, new string[] { "Skyco_Account", "Skyco_Address", "Skyco_Phone" });
+                IQueryable<DataModal.DataClasses.Skyco_Users> entities = _unitOfWork.Skyco_UserRepository.GetAllByFilters(predicate, new string[] { "Skyco_Account", "Skyco_Account.Location", "Skyco_Address", "Skyco_Phone" });
                
                 count = entities.Count();
                 var skipAmount = 0;
@@ -180,7 +180,7 @@ namespace BusinessServices.Services
             try
             {
                 Expression<Func<DataModal.DataClasses.Skyco_Users, Boolean>> predicate = u => u.UserId == Id;
-                DataModal.DataClasses.Skyco_Users entities = _unitOfWork.Skyco_UserRepository.GetOneByFilters(predicate, new string[] { "Skyco_Account", "Skyco_Address", "Skyco_Phone" });
+                DataModal.DataClasses.Skyco_Users entities = _unitOfWork.Skyco_UserRepository.GetOneByFilters(predicate, new string[] { "Skyco_Account", "Skyco_Account.Location", "Skyco_Address", "Skyco_Phone" });
                 if (entities != null)
                     return FactorySkyco_User.GetInstance().CreateBusiness(entities);
                 return null;
@@ -190,7 +190,21 @@ namespace BusinessServices.Services
                 throw HandlerExceptions.GetInstance().RunCustomExceptions(ex);
             }
         }
-
+        public Skyco_UserBE GetByE_mail(String email)
+        {
+            try
+            {
+                Expression<Func<DataModal.DataClasses.Skyco_Users, Boolean>> predicate = u => u.Skyco_Account.Any( p => p.EmailAddress == email);
+                DataModal.DataClasses.Skyco_Users entities = _unitOfWork.Skyco_UserRepository.GetOneByFilters(predicate, new string[] { "Skyco_Account", "Skyco_Account.Location", "Skyco_Address", "Skyco_Phone" });
+                if (entities != null)
+                    return FactorySkyco_User.GetInstance().CreateBusiness(entities);
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw HandlerExceptions.GetInstance().RunCustomExceptions(ex);
+            }
+        }
         public bool Update(Skyco_UserBE Be)
         {
             try

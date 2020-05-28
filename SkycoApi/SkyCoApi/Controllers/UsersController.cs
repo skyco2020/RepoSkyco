@@ -34,6 +34,7 @@ namespace SkyCoApi.Controllers
             _services = services;
         }
         #endregion
+       
         [Authorize]
         [System.Web.Http.HttpGet]
         [ResponseType(typeof(Skyco_UserDTOCollectionRepresentation))]
@@ -96,5 +97,22 @@ namespace SkyCoApi.Controllers
             _services.Delete(id, identityClaims.FindFirst("username").Value);
             return Ok();                   
         }
+
+        #region Route
+        [AllowAnonymous]
+        [System.Web.Http.Route("api/Users/SearchByEmail")]
+        [System.Web.Http.HttpGet]
+        [ResponseType(typeof(Skyco_UserDTOCollectionRepresentation))]
+        public async Task<IHttpActionResult> GetByE_mail(String email)
+        {
+            Skyco_UserBE be = _services.GetByE_mail(email);
+            Skyco_UserDTO dto = new Skyco_UserDTO();
+            if (be == null)
+                return NotFound();
+            dto = Models.FactoryDTO.FactorySkyco_UserDTO.GetInstance().CreateDTO(be);
+            dto.CreatesMySelfLinks();
+            return Ok(dto);
+        }
+        #endregion
     }
 }

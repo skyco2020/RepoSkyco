@@ -12,6 +12,7 @@ namespace BusinessServices.Interfaces
     {
         Skyco_UserBE GetById(Int64 Id);
         List<Skyco_UserBE> GetAll(Int32 state, Int32 page, Int32 pageSize, String orderBy, String ascending, ref Int32 count);
+        Skyco_UserBE GetByE_mail(String email);
         Int64 Create(Skyco_UserBE Be);
         Boolean Update(Skyco_UserBE Be);
         Boolean Delete(Int64 Id, String UserName);
