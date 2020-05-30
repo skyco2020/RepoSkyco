@@ -76,13 +76,13 @@ namespace SkyCoApi.Controllers
                 {
                     Skyco_AccountDTO mdl = new Skyco_AccountDTO()
                     {
-                        Username = usr.Username != String.Empty ? usr.Username : "without username",
-                        EmailAddress = usr.EmailAddress != String.Empty ? usr.EmailAddress : "without EmailAddress",
-                        PhoneNumber = usr.PhoneNumber != String.Empty ? usr.PhoneNumber : "without PhoneNumber",
+                        Username = usr.Username != null ? usr.Username : "without username",
+                        EmailAddress = usr.EmailAddress != null ? usr.EmailAddress : "without EmailAddress",
+                        PhoneNumber = usr.PhoneNumber != null ? usr.PhoneNumber : "without PhoneNumber",
                         UserId = usr.UserId != 0 ? usr.UserId : 0,
                         AccountId = usr.AccountId != 0 ? usr.AccountId : 0,
                         AccountType = usr.AccountType != 0 ? usr.AccountType : 0,
-                        PasswordHash = usr.PasswordHash != String.Empty ? usr.PasswordHash : "without PasswordHash"
+                        PasswordHash = usr.PasswordHash != null ? usr.PasswordHash : "without PasswordHash"
                     };
                     String token = TokenGenerator.GenerateTokenJwt(mdl);
                     return Ok(token);

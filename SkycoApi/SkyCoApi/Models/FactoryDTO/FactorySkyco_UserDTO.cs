@@ -50,7 +50,7 @@ namespace SkyCoApi.Models.FactoryDTO
                     dto.Skyco_Account = new List<Skyco_AccountDTO>();
                     foreach (Skyco_AccountBE item in BE.Skyco_Account)
                     {
-                        FactorySkyco_AccountDTO.GetInstance().CreateDTO(item);
+                        dto.Skyco_Account.Add(FactorySkyco_AccountDTO.GetInstance().CreateDTO(item));
                     }
                 }
 
@@ -59,7 +59,7 @@ namespace SkyCoApi.Models.FactoryDTO
                     dto.Skyco_Address = new List<Skyco_AddressDTO>();
                     foreach (Skyco_AddressBE item in BE.Skyco_Address)
                     {
-                        FactorySkyco_AddressDTO.GetInstance().CreateDTO(item);
+                        dto.Skyco_Address.Add(FactorySkyco_AddressDTO.GetInstance().CreateDTO(item));
                     }
                 }
                 if (BE.Skyco_Phone != null)
@@ -67,7 +67,7 @@ namespace SkyCoApi.Models.FactoryDTO
                     dto.Skyco_Phone = new List<Skyco_PhoneDTO>();
                     foreach (Skyco_PhoneBE item in BE.Skyco_Phone)
                     {
-                        FactorySkyco_PhoneDTO.GetInstance().CreateDTO(item);
+                        dto.Skyco_Phone.Add(FactorySkyco_PhoneDTO.GetInstance().CreateDTO(item));
                     }
                 }
                 return dto;

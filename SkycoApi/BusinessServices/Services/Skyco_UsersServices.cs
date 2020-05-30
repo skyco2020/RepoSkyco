@@ -215,7 +215,7 @@ namespace BusinessServices.Services
                 {
                     foreach (Skyco_Addresses item in entity.Skyco_Address)
                     {
-                        _unitOfWork.Skyco_AddressRepository.Delete(item, new List<string> { "UpdatedAt", "UpdatedBy" });
+                        _unitOfWork.Skyco_AddressRepository.Update(item, new List<string> { "UpdatedAt", "UpdatedBy" });
                     }
                 }               
 
@@ -223,10 +223,16 @@ namespace BusinessServices.Services
                 {
                     foreach (Skyco_Phones item in entity.Skyco_Phone)
                     {
-                        _unitOfWork.Skyco_PhoneRepository.Delete(item, new List<string> { "UpdatedAt", "UpdatedBy" , "PhoneNumber", "Preferred"});
+                        _unitOfWork.Skyco_PhoneRepository.Update(item, new List<string> { "UpdatedAt", "UpdatedBy" , "PhoneNumber", "Preferred"});
                     }
                 }
-
+                if (entity.Skyco_Account != null)
+                {
+                    foreach (Skyco_Accounts item in entity.Skyco_Account)
+                    {
+                        _unitOfWork.SkycoAccountRepository.Update(item, new List<string> { "PasswordHash"});
+                    }
+                }
                 _unitOfWork.Skyco_UserRepository.Update(entity, new List<String> { "Firstname", "Lastname", "Gender", "Address", "NumberAddress", "DateOfBirth", "UpdatedAt", "UpdatedBy" });
                 _unitOfWork.Commit();  
                 

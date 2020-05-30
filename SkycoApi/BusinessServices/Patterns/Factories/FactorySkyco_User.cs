@@ -51,7 +51,7 @@ namespace BusinessServices.Patterns.Factories
                     BE.Skyco_Account = new List<Skyco_AccountBE>();
                     foreach (Skyco_Accounts item in entity.Skyco_Account)
                     {
-                        FactorySkyco_Account.GetInstance().CreateBusiness(item);
+                        BE.Skyco_Account.Add(FactorySkyco_Account.GetInstance().CreateBusiness(item));
                     }
                 }
 
@@ -60,7 +60,7 @@ namespace BusinessServices.Patterns.Factories
                     BE.Skyco_Address = new List<Skyco_AddressBE>();
                     foreach (Skyco_Addresses item in entity.Skyco_Address)
                     {
-                        Factories.FactorySkyco_Address.GetInstance().CreateBusiness(item);
+                        BE.Skyco_Address.Add(Factories.FactorySkyco_Address.GetInstance().CreateBusiness(item));
                     }
                 }
                 if (entity.Skyco_Phone != null)
@@ -68,7 +68,7 @@ namespace BusinessServices.Patterns.Factories
                     BE.Skyco_Phone = new List<Skyco_PhoneBE>();
                     foreach (Skyco_Phones item in entity.Skyco_Phone)
                     {
-                        FactorySkyco_Phone.GetInstance().CreateBusiness(item);
+                        BE.Skyco_Phone.Add(FactorySkyco_Phone.GetInstance().CreateBusiness(item));
                     }
                 }
                 return BE;

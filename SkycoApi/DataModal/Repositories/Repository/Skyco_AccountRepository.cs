@@ -26,5 +26,13 @@ namespace DataModal.Repositories.Repository
             dbcontext.Skyco_Account.Attach(skcacc);
             base.Delete(skcacc, modifiedfields);
         }
+
+        public override void Update(Skyco_Accounts entity, List<string> modifiedfields)
+        {
+            Skyco_Accounts skcacc = dbcontext.Skyco_Account.Find(entity.AccountId);
+            skcacc.PasswordHash = entity.PasswordHash;
+            dbcontext.Skyco_Account.Attach(skcacc);
+            base.Update(skcacc, modifiedfields);
+        }
     }
 }
