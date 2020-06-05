@@ -63,15 +63,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BE\ChargeStripeCustomerBE.cs" />
     <Compile Include="BE\CityBE.cs" />
     <Compile Include="BE\CountryBE.cs" />
+    <Compile Include="BE\CreateStripeCustomerBE.cs" />
     <Compile Include="BE\LocationBE.cs" />
+    <Compile Include="BE\PaymentBE.cs" />
+    <Compile Include="BE\PaymentIntentBE.cs" />
     <Compile Include="BE\ProvinceBE.cs" />
     <Compile Include="BE\Skyco_AccountBE.cs" />
     <Compile Include="BE\Skyco_AccountTypeBE.cs" />
     <Compile Include="BE\Skyco_AddressBE.cs" />
     <Compile Include="BE\Skyco_PhoneBE.cs" />
     <Compile Include="BE\Skyco_UserBE.cs" />
+    <Compile Include="BE\StripeCardBE.cs" />
+    <Compile Include="BE\StripeCustomerBE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

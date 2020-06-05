@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resolver", "Resolver\Resolv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyCoApi", "SkyCoApi\SkyCoApi.csproj", "{70E455C2-5D72-4964-9E99-24B142D89A0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StripeServices", "StripeServices\StripeServices.csproj", "{6D350CA7-7895-457A-B2FD-83C7DB9FA376}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,12 +41,16 @@ Global
 		{70E455C2-5D72-4964-9E99-24B142D89A0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70E455C2-5D72-4964-9E99-24B142D89A0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70E455C2-5D72-4964-9E99-24B142D89A0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D350CA7-7895-457A-B2FD-83C7DB9FA376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D350CA7-7895-457A-B2FD-83C7DB9FA376}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D350CA7-7895-457A-B2FD-83C7DB9FA376}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D350CA7-7895-457A-B2FD-83C7DB9FA376}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {F8D1BA41-F466-4B0C-BDCB-0321CC4BCC56}
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35
+		SolutionGuid = {F8D1BA41-F466-4B0C-BDCB-0321CC4BCC56}
 	EndGlobalSection
 EndGlobal
