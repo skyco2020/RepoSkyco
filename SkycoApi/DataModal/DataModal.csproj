@@ -53,9 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataClasses\Cards.cs" />
     <Compile Include="DataClasses\Cities.cs" />
     <Compile Include="DataClasses\Countries.cs" />
     <Compile Include="DataClasses\Locations.cs" />
+    <Compile Include="DataClasses\Payments.cs" />
+    <Compile Include="DataClasses\Plans.cs" />
     <Compile Include="DataClasses\Provinces.cs" />
     <Compile Include="DataClasses\SkyCoDbContext.cs" />
     <Compile Include="DataClasses\Skyco_Accounts.cs" />
