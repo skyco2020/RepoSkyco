@@ -67,6 +67,7 @@
     <Compile Include="DataClasses\Skyco_Phones.cs" />
     <Compile Include="DataClasses\Skyco_Users.cs" />
     <Compile Include="DataClasses\sysdiagrams.cs" />
+    <Compile Include="DataClasses\Tokens.cs" />
     <Compile Include="GenericRepository\ISkyCoGenericRepository.cs" />
     <Compile Include="GenericRepository\SkyCoGenericRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,7 +95,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Resolver\Resolver.csproj">
+      <Project>{0FBE64BA-C24C-4D31-B479-DE461176B310}</Project>
+      <Name>Resolver</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

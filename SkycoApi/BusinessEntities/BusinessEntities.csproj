@@ -63,6 +63,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BE\BaseBE.cs" />
+    <Compile Include="BE\CardBE.cs" />
     <Compile Include="BE\ChargeStripeCustomerBE.cs" />
     <Compile Include="BE\CityBE.cs" />
     <Compile Include="BE\CountryBE.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="BE\LocationBE.cs" />
     <Compile Include="BE\PaymentBE.cs" />
     <Compile Include="BE\PaymentIntentBE.cs" />
+    <Compile Include="BE\PlanBE.cs" />
     <Compile Include="BE\ProvinceBE.cs" />
     <Compile Include="BE\Skyco_AccountBE.cs" />
     <Compile Include="BE\Skyco_AccountTypeBE.cs" />
@@ -84,6 +87,5 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

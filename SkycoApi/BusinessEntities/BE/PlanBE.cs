@@ -1,30 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataModal.DataClasses
+namespace BusinessEntities.BE
 {
-    public class Plans
+    public class PlanBE: BaseBE
     {
-        [Key]
-        public Int64 PlanId { get; set; }
         public Int64 AccountId { get; set; }
         public Decimal Price { get; set; }
         public String Description { get; set; }
         public DateTime PlanDate { get; set; }
-        public Int32 state { get; set; }
 
         #region Relation
-        [ForeignKey("AccountId")]
-        public Skyco_Accounts Accounts { get; set; }
+        public Skyco_AccountBE Accounts { get; set; }
         #endregion
 
         #region List
-        public List<Payments> Payments { get; set; }
+        public List<PaymentBE> Payments { get; set; }
         #endregion
     }
 }

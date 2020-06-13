@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StripeServices
+namespace Resolver.Enumerations
 {
-    public static class Currencies
+    public  class Currencies
     {
         public const string UnitedArabEmiratesDirham = "AED";
         public const string AfghanAfghani = "AFN";

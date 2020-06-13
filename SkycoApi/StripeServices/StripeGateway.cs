@@ -1,4 +1,5 @@
-﻿using ServiceStack;
+﻿using Resolver.Enumerations;
+using ServiceStack;
 using ServiceStack.Stripe.Types;
 using ServiceStack.Text;
 using System;

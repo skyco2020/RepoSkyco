@@ -78,6 +78,7 @@
     <Compile Include="Cryptography\MD5Base.cs" />
     <Compile Include="Cryptography\MD5Encryption.cs" />
     <Compile Include="Cryptography\RandomLink.cs" />
+    <Compile Include="Enumerations\Currencies.cs" />
     <Compile Include="Enumerations\Gender.cs" />
     <Compile Include="Enumerations\ListGeneric.cs" />
     <Compile Include="Enumerations\Rol.cs" />
