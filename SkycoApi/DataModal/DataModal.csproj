@@ -71,6 +71,9 @@
     <Compile Include="GenericRepository\ISkyCoGenericRepository.cs" />
     <Compile Include="GenericRepository\SkyCoGenericRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Interface\ICardRepository.cs" />
+    <Compile Include="Repositories\Interface\IPaymentRepository.cs" />
+    <Compile Include="Repositories\Interface\IPlanRepository.cs" />
     <Compile Include="Repositories\Interface\ISkyco_AccountRepository.cs" />
     <Compile Include="Repositories\Interface\ICityRepository.cs" />
     <Compile Include="Repositories\Interface\ICountryrepository.cs" />
@@ -80,15 +83,20 @@
     <Compile Include="Repositories\Interface\ISkyco_AddressRepository.cs" />
     <Compile Include="Repositories\Interface\ISkyco_PhoneRepository.cs" />
     <Compile Include="Repositories\Interface\ISkyco_UserRepository.cs" />
+    <Compile Include="Repositories\Interface\ITokenRepository.cs" />
+    <Compile Include="Repositories\Repository\CardRepository.cs" />
     <Compile Include="Repositories\Repository\CityRepository.cs" />
     <Compile Include="Repositories\Repository\CountryRepository.cs" />
     <Compile Include="Repositories\Repository\LocationRepository.cs" />
+    <Compile Include="Repositories\Repository\PaymentRepository.cs" />
+    <Compile Include="Repositories\Repository\PlanRepository.cs" />
     <Compile Include="Repositories\Repository\Skyco_AccountRepository.cs" />
     <Compile Include="Repositories\Repository\ProvinceRepository.cs" />
     <Compile Include="Repositories\Repository\Skyco_AccountTypeRepository.cs" />
     <Compile Include="Repositories\Repository\Skyco_AddressRepository.cs" />
     <Compile Include="Repositories\Repository\Skyco_PhoneRepository.cs" />
     <Compile Include="Repositories\Repository\Skyco_UserRepository.cs" />
+    <Compile Include="Repositories\Repository\TokenRepository.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

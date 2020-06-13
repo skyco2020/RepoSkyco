@@ -81,6 +81,7 @@
     <Compile Include="BE\Skyco_UserBE.cs" />
     <Compile Include="BE\StripeCardBE.cs" />
     <Compile Include="BE\StripeCustomerBE.cs" />
+    <Compile Include="BE\TokenBE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

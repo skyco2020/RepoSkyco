@@ -99,6 +99,7 @@
     <Compile Include="Interfaces\ICountryServices.cs" />
     <Compile Include="Interfaces\ILocationServices.cs" />
     <Compile Include="Interfaces\IPaymentServices.cs" />
+    <Compile Include="Interfaces\IPlanServices.cs" />
     <Compile Include="Interfaces\ISkyco_AccountServices.cs" />
     <Compile Include="Interfaces\IProvinceServices.cs" />
     <Compile Include="Interfaces\ISkyco_AccountTypeServices.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Interfaces\ISkyco_UsersServices.cs" />
     <Compile Include="OwinSecurity\IOwinSecurityService.cs" />
     <Compile Include="OwinSecurity\OwinSecurityServer.cs" />
+    <Compile Include="Patterns\Factories\FactoryPlan.cs" />
     <Compile Include="Patterns\Factories\FactorySkyco_AccountType.cs" />
     <Compile Include="Patterns\Factories\FactorySkyco_Address.cs" />
     <Compile Include="Services\CityServices.cs" />
@@ -121,6 +123,7 @@
     <Compile Include="Patterns\Factories\FactorySkyco_Phone.cs" />
     <Compile Include="Services\LocationServices.cs" />
     <Compile Include="Services\PaymentServices.cs" />
+    <Compile Include="Services\PlanServices.cs" />
     <Compile Include="Services\ProvinceServices.cs" />
     <Compile Include="Services\Skyco_AccountServices.cs" />
     <Compile Include="Services\Skyco_AccountTypeServices.cs" />

@@ -67,22 +67,40 @@ namespace DataModal.UnitOfWork
         #region Relation Repository
 
         #region Members 
-
+        private ICardRepository _CardRepository;
         private ICityRepository _CityRepository;
         private ICountryRepository _CountryRepository;
         private ILocationRepository _LocationRepository;
+        private IPaymentRepository _PaymentRepository;
+        private IPlanRepository _PlanRepository;
         private IProvinceRepository _ProvinceRepository;
         private ISkyco_AccountRepository _Skyco_AccountRepository;
         private ISkyco_AccountTypeRepository _Skyco_AccountTypeRepository;
         private ISkyco_AddressRepository _Skyco_AddressRepository;
         private ISkyco_PhoneRepository _Skyco_PhoneRepository;
         private ISkyco_UserRepository _Skyco_UserRepository;
+        private ITokenRepository _TokenRepository;
 
         #endregion
 
 
         #region Properties
+        public ICardRepository CardRepository
+        {
+            get
+            {
+                if (_CityRepository == null)
+                {
+                    return _CardRepository = new CardRepository(context);
+                }
+                return _CardRepository;
+            }
 
+            set
+            {
+                _CardRepository = value;
+            }
+        }
         public ICityRepository CityRepository
         {
             get
@@ -125,7 +143,30 @@ namespace DataModal.UnitOfWork
             }
             set { _LocationRepository = value; }
         }
-
+        public IPaymentRepository PaymentRepository
+        {
+            get
+            {
+                if (_PaymentRepository == null)
+                {
+                    _PaymentRepository = new PaymentRepository(context);
+                }
+                return _PaymentRepository;
+            }
+            set { _PaymentRepository = value; }
+        }
+        public IPlanRepository PlanRepository
+        {
+            get
+            {
+                if (_PlanRepository == null)
+                {
+                    _PlanRepository = new PlanRepository(context);
+                }
+                return _PlanRepository;
+            }
+            set { _PlanRepository = value; }
+        }
         public IProvinceRepository ProvinceRepository
         {
             get
@@ -226,7 +267,25 @@ namespace DataModal.UnitOfWork
             {
                 _Skyco_UserRepository = value;
             }
-        }      
+        }
+
+        public ITokenRepository TokenRepository
+        {
+            get
+            {
+                if (_TokenRepository == null)
+                {
+                    return _TokenRepository = new TokenRepository(context);
+                }
+                return _TokenRepository;
+            }
+
+            set
+            {
+                _TokenRepository = value;
+            }
+        }
+
         #endregion
 
         #endregion
