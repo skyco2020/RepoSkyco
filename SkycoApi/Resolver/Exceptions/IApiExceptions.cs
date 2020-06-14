@@ -13,7 +13,7 @@ namespace Resolver.Exceptions
         /// <summary>
         /// ErrorDescription
         /// </summary>
-        string ErrorDescription { get; set; }
+        string MessageError { get; set; }
         /// <summary>
         /// HttpStatus
         /// </summary>

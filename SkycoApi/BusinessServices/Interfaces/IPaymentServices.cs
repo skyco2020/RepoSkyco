@@ -9,6 +9,10 @@ namespace BusinessServices.Interfaces
 {
     public interface IPaymentServices
     {
-        Boolean Can_Charge_Customer(PaymentBE be);
+        PaymentBE GetById(Int64 Id);
+        List<PaymentBE> GetAll(Int32 state, Int32 page, Int32 top, String orderBy, String ascending, ref Int32 count);
+        Int64 Create(PaymentBE Be);
+        Boolean Update(PaymentBE Be);
+        Boolean Delete(Int64 Id, String UserName);
     }
 }

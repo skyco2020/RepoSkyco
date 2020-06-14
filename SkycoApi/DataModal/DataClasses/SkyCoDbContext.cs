@@ -19,6 +19,7 @@ namespace DataModal.DataClasses
         public virtual DbSet<Countries> Country { get; set; }
         public virtual DbSet<Locations> Location { get; set; }
         public virtual DbSet<Payments> Payments { get; set; }
+        public virtual DbSet<Payment_Skyco_Accounts> Payment_Skyco_Accounts { get; set; }
         public virtual DbSet<Plans> Plans { get; set; }
         public virtual DbSet<Provinces> Provinces { get; set; }
         public virtual DbSet<Skyco_Accounts> Skyco_Account { get; set; }

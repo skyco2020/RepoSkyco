@@ -13,26 +13,25 @@ namespace DataModal.DataClasses
     {
         [Key]
         public Int64 idpayment { get; set; }
-        public Int64 AccountId { get; set; }
         public Int64 idcard { get; set; }
         public Int64 PlanId { get; set; }
-        public Decimal Amount { get; set; }
-        public DateTime paymentdate { get; set; }
         public String name { get; set; }
         public String Description { get; set; }
-        public Currencies Currency { get; set; }
+        public string Currency { get; set; }
         public Int32 Quantity { get; set; }
         public Int32 state { get; set; }
 
         #region Relation
-        [ForeignKey("AccountId")]
-        public Skyco_Accounts Accounts { get; set; }
 
         [ForeignKey("idcard")]
         public Cards Cards { get; set; }
 
         [ForeignKey("PlanId")]
         public Plans Plans { get; set; }
+        #endregion
+
+        #region List
+        public List<Payment_Skyco_Accounts> Payment_Skyco_Accounts { get; set; }
         #endregion
     }
 }

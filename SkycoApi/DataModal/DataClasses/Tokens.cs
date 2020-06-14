@@ -18,6 +18,7 @@ namespace DataModal.DataClasses
         public Int64 objectcart { get; set; }
         public Int64 type { get; set; }
         public Int64 used { get; set; }
+        public Int32 state { get; set; }
 
         #region List
         public List<Cards> cards { get; set; }

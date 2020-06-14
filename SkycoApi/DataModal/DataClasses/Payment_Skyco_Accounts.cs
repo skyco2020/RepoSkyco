@@ -8,24 +8,22 @@ using System.Threading.Tasks;
 
 namespace DataModal.DataClasses
 {
-    public class Plans
+    public class Payment_Skyco_Accounts
     {
         [Key]
-        public Int64 PlanId { get; set; }
+        public Int64 IdPaymentUser { get; set; }
+        public Int64 idPayment { get; set; }
         public Int64 AccountId { get; set; }
-        public String TypePlan { get; set; }
-        public Decimal Price { get; set; }
-        public String Description { get; set; }
-        public DateTime PlanDate { get; set; }
+        public DateTime paymentdate { get; set; }
+        public string idstripecard { get; set; }
+        public Decimal Amount { get; set; }
         public Int32 state { get; set; }
 
         #region Relation
+        [ForeignKey("idPayment")]
+        public Payments Payments { get; set; }
         [ForeignKey("AccountId")]
         public Skyco_Accounts Accounts { get; set; }
-        #endregion
-
-        #region List
-        public List<Payments> Payments { get; set; }
         #endregion
     }
 }

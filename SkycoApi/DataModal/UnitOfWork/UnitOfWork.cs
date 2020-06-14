@@ -72,6 +72,7 @@ namespace DataModal.UnitOfWork
         private ICountryRepository _CountryRepository;
         private ILocationRepository _LocationRepository;
         private IPaymentRepository _PaymentRepository;
+        private IPayment_Skyco_AccountRepository _Payment_Skyco_AccountRepository;
         private IPlanRepository _PlanRepository;
         private IProvinceRepository _ProvinceRepository;
         private ISkyco_AccountRepository _Skyco_AccountRepository;
@@ -117,7 +118,6 @@ namespace DataModal.UnitOfWork
                 _CityRepository = value;
             }
         }  
-
         public ICountryRepository Countryrepository
         {
             get
@@ -130,7 +130,6 @@ namespace DataModal.UnitOfWork
             }
             set => _CountryRepository = value;
         }
-
         public ILocationRepository LocationRepository
         {
             get
@@ -154,6 +153,18 @@ namespace DataModal.UnitOfWork
                 return _PaymentRepository;
             }
             set { _PaymentRepository = value; }
+        }
+        public IPayment_Skyco_AccountRepository Payment_Skyco_AccountRepository
+        {
+            get
+            {
+                if (_Payment_Skyco_AccountRepository == null)
+                {
+                    _Payment_Skyco_AccountRepository = new Payment_Skyco_AccountRepository(context);
+                }
+                return _Payment_Skyco_AccountRepository;
+            }
+            set { _Payment_Skyco_AccountRepository = value; }
         }
         public IPlanRepository PlanRepository
         {

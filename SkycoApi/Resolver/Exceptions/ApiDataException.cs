@@ -14,7 +14,7 @@ namespace Resolver.Exceptions
         [DataMember]
         public int ErrorCode { get; set; }
         [DataMember]
-        public string ErrorDescription { get; set; }
+        public string MessageError { get; set; }
         [DataMember]
         public HttpStatusCode HttpStatus { get; set; }
 
@@ -46,7 +46,7 @@ namespace Resolver.Exceptions
         public ApiDataException(int errorCode, string errorDescription, HttpStatusCode httpStatus, string referenceLink)
         {
             ErrorCode = errorCode;
-            ErrorDescription = errorDescription;
+            MessageError = errorDescription;
             HttpStatus = httpStatus;
             ReferenceLink = referenceLink;
         }

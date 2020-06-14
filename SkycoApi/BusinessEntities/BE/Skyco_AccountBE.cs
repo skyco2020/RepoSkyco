@@ -43,5 +43,9 @@ namespace BusinessEntities.BE
         public Skyco_UserBE Skyco_User { get; set; }
         public LocationBE Location { get; set; }
         #endregion
+
+        #region List
+        public List<Payment_Skyco_AccountBE> Payment_Skyco_Accounts { get; set; }
+        #endregion
     }
 }

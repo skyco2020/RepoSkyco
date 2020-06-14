@@ -14,7 +14,7 @@ namespace SkyCoApi.ActionFilters
             return new ErrorHelper.JsonCustomException()
             {
                 ErrorCode = ex.ErrorCode,
-                ErrorDescription = ex.ErrorDescription,
+                ErrorDescription = ex.MessageError,
                 HttpStatus = ex.HttpStatus,
                 ReasonPhrase = ex.ReasonPhrase,
                 ReferenceLink = ex.ReferenceLink

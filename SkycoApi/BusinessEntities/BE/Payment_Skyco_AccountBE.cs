@@ -6,20 +6,17 @@ using System.Threading.Tasks;
 
 namespace BusinessEntities.BE
 {
-    public class PlanBE: BaseBE
+    public class Payment_Skyco_AccountBE : BaseBE
     {
+        public Int64 idPayment { get; set; }
         public Int64 AccountId { get; set; }
-        public Decimal Price { get; set; }
-        public String Description { get; set; }
-        public String TypePlan { get; set; }
-        public DateTime PlanDate { get; set; }
+        public DateTime paymentdate { get; set; }
+        public string idstripecard { get; set; }
+        public Decimal Amount { get; set; }
 
         #region Relation
+        public PaymentBE Payments { get; set; }
         public Skyco_AccountBE Accounts { get; set; }
-        #endregion
-
-        #region List
-        public List<PaymentBE> Payments { get; set; }
         #endregion
     }
 }

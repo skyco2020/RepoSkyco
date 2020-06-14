@@ -29,6 +29,7 @@ namespace BusinessServices.Patterns.Factories
                     AccountId = entity.AccountId,
                     Description = entity.Description,
                     Id = entity.PlanId,
+                    TypePlan = entity.TypePlan,
                     PlanDate = entity.PlanDate,
                     Price = entity.Price,
                     state = entity.state,
@@ -49,7 +50,13 @@ namespace BusinessServices.Patterns.Factories
             {
                 entity = new Plans()
                 {
-                    
+                    AccountId = be.AccountId,
+                    Description = be.Description,
+                    PlanId = be.Id,
+                    TypePlan = be.TypePlan,
+                    PlanDate = be.PlanDate,
+                    Price = be.Price,
+                    state = be.state,
                 };
                 return entity;
 

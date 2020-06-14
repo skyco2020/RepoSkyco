@@ -29,5 +29,9 @@ namespace BusinessEntities.BE
         public String name { get; set; }
         public String objectcard { get; set; }
         public String tokenization_method { get; set; }
+
+        #region Relation
+        public TokenBE Tokens { get; set; }
+        #endregion
     }
 }

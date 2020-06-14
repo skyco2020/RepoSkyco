@@ -65,6 +65,10 @@ namespace DataModal.DataClasses
         [ForeignKey("LocationId")]
         public Locations Location { get; set; }
         #endregion
+
+        #region List
+        public List<Payment_Skyco_Accounts> Payment_Skyco_Accounts { get; set; }
+        #endregion
     }
 
 }

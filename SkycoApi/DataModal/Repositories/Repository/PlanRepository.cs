@@ -14,5 +14,26 @@ namespace DataModal.Repositories.Repository
         public PlanRepository(SkyCoDbContext context) : base(context)
         {
         }
+
+        public override void Delete(Plans entity, List<string> modifiedfields)
+        {
+            Plans plan = dbcontext.Plans.Find(entity.PlanId);
+            plan.state = entity.state;
+            plan.PlanDate = entity.PlanDate;
+
+            dbcontext.Plans.Attach(plan);
+            base.Delete(plan, modifiedfields);
+        }
+
+        public override void Update(Plans entity, List<string> modifiedfields)
+        {
+            Plans plan = dbcontext.Plans.Find(entity.PlanId);
+            plan.TypePlan = entity.TypePlan;
+            plan.Price = entity.Price;
+            plan.Description = entity.Description;
+
+            dbcontext.Plans.Attach(plan);
+            base.Update(plan, modifiedfields);    
+        }
     }
 }

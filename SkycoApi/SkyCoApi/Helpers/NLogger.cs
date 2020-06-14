@@ -91,7 +91,7 @@ namespace SkyCoApi.Helpers
                     var exception = record.Exception as ApiException;
                     if (exception != null)
                     {
-                        message.Append("").Append("Error: " + exception.ErrorDescription + Environment.NewLine);
+                        message.Append("").Append("Error: " + exception.MessageError + Environment.NewLine);
                         message.Append("").Append("Error Code: " + exception.ErrorCode + Environment.NewLine);
                     }
                 }
@@ -100,7 +100,7 @@ namespace SkyCoApi.Helpers
                     var exception = record.Exception as ApiBusinessException;
                     if (exception != null)
                     {
-                        message.Append("").Append("Error: " + exception.ErrorDescription + Environment.NewLine);
+                        message.Append("").Append("Error: " + exception.MessageError + Environment.NewLine);
                         message.Append("").Append("Error Code: " + exception.ErrorCode + Environment.NewLine);
                     }
                 }
@@ -109,7 +109,7 @@ namespace SkyCoApi.Helpers
                     var exception = record.Exception as ApiDataException;
                     if (exception != null)
                     {
-                        message.Append("").Append("Error: " + exception.ErrorDescription + Environment.NewLine);
+                        message.Append("").Append("Error: " + exception.MessageError + Environment.NewLine);
                         message.Append("").Append("Error Code: " + exception.ErrorCode + Environment.NewLine);
                     }
                 }

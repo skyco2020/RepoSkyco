@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Resolver.Enumerations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,15 @@ namespace BusinessEntities.BE
 {
     public class PaymentBE : BaseBE
     {
-        public string idstripecard { get; set; }
-        public Int64 AccountId { get; set; }
         public Int64 idcard { get; set; }
-        public int Amount { get; set; }
-        public string Currency { get; set; }
-        public DateTime paymentdate { get; set; }
-        public string name { get; set; }
+        public Int64 PlanId { get; set; }
+        public String name { get; set; }
+        public String Description { get; set; }
+        public String Currency { get; set; }
         public Int32 Quantity { get; set; }
-        public string Description { get; set; }
+
+        #region List
+        public List<Payment_Skyco_AccountBE> Payment_Skyco_Accounts { get; set; }
+        #endregion
     }
 }

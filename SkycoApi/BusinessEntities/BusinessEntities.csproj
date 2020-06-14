@@ -72,6 +72,7 @@
     <Compile Include="BE\LocationBE.cs" />
     <Compile Include="BE\PaymentBE.cs" />
     <Compile Include="BE\PaymentIntentBE.cs" />
+    <Compile Include="BE\Payment_Skyco_AccountBE.cs" />
     <Compile Include="BE\PlanBE.cs" />
     <Compile Include="BE\ProvinceBE.cs" />
     <Compile Include="BE\Skyco_AccountBE.cs" />
@@ -87,6 +88,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Resolver\Resolver.csproj">
+      <Project>{0FBE64BA-C24C-4D31-B479-DE461176B310}</Project>
+      <Name>Resolver</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
