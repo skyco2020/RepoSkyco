@@ -16,12 +16,12 @@ using System.Web.Http.Description;
 
 namespace SkyCoApi.Controllers
 {
-    public class PaymentsController : ApiController
+    public class PlansController : ApiController
     {
         #region Single
-        private IPaymentServices _services;
+        private IPlanServices _services;
 
-        public PaymentsController(IPaymentServices services)
+        public PlansController(IPlanServices services)
         {
             _services = services;
         }
@@ -29,38 +29,38 @@ namespace SkyCoApi.Controllers
 
         [Authorize]
         [System.Web.Http.HttpGet]
-        [ResponseType(typeof(PaymentDTOCollectionRepresentation))]
+        [ResponseType(typeof(PlanDTOCollectionRepresentation))]
         public async Task<IHttpActionResult> GetById(long id)
         {
-            PaymentBE be = _services.GetById(id);
-            PaymentDTO dto = new PaymentDTO();
+            PlanBE be = _services.GetById(id);
+            PlanDTO dto = new PlanDTO();
             if (be == null)
                 return NotFound();
-            dto = Models.FactoryDTO.FactoryPaymentDTO.GetInstance().CreateDTO(be);
+            dto = Models.FactoryDTO.FactoryPlanDTO.GetInstance().CreateDTO(be);
             dto.CreatesMySelfLinks();
             return Ok(dto);
         }
 
         [AllowAnonymous]
         [System.Web.Http.HttpGet]
-        [ResponseType(typeof(PaymentDTOCollectionRepresentation))]
-        public async Task<IHttpActionResult> GetAll(Int32 state = (Int32)StateEnum.Activated, int page = 1, Int32 top = 12, String orderby = nameof(PaymentDTO.idpayment), String ascending = "asc")
+        [ResponseType(typeof(PlanDTOCollectionRepresentation))]
+        public async Task<IHttpActionResult> GetAll(Int32 state = (Int32)StateEnum.Activated, int page = 1, Int32 top = 12, String orderby = nameof(PlanDTO.PlanId), String ascending = "asc")
         {
             var count = 0;
-            IQueryable<PaymentBE> query = _services.GetAll(state, page, top, orderby, ascending, ref count).AsQueryable();
-            List<PaymentDTO> listdoto = new List<PaymentDTO>();
-            foreach (PaymentBE item in query)
+            IQueryable<PlanBE> query = _services.GetAll(state, page, top, orderby, ascending, ref count).AsQueryable();
+            List<PlanDTO> listdoto = new List<PlanDTO>();
+            foreach (PlanBE item in query)
             {
-                listdoto.Add(Models.FactoryDTO.FactoryPaymentDTO.GetInstance().CreateDTO(item));
+                listdoto.Add(Models.FactoryDTO.FactoryPlanDTO.GetInstance().CreateDTO(item));
             }
             System.Collections.Specialized.HybridDictionary myfilters = new System.Collections.Specialized.HybridDictionary();
             myfilters.Add("state", state);
-            PaymentDTOCollectionRepresentation dt = new PaymentDTOCollectionRepresentation(listdoto.ToList(), FilterHelper.GenerateFilter(myfilters, top, orderby, ascending), page, count, top);
+            PlanDTOCollectionRepresentation dt = new PlanDTOCollectionRepresentation(listdoto.ToList(), FilterHelper.GenerateFilter(myfilters, top, orderby, ascending), page, count, top);
             return Ok(dt);
         }
         [AllowAnonymous]
         [System.Web.Http.HttpPost]
-        public async Task<IHttpActionResult> Post(PaymentBE be)
+        public async Task<IHttpActionResult> Post(PlanBE be)
         {
             if (!ModelState.IsValid)
             {
@@ -70,9 +70,9 @@ namespace SkyCoApi.Controllers
             return Created(new Uri(Url.Link("DefaultApi", new { Id = be.Id })), be);
         }
 
-        [Authorize]
+        [AllowAnonymous]
         [System.Web.Http.HttpPut]
-        public async Task<IHttpActionResult> Put(PaymentBE bE)
+        public async Task<IHttpActionResult> Put(PlanBE bE)
         {
             if (!ModelState.IsValid)
             {

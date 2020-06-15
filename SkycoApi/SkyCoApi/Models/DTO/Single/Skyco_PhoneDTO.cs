@@ -13,6 +13,7 @@ namespace SkyCoApi.Models.DTO.Single
             Rel = Mytemplate.GetMyRelationReference().Rel;
         }
         #endregion
+
         #region Properties
         public Int64 IdPhone { get; set; }
         public Int64 UserId { get; set; }

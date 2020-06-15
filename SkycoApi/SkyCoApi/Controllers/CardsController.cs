@@ -16,12 +16,12 @@ using System.Web.Http.Description;
 
 namespace SkyCoApi.Controllers
 {
-    public class PaymentsController : ApiController
+    public class CardsController : ApiController
     {
         #region Single
-        private IPaymentServices _services;
+        private ICardServices _services;
 
-        public PaymentsController(IPaymentServices services)
+        public CardsController(ICardServices services)
         {
             _services = services;
         }
@@ -29,38 +29,38 @@ namespace SkyCoApi.Controllers
 
         [Authorize]
         [System.Web.Http.HttpGet]
-        [ResponseType(typeof(PaymentDTOCollectionRepresentation))]
+        [ResponseType(typeof(CardDTOCollectionRepresentation))]
         public async Task<IHttpActionResult> GetById(long id)
         {
-            PaymentBE be = _services.GetById(id);
-            PaymentDTO dto = new PaymentDTO();
+            CardBE be = _services.GetById(id);
+            CardDTO dto = new CardDTO();
             if (be == null)
                 return NotFound();
-            dto = Models.FactoryDTO.FactoryPaymentDTO.GetInstance().CreateDTO(be);
+            dto = Models.FactoryDTO.FactoryCardDTO.GetInstance().CreateDTO(be);
             dto.CreatesMySelfLinks();
             return Ok(dto);
         }
 
         [AllowAnonymous]
         [System.Web.Http.HttpGet]
-        [ResponseType(typeof(PaymentDTOCollectionRepresentation))]
-        public async Task<IHttpActionResult> GetAll(Int32 state = (Int32)StateEnum.Activated, int page = 1, Int32 top = 12, String orderby = nameof(PaymentDTO.idpayment), String ascending = "asc")
+        [ResponseType(typeof(CardDTOCollectionRepresentation))]
+        public async Task<IHttpActionResult> GetAll(Int32 state = (Int32)StateEnum.Activated, int page = 1, Int32 top = 12, String orderby = nameof(CardDTO.idcard), String ascending = "asc")
         {
             var count = 0;
-            IQueryable<PaymentBE> query = _services.GetAll(state, page, top, orderby, ascending, ref count).AsQueryable();
-            List<PaymentDTO> listdoto = new List<PaymentDTO>();
-            foreach (PaymentBE item in query)
+            IQueryable<CardBE> query = _services.GetAll(state, page, top, orderby, ascending, ref count).AsQueryable();
+            List<CardDTO> listdoto = new List<CardDTO>();
+            foreach (CardBE item in query)
             {
-                listdoto.Add(Models.FactoryDTO.FactoryPaymentDTO.GetInstance().CreateDTO(item));
+                listdoto.Add(Models.FactoryDTO.FactoryCardDTO.GetInstance().CreateDTO(item));
             }
             System.Collections.Specialized.HybridDictionary myfilters = new System.Collections.Specialized.HybridDictionary();
             myfilters.Add("state", state);
-            PaymentDTOCollectionRepresentation dt = new PaymentDTOCollectionRepresentation(listdoto.ToList(), FilterHelper.GenerateFilter(myfilters, top, orderby, ascending), page, count, top);
+            CardDTOCollectionRepresentation dt = new CardDTOCollectionRepresentation(listdoto.ToList(), FilterHelper.GenerateFilter(myfilters, top, orderby, ascending), page, count, top);
             return Ok(dt);
         }
         [AllowAnonymous]
         [System.Web.Http.HttpPost]
-        public async Task<IHttpActionResult> Post(PaymentBE be)
+        public async Task<IHttpActionResult> Post(CardBE be)
         {
             if (!ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace SkyCoApi.Controllers
 
         [Authorize]
         [System.Web.Http.HttpPut]
-        public async Task<IHttpActionResult> Put(PaymentBE bE)
+        public async Task<IHttpActionResult> Put(CardBE bE)
         {
             if (!ModelState.IsValid)
             {
