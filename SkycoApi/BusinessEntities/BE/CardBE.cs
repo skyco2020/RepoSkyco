@@ -33,5 +33,9 @@ namespace BusinessEntities.BE
         #region Relation
         public TokenBE Tokens { get; set; }
         #endregion
+
+        #region List
+        public List<PaymentBE> Payments { get; set; }
+        #endregion
     }
 }

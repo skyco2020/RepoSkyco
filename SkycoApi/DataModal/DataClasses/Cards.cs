@@ -39,5 +39,10 @@ namespace DataModal.DataClasses
         [ForeignKey("idtoken")]
         public Tokens Tokens { get; set; }
         #endregion
+
+        #region List
+        public List<Payments> Payments { get; set; }
+
+        #endregion
     }
 }

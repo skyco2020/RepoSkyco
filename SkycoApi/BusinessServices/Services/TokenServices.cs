@@ -1,10 +1,13 @@
 ﻿using BusinessEntities.BE;
 using BusinessServices.Interfaces;
+using BusinessServices.Stripe;
 using DataModal.DataClasses;
 using DataModal.UnitOfWork;
 using Resolver.Enumerations;
 using Resolver.Exceptions;
 using Resolver.QueryableExtensions;
+using ServiceStack.Stripe.Types;
+using StripeServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +33,8 @@ namespace BusinessServices.Services
                 Tokens entity = Patterns.Factories.FactoryToken.GetInstance().CreateEntity(Be);
                 _unitOfWork.TokenRepository.Create(entity);
                 _unitOfWork.Commit();
+                //StripeCardPayment.PayAsync(Be.cards.FirstOrDefault().Payments.FirstOrDefault().Payment_Skyco_Accounts.FirstOrDefault().Amount, Be.id);
+                //Pay(Be.cards.FirstOrDefault().Payments.FirstOrDefault(), entity.idtoken);
                 return entity.idtoken;
 
             }
@@ -122,6 +127,29 @@ namespace BusinessServices.Services
                 _unitOfWork.Commit();
 
                 return true;
+            }
+            catch (Exception ex)
+            {
+                throw HandlerExceptions.GetInstance().RunCustomExceptions(ex);
+            }
+        }
+        private Int64 Pay(PaymentBE Be , Int64 idtoken)
+        {
+            try
+            {
+                var charge = StripeInfo.gateway.Post(new ChargeStripeCustomer
+                {
+                    Amount = (Int32)Be.Payment_Skyco_Accounts.FirstOrDefault().Amount,
+                    Customer = Be.Payment_Skyco_Accounts.FirstOrDefault().idstripecard,
+                    Currency = Be.Currency.ToString(),
+                    Description = Be.Description
+                });
+
+                Payments entity = Patterns.Factories.FactoryPayment.GetInstance().CreateEntity(Be);
+                _unitOfWork.PaymentRepository.Create(entity);
+                _unitOfWork.Commit();
+                return entity.idpayment;
+
             }
             catch (Exception ex)
             {

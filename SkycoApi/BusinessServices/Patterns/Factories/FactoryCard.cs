@@ -90,6 +90,11 @@ namespace BusinessServices.Patterns.Factories
                     state = be.state,
                     tokenization_method = be.tokenization_method
                 };
+                if (be.Payments != null)
+                {
+                    entity.Payments = new List<Payments>();
+
+                }
                 return entity;
 
             }

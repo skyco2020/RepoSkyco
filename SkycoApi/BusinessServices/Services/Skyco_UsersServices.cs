@@ -249,17 +249,17 @@ namespace BusinessServices.Services
         #region Private Method
         private Boolean GetLocation(String Country, String province, String city)
         {
-            Countries country = _unitOfWork.Countryrepository.GetOneByFilters(u => u.CountryName == Country, new string[] { "Provinces", "Provinces.City" });
+            Countries country = _unitOfWork.Countryrepository.GetOneByFilters(u => u.CountryName == Country && u.CountryName != null, new string[] { "Provinces", "Provinces.City" });
             if (country != null)
             {
                 this.CountryId = country.CountryId;
                 if (country.Provinces != null)
                 {
-                    Provinces pro = country.Provinces.Find(p => p.ProvinceName.Trim().ToLower() == province.Trim().ToLower());
+                    Provinces pro = country.Provinces.Find(p => p.ProvinceName.Trim().ToLower() == province.Trim().ToLower() && p.ProvinceName != null);
                     this.ProvinceId = pro.ProvinceId;
                     if (pro.City != null)
                     {
-                        this.CityId = pro.City.Find(x => x.CityName.Trim().ToLower() == city.Trim().ToLower()).CityId;
+                        this.CityId = pro.City.Find(x => x.CityName.Trim().ToLower() == city.Trim().ToLower() && x.CityName!= null).CityId;
                         return true;
                     }
                 }

@@ -8,14 +8,12 @@ namespace BusinessEntities.BE
 {
     public class PaymentIntentBE
     {
-        public enum Currency
-        {
-            usd,
-            eur
-        }
-
-        public String description { get; set; }
-        public Int32 amount { get; set; }
-        public Currency currency { get; set; }
+        public Int64 idPaymentIntent { get; set; }
+        public Int64 AccountId { get; set; }
+        public Int64 PlanId { get; set; }
+        public String TokenID { get; set; }
+        public long amount { get; set; }
+        public String name { get; set; }
+        public Int32 state { get; set; }
     }
 }

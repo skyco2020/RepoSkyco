@@ -138,6 +138,7 @@
     <Compile Include="Services\Skyco_PhoneServices.cs" />
     <Compile Include="Services\Skyco_UsersServices.cs" />
     <Compile Include="Services\StripBase.cs" />
+    <Compile Include="Services\StripeCardServices.cs" />
     <Compile Include="Services\TokenServices.cs" />
     <Compile Include="Stripe\StripeInfo.cs" />
   </ItemGroup>
