@@ -89,20 +89,22 @@ namespace StripeServices
             var options4 = new CustomerCreateOptions
             {    
                 Name = "Pradel Eugene",
-                Description = "My First Test Customer (created for API docs)",     
+                Description = "My First Test Customer (created for API docs)",  
+                PaymentMethod = pay.Id,
+                //Source = pay.Id
             };
             var service4 = new CustomerService();
            Customer custom =  service4.Create(options4);
 
-            var options0 = new PaymentMethodListOptions
-            {
-                Customer = custom.Id,
-                Type = "card",
-            };
-            var service0 = new PaymentMethodService();
-            StripeList<PaymentMethod> paymentMethods = service0.List(
-              options0
-            );
+            //var options0 = new PaymentMethodListOptions
+            //{
+            //    Customer = custom.Id,
+            //    Type = "card",
+            //};
+            //var service0 = new PaymentMethodService();
+            //StripeList<PaymentMethod> paymentMethods = service0.List(
+            //  options0
+            //);
 
             //var mp = paymentMethods.Data[0].Id;
             var options12 = new PaymentMethodAttachOptions
@@ -110,20 +112,32 @@ namespace StripeServices
                 Customer = custom.Id,
             };
             var service12 = new PaymentMethodService();
-            service12.Attach(
+            var paymentMethod = service12.Attach(
               pay.Id,
               options12
             );
 
+            var option2s = new ChargeCreateOptions
+            {
+                Source = paymentMethod.Id,
+                Customer =  custom.Id,
+                Amount = 8,
+                Currency = "usd",
+            };
+            var servic2e = new ChargeService();
+            Charge charge = servic2e.Create(option2s);
+
             var options3 = new SubscriptionCreateOptions
             {
                 Customer = custom.Id,
+                //DefaultSource = pay.Id,
                 Items = new List<SubscriptionItemOptions>
                 {
                     new SubscriptionItemOptions
                     {
                         Price = "price_1H3XxiCoU1sl4udJRQZm1Y1P",                        
                          Quantity = 1,
+                          
                     },
                 } ,
             };
@@ -134,6 +148,7 @@ namespace StripeServices
             {
                 Subscription = "price_1H3XxiCoU1sl4udJRQZm1Y1P",
                 Quantity = 1,
+
             };
             var service2 = new SubscriptionItemService();
             service2.Create(options2);
