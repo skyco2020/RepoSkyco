@@ -70,6 +70,77 @@ namespace StripeServices
             //var paymentIntent = service.Create(options);
 
             //return "Success";
+
+            var options6 = new PaymentMethodCreateOptions
+            {
+                Type = "card",
+                Card = new PaymentMethodCardCreateOptions
+                {
+                    Number = "4242424242424242",
+                    ExpMonth = 3,
+                    ExpYear = 2021,
+                    Cvc = "314",
+                },
+            };
+            var service6 = new PaymentMethodService();
+            var pay = service6.Create(options6);
+
+
+            var options4 = new CustomerCreateOptions
+            {    
+                Name = "Pradel Eugene",
+                Description = "My First Test Customer (created for API docs)",     
+            };
+            var service4 = new CustomerService();
+           Customer custom =  service4.Create(options4);
+
+            var options0 = new PaymentMethodListOptions
+            {
+                Customer = custom.Id,
+                Type = "card",
+            };
+            var service0 = new PaymentMethodService();
+            StripeList<PaymentMethod> paymentMethods = service0.List(
+              options0
+            );
+
+            //var mp = paymentMethods.Data[0].Id;
+            var options12 = new PaymentMethodAttachOptions
+            {
+                Customer = custom.Id,
+            };
+            var service12 = new PaymentMethodService();
+            service12.Attach(
+              pay.Id,
+              options12
+            );
+
+            var options3 = new SubscriptionCreateOptions
+            {
+                Customer = custom.Id,
+                Items = new List<SubscriptionItemOptions>
+                {
+                    new SubscriptionItemOptions
+                    {
+                        Price = "price_1H3XxiCoU1sl4udJRQZm1Y1P",                        
+                         Quantity = 1,
+                    },
+                } ,
+            };
+            var service3 = new SubscriptionService();
+            Subscription subscription = service3.Create(options3);
+
+            var options2 = new SubscriptionItemCreateOptions
+            {
+                Subscription = "price_1H3XxiCoU1sl4udJRQZm1Y1P",
+                Quantity = 1,
+            };
+            var service2 = new SubscriptionItemService();
+            service2.Create(options2);
+
+            var service1 = new SubscriptionItemService();
+            var mp1 = service1.Get("price_1H3XxiCoU1sl4udJRQZm1Y1P");
+
             var options = new SessionCreateOptions
             {
                 SuccessUrl = "https://localhost:8080/success?id={CHECKOUT_SESSION_ID}",
