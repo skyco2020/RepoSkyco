@@ -84,6 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PaymentIntent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StripeCardPayment.cs" />
     <Compile Include="StripeGateway.cs" />

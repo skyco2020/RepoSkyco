@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessEntities.BE
+namespace StripeServices
 {
-    public class PaymentIntentBE
+    public class PaymentIntent
     {
         public Int64 idPaymentIntent { get; set; }
         public Int64 AccountId { get; set; }

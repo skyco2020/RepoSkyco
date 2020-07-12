@@ -10,180 +10,172 @@ namespace StripeServices
 {
     public static class StripeCardPayment
     {
-        
 
-        public static async Task<dynamic> PayAsync(/*String cardnumber, Int32 month, Int32 year, String cvc,  String name,*/long value, String tokenID)
+        #region Create Subscription
+        public static async Task<dynamic> PayAsync(PaymentIntent payment)
         {
-            //try
-            //{
+            try
+            {
+                #region Secret Key
                 Key();
-            //TokenCreateOptions optionstoken = new TokenCreateOptions
-            //{
-            //    Card = new CreditCardOptions
-            //    {
-            //        Number = cardnumber,
-            //        ExpMonth = month,
-            //        ExpYear = year,
-            //        Cvc = cvc
-            //    }
-            //};
-            //TokenService servetoken = new TokenService();
-            //Token stripetoken = await servetoken.CreateAsync(optionstoken);
+                #endregion
 
-            //    ChargeCreateOptions options = new ChargeCreateOptions
-            //    {
-            //        Amount = value,
-            //        Currency = "usd",
-            //        Description = "Contracted plan",
-            //        Source = tokenID
-            //    };
-
-            //    ChargeService service = new ChargeService();
-            //    Charge charge = await service.CreateAsync(options);
-
-            //    if (charge.Paid)
-            //    {
-            //        return "Success";
-            //    }
-            //    else
-            //    {
-            //        return "failed";
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    return ex.Message;
-            //}
-            //PaymentIntentCreateOptions options = new PaymentIntentCreateOptions
-            //{
-            //    Amount = value,
-            //    Currency = "usd",
-            //    Source =  tokenID,
-            //    //Verify your integration in this guide by including this parameter
-            //    Metadata = new Dictionary<string, string>
-            //    {
-            //      { "integration_check", "accept_a_payment" },
-            //    },
-            //};
-
-            //var service = new PaymentIntentService();
-            //var paymentIntent = service.Create(options);
-
-            //return "Success";
-
-            var options6 = new PaymentMethodCreateOptions
-            {
-                Type = "card",
-                Card = new PaymentMethodCardCreateOptions
+                #region TOken Credit Card
+                TokenCreateOptions tokenoption = new TokenCreateOptions
                 {
-                    Number = "4242424242424242",
-                    ExpMonth = 3,
-                    ExpYear = 2021,
-                    Cvc = "314",
-                },
-            };
-            var service6 = new PaymentMethodService();
-            var pay = service6.Create(options6);
+                    Card = new CreditCardOptions
+                    {
+                        Number = payment.cardnumber,
+                        ExpYear = payment.year,
+                        ExpMonth = payment.month,
+                        Cvc = payment.cvc
+                    }
+                };
 
+                TokenService tokenservice = new TokenService();
+                Token stripeToken = tokenservice.Create(tokenoption);
+                #endregion
 
-            var options4 = new CustomerCreateOptions
-            {    
-                Name = "Pradel Eugene",
-                Description = "My First Test Customer (created for API docs)",  
-                PaymentMethod = pay.Id,
-                //Source = pay.Id
-            };
-            var service4 = new CustomerService();
-           Customer custom =  service4.Create(options4);
+                #region Customer
+                CustomerCreateOptions customerption = new CustomerCreateOptions
+                {
+                    Name = payment.fullname,
+                    Email = payment.Email,
+                    Description = payment.Description,
+                    Source = stripeToken.Id
+                };
+                CustomerService customerservice = new CustomerService();
+                Customer custom = customerservice.Create(customerption);
+                #endregion
 
-            //var options0 = new PaymentMethodListOptions
-            //{
-            //    Customer = custom.Id,
-            //    Type = "card",
-            //};
-            //var service0 = new PaymentMethodService();
-            //StripeList<PaymentMethod> paymentMethods = service0.List(
-            //  options0
-            //);
+                #region Payment Atach Method
+                PaymentMethodAttachOptions paymentatch = new PaymentMethodAttachOptions
+                {
+                    Customer = custom.Id,
+                };
+                PaymentMethodService paymentmethodservice = new PaymentMethodService();
+                PaymentMethod paymentMethod = paymentmethodservice.Attach(
+                  stripeToken.Card.Id,
+                  paymentatch
+                );
+                #endregion
 
-            //var mp = paymentMethods.Data[0].Id;
-            var options12 = new PaymentMethodAttachOptions
-            {
-                Customer = custom.Id,
-            };
-            var service12 = new PaymentMethodService();
-            var paymentMethod = service12.Attach(
-              pay.Id,
-              options12
-            );
-
-            var option2s = new ChargeCreateOptions
-            {
-                Source = paymentMethod.Id,
-                Customer =  custom.Id,
-                Amount = 8,
-                Currency = "usd",
-            };
-            var servic2e = new ChargeService();
-            Charge charge = servic2e.Create(option2s);
-
-            var options3 = new SubscriptionCreateOptions
-            {
-                Customer = custom.Id,
-                //DefaultSource = pay.Id,
-                Items = new List<SubscriptionItemOptions>
+                #region Subscription Create
+                SubscriptionCreateOptions subscriptioncreateoption = new SubscriptionCreateOptions
+                {
+                    Customer = custom.Id,
+                    Items = new List<SubscriptionItemOptions>
                 {
                     new SubscriptionItemOptions
                     {
-                        Price = "price_1H3XxiCoU1sl4udJRQZm1Y1P",                        
-                         Quantity = 1,
-                          
+                        //Price = "price_1H3XxiCoU1sl4udJRQZm1Y1P",
+                        Price = payment.Price,
+                        Quantity = 1,
+
                     },
-                } ,
-            };
-            var service3 = new SubscriptionService();
-            Subscription subscription = service3.Create(options3);
-
-            var options2 = new SubscriptionItemCreateOptions
-            {
-                Subscription = "price_1H3XxiCoU1sl4udJRQZm1Y1P",
-                Quantity = 1,
-
-            };
-            var service2 = new SubscriptionItemService();
-            service2.Create(options2);
-
-            var service1 = new SubscriptionItemService();
-            var mp1 = service1.Get("price_1H3XxiCoU1sl4udJRQZm1Y1P");
-
-            var options = new SessionCreateOptions
-            {
-                SuccessUrl = "https://localhost:8080/success?id={CHECKOUT_SESSION_ID}",
-                CancelUrl = "https://localhost:8080/cancel",
-                PaymentMethodTypes = new List<string> {
-                  "card",
                 },
-                        LineItems = new List<SessionLineItemOptions> {
-                  new SessionLineItemOptions {
-                    Name = "T-shirt",
-                    Description = "Comfortable cotton t-shirt",
-                    Amount = value,
-                    Currency = "usd",
-                    Quantity = 4,
-                  },
-                },
-            };
+                };
+                var service3 = new SubscriptionService();
+                Subscription subscription = service3.Create(subscriptioncreateoption);
+                #endregion
 
-            var service = new SessionService();
-            Session session = service.Create(options);
-            return session.Id;
+                #region Detail subscription
+                SubscriptionItemService subscriptionservice = new SubscriptionItemService();
+                return subscriptionservice.Get(subscription.Id);
+                #endregion
+
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
+            //var options = new SessionCreateOptions
+            //{
+            //    SuccessUrl = "https://localhost:8080/success?id={CHECKOUT_SESSION_ID}",
+            //    CancelUrl = "https://localhost:8080/cancel",
+            //    PaymentMethodTypes = new List<string> {
+            //      "card",
+            //    },
+            //            LineItems = new List<SessionLineItemOptions> {
+            //      new SessionLineItemOptions {
+            //        Name = "T-shirt",
+            //        Description = "Comfortable cotton t-shirt",
+            //        Amount = value,
+            //        Currency = "usd",
+            //        Quantity = 4,
+            //      },
+            //    },
+            //};
+
+            //var service = new SessionService();
+            //Session session = service.Create(options);
+            //return session.Id;
         }
+        #endregion
 
+        #region Secret Key
         private static void Key()
         {
             // Set your secret key. Remember to switch to your live secret key in production!
             // See your keys here: https://dashboard.stripe.com/account/apikeys
             StripeConfiguration.ApiKey = "sk_test_pJiL43vnUyaJT9xOyyG80W4s0096SCKG0c";
         }
+        #endregion
+
+        #region UpdateSubscription
+        public static async Task<dynamic> Update(PaymentIntent payment)
+        {
+            try
+            {
+                #region Secret Key
+                Key();
+                #endregion
+                var options = new CardUpdateOptions
+                {
+                    Name = "Jenny Rosen",                  
+                    
+                };
+                CardService service = new CardService();
+                 Card updatecard =service.Update(
+                  "cus_HdANU9WSjrJgan",
+                  "card_1H3u2cCoU1sl4udJZFipXGPy",
+                  options
+                );
+                return updatecard;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
+        }
+        #endregion
+
+        public static async Task<dynamic> GetAllProduct()
+        {
+            #region Secret Key
+            Key();
+            #endregion
+
+            PriceListOptions options = new PriceListOptions 
+            { 
+                Limit = 3
+            };
+            PriceService service = new PriceService();
+            StripeList<Price> prices = service.List(options);
+            return prices;
+        }
+        #region Delete Subscription
+        //public static async Task<dynamic> DeleteSub(String subcripId)
+        //{
+        //    #region Secret Key
+        //    Key();
+        //    #endregion
+        //    var service = new SubscriptionService();
+        //    service.Cancel(subcripId);
+        //}
+        #endregion
     }
 }

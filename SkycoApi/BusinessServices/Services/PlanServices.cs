@@ -5,6 +5,7 @@ using DataModal.UnitOfWork;
 using Resolver.Enumerations;
 using Resolver.Exceptions;
 using Resolver.QueryableExtensions;
+using StripeServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;

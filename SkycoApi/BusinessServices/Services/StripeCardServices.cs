@@ -15,12 +15,14 @@ namespace BusinessServices.Services
         {
             try
             {
-                return await StripeCardPayment.PayAsync(Be.amount, Be.name);              
+                PaymentIntent entity = Patterns.Factories.FactoryPaymentIntent.GetInstance().CreateEntity(Be);
+                return await StripeCardPayment.PayAsync(entity);              
             }
             catch (Exception ex)
             {
                 throw HandlerExceptions.GetInstance().RunCustomExceptions(ex);
             }
         }
+
     }
 }
