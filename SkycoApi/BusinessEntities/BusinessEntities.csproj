@@ -74,6 +74,7 @@
     <Compile Include="BE\PaymentIntentBE.cs" />
     <Compile Include="BE\Payment_Skyco_AccountBE.cs" />
     <Compile Include="BE\PlanBE.cs" />
+    <Compile Include="BE\PricePlanBE.cs" />
     <Compile Include="BE\ProvinceBE.cs" />
     <Compile Include="BE\Skyco_AccountBE.cs" />
     <Compile Include="BE\Skyco_AccountTypeBE.cs" />

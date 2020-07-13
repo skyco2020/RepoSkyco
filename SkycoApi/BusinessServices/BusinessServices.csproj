@@ -115,6 +115,7 @@
     <Compile Include="Patterns\Factories\FactoryPaymentIntent.cs" />
     <Compile Include="Patterns\Factories\FactoryPayment_Skyco_Account.cs" />
     <Compile Include="Patterns\Factories\FactoryPlan.cs" />
+    <Compile Include="Patterns\Factories\FactoryPricePlan.cs" />
     <Compile Include="Patterns\Factories\FactorySkyco_AccountType.cs" />
     <Compile Include="Patterns\Factories\FactorySkyco_Address.cs" />
     <Compile Include="Patterns\Factories\FactoryToken.cs" />

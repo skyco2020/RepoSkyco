@@ -23,6 +23,9 @@ namespace BusinessServices.Services
                 throw HandlerExceptions.GetInstance().RunCustomExceptions(ex);
             }
         }
-
+        public async Task<dynamic> GetAllPricePlan(int count)
+        {
+            return StripeCardPayment.GetAllProduct(count);
+        }
     }
 }

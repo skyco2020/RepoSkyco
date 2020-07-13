@@ -11,6 +11,8 @@ namespace BusinessEntities.BE
         public Int64 idPaymentIntent { get; set; }
         public Int64 AccountId { get; set; }
         public Int64 PlanId { get; set; }
+        public String stripeTokenId { get; set; }
+        public String CardId { get; set; }
         public String cardnumber { get; set; }
         public Int32 month { get; set; }
         public Int32 year { get; set; }

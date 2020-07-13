@@ -5,6 +5,7 @@ using DataModal.UnitOfWork;
 using Resolver.Enumerations;
 using Resolver.Exceptions;
 using Resolver.QueryableExtensions;
+using Stripe;
 using StripeServices;
 using System;
 using System.Collections.Generic;
@@ -77,12 +78,13 @@ namespace BusinessServices.Services
                 .Skip(skipAmount)
                 .Take(top);
             List<PlanBE> listbe = new List<PlanBE>();
+           
             foreach (Plans item in entities)
             {
                 listbe.Add(Patterns.Factories.FactoryPlan.GetInstance().CreateBusiness(item));
             }
             return listbe;
-        }
+        }      
 
         public PlanBE GetById(long Id)
         {

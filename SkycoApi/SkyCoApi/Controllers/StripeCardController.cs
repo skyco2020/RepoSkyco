@@ -25,5 +25,12 @@ namespace SkyCoApi.Controllers
         {
             return _services.Create(Be);
         }
+
+        [AllowAnonymous]
+        [System.Web.Http.HttpGet]
+        public async Task<dynamic> GetAll(int count = 3)
+        {           
+            return Ok(_services.GetAllPricePlan(count));
+        }
     }
 }

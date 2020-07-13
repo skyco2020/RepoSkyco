@@ -12,7 +12,7 @@ namespace BusinessServices.Interfaces
         PlanBE GetById(Int64 Id);
         List<PlanBE> GetAll(Int32 state, Int32 page, Int32 top, String orderBy, String ascending, ref Int32 count);
         Int64 Create(PlanBE Be);
-        Boolean Update(PlanBE Be);
-        Boolean Delete(Int64 Id, String UserName);
+        Boolean Update(PlanBE Be); 
+         Boolean Delete(Int64 Id, String UserName);
     }
 }

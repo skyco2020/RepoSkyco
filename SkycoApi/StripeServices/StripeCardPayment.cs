@@ -21,19 +21,19 @@ namespace StripeServices
                 #endregion
 
                 #region TOken Credit Card
-                TokenCreateOptions tokenoption = new TokenCreateOptions
-                {
-                    Card = new CreditCardOptions
-                    {
-                        Number = payment.cardnumber,
-                        ExpYear = payment.year,
-                        ExpMonth = payment.month,
-                        Cvc = payment.cvc
-                    }
-                };
+                //TokenCreateOptions tokenoption = new TokenCreateOptions
+                //{
+                //    Card = new CreditCardOptions
+                //    {
+                //        Number = payment.cardnumber,
+                //        ExpYear = payment.year,
+                //        ExpMonth = payment.month,
+                //        Cvc = payment.cvc
+                //    }
+                //};
 
-                TokenService tokenservice = new TokenService();
-                Token stripeToken = tokenservice.Create(tokenoption);
+                //TokenService tokenservice = new TokenService();
+                //Token stripeToken = tokenservice.Create(tokenoption);
                 #endregion
 
                 #region Customer
@@ -42,7 +42,7 @@ namespace StripeServices
                     Name = payment.fullname,
                     Email = payment.Email,
                     Description = payment.Description,
-                    Source = stripeToken.Id
+                    Source = payment.stripeTokenId
                 };
                 CustomerService customerservice = new CustomerService();
                 Customer custom = customerservice.Create(customerption);
@@ -55,7 +55,7 @@ namespace StripeServices
                 };
                 PaymentMethodService paymentmethodservice = new PaymentMethodService();
                 PaymentMethod paymentMethod = paymentmethodservice.Attach(
-                  stripeToken.Card.Id,
+                  payment.CardId,
                   paymentatch
                 );
                 #endregion
@@ -78,39 +78,13 @@ namespace StripeServices
                 var service3 = new SubscriptionService();
                 Subscription subscription = service3.Create(subscriptioncreateoption);
                 #endregion
-
-                #region Detail subscription
-                SubscriptionItemService subscriptionservice = new SubscriptionItemService();
-                return subscriptionservice.Get(subscription.Id);
-                #endregion
+                return subscription;
 
             }
             catch (Exception ex)
             {
                 return ex.Message;
-            }
-
-            //var options = new SessionCreateOptions
-            //{
-            //    SuccessUrl = "https://localhost:8080/success?id={CHECKOUT_SESSION_ID}",
-            //    CancelUrl = "https://localhost:8080/cancel",
-            //    PaymentMethodTypes = new List<string> {
-            //      "card",
-            //    },
-            //            LineItems = new List<SessionLineItemOptions> {
-            //      new SessionLineItemOptions {
-            //        Name = "T-shirt",
-            //        Description = "Comfortable cotton t-shirt",
-            //        Amount = value,
-            //        Currency = "usd",
-            //        Quantity = 4,
-            //      },
-            //    },
-            //};
-
-            //var service = new SessionService();
-            //Session session = service.Create(options);
-            //return session.Id;
+            }           
         }
         #endregion
 
@@ -153,19 +127,27 @@ namespace StripeServices
         }
         #endregion
 
-        public static async Task<dynamic> GetAllProduct()
+        public static async Task<dynamic> GetAllProduct(int count)
         {
-            #region Secret Key
-            Key();
-            #endregion
+            try
+            {
+                #region Secret Key
+                Key();
+                #endregion
 
-            PriceListOptions options = new PriceListOptions 
-            { 
-                Limit = 3
-            };
-            PriceService service = new PriceService();
-            StripeList<Price> prices = service.List(options);
-            return prices;
+                PriceListOptions options = new PriceListOptions
+                {
+                    Limit = count
+                };
+                PriceService service = new PriceService();
+                StripeList<Price> prices = service.List(options);
+                return prices;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+           
         }
         #region Delete Subscription
         //public static async Task<dynamic> DeleteSub(String subcripId)
