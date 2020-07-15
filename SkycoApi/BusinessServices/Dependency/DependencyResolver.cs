@@ -16,11 +16,10 @@ namespace BusinessServices.Dependency
     {
         public void SetUp(IRegisterComponent registerComponent)
         {
-            registerComponent.RegisterType<ICardServices, CardServices>();
             registerComponent.RegisterType<ICityServices, CityServices>();
             registerComponent.RegisterType<ICountryServices, CountryServices>();
             registerComponent.RegisterType<ILocationServices, LocationServices>();
-            registerComponent.RegisterType<IPaymentServices, PaymentServices>();
+            registerComponent.RegisterType<IStripeSubscribeServices, StripeSubscribeServices>();
             registerComponent.RegisterType<IPlanServices, PlanServices>();
             registerComponent.RegisterType<IProvinceServices, ProvinceServices>();
             registerComponent.RegisterType<ISkyco_AccountServices, Skyco_AccountServices>();
@@ -28,7 +27,6 @@ namespace BusinessServices.Dependency
             registerComponent.RegisterType<ISkyco_AddressServices, Skyco_AddressServices>();
             registerComponent.RegisterType<ISkyco_PhoneServices, Skyco_PhoneServices>();
             registerComponent.RegisterType<ISkyco_UsersServices, Skyco_UsersServices>();
-            registerComponent.RegisterType<ITokenServices, TokenServices>();
             registerComponent.RegisterType<IOwinSecurityService, OwinSecurityServer>();
         }
     }

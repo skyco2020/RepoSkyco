@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace DataModal.DataClasses
 {
-    public class Payment_Skyco_Accounts
+    public class StripeSubscribes
     {
         [Key]
-        public Int64 IdPaymentUser { get; set; }
-        public Int64 idPayment { get; set; }
+        public Int64 idStripeSubscribe { get; set; }
         public Int64 AccountId { get; set; }
-        public DateTime paymentdate { get; set; }
-        public string idstripecard { get; set; }
-        public Decimal Amount { get; set; }
+        public String idPlanPriceStripe { get; set; }
+        public String idStripeCustomer { get; set; }
+        public String idSubscribe { get; set; }
+        public String idCardStripe { get; set; }
+        public String idTokenStripe { get; set; }
+        public DateTime SubscribeDate{ get; set; }
         public Int32 state { get; set; }
 
         #region Relation
-        [ForeignKey("idPayment")]
-        public Payments Payments { get; set; }
         [ForeignKey("AccountId")]
         public Skyco_Accounts Accounts { get; set; }
         #endregion

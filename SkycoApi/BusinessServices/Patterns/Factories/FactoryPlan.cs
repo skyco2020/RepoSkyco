@@ -27,6 +27,7 @@ namespace BusinessServices.Patterns.Factories
                 be = new PlanBE()
                 {
                     AccountId = entity.AccountId,
+                    idProductStripe = entity.idProductStripe,
                     Description = entity.Description,
                     Id = entity.PlanId,
                     TypePlan = entity.TypePlan,
@@ -51,6 +52,7 @@ namespace BusinessServices.Patterns.Factories
                 entity = new Plans()
                 {
                     AccountId = be.AccountId,
+                    idProductStripe = be.idProductStripe,
                     Description = be.Description,
                     PlanId = be.Id,
                     TypePlan = be.TypePlan,

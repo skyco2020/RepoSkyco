@@ -25,6 +25,7 @@ namespace SkyCoApi.Models.FactoryDTO
                 dto = new PlanDTO()
                 {
                     AccountId = be.AccountId,
+                    idProductStripe = be.idProductStripe,
                     Description = be.Description,
                     PlanId = be.Id,
                     TypePlan = be.TypePlan,

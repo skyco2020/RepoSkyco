@@ -2,6 +2,7 @@
 using Stripe.Checkout;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,23 +18,7 @@ namespace StripeServices
             try
             {
                 #region Secret Key
-                Key();
-                #endregion
-
-                #region TOken Credit Card
-                //TokenCreateOptions tokenoption = new TokenCreateOptions
-                //{
-                //    Card = new CreditCardOptions
-                //    {
-                //        Number = payment.cardnumber,
-                //        ExpYear = payment.year,
-                //        ExpMonth = payment.month,
-                //        Cvc = payment.cvc
-                //    }
-                //};
-
-                //TokenService tokenservice = new TokenService();
-                //Token stripeToken = tokenservice.Create(tokenoption);
+                Key.SecretKey();
                 #endregion
 
                 #region Customer
@@ -69,7 +54,7 @@ namespace StripeServices
                     new SubscriptionItemOptions
                     {
                         //Price = "price_1H3XxiCoU1sl4udJRQZm1Y1P",
-                        Price = payment.Price,
+                        Price = payment.IDStripePrice,
                         Quantity = 1,
 
                     },
@@ -88,22 +73,13 @@ namespace StripeServices
         }
         #endregion
 
-        #region Secret Key
-        private static void Key()
-        {
-            // Set your secret key. Remember to switch to your live secret key in production!
-            // See your keys here: https://dashboard.stripe.com/account/apikeys
-            StripeConfiguration.ApiKey = "sk_test_pJiL43vnUyaJT9xOyyG80W4s0096SCKG0c";
-        }
-        #endregion
-
         #region UpdateSubscription
         public static async Task<dynamic> Update(PaymentIntent payment)
         {
             try
             {
                 #region Secret Key
-                Key();
+                Key.SecretKey();
                 #endregion
                 var options = new CardUpdateOptions
                 {
@@ -132,7 +108,7 @@ namespace StripeServices
             try
             {
                 #region Secret Key
-                Key();
+                Key.SecretKey();
                 #endregion
 
                 PriceListOptions options = new PriceListOptions

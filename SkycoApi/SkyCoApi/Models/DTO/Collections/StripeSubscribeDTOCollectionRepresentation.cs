@@ -8,7 +8,7 @@ using System.Web;
 
 namespace SkyCoApi.Models.DTO.Collections
 {
-    public class Payment_Skyco_AccountDTOCollectionRepresentation : BaseCollectionRepresentation<Payment_Skyco_AccountDTO>
+    public class StripeSubscribeDTOCollectionRepresentation : BaseCollectionRepresentation<StripeSubscribeDTO>
     {
         #region Template
         public override BaseTemplate Mytemplate
@@ -16,7 +16,7 @@ namespace SkyCoApi.Models.DTO.Collections
             get
             {
                 if (_mytemplate == null)
-                    _mytemplate = Payment_Skyco_AccountTemplate.GetInstance();
+                    _mytemplate = StripeSubscribeTemplate.GetInstance();
                 return _mytemplate;
             }
 
@@ -28,7 +28,7 @@ namespace SkyCoApi.Models.DTO.Collections
         #endregion
 
         #region Representations
-        public Payment_Skyco_AccountDTOCollectionRepresentation(IList<Payment_Skyco_AccountDTO> list) : base(list)
+        public StripeSubscribeDTOCollectionRepresentation(IList<StripeSubscribeDTO> list) : base(list)
         {
             foreach (var l in list)
             {
@@ -37,7 +37,7 @@ namespace SkyCoApi.Models.DTO.Collections
             }
         }
 
-        public Payment_Skyco_AccountDTOCollectionRepresentation(IList<Payment_Skyco_AccountDTO> list, String filters, Int32 pagenumber, Int32 count, Int32 top) : base(list, filters, pagenumber, count, top)
+        public StripeSubscribeDTOCollectionRepresentation(IList<StripeSubscribeDTO> list, String filters, Int32 pagenumber, Int32 count, Int32 top) : base(list, filters, pagenumber, count, top)
         {
             foreach (var l in list)
             {

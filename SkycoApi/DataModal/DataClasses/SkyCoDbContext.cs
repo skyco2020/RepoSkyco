@@ -14,12 +14,10 @@ namespace DataModal.DataClasses
             this.Configuration.ProxyCreationEnabled = false;
             this.Configuration.LazyLoadingEnabled = false;
         }
-        public virtual DbSet<Cards> Cards { get; set; }
         public virtual DbSet<Cities> City { get; set; }
         public virtual DbSet<Countries> Country { get; set; }
         public virtual DbSet<Locations> Location { get; set; }
-        public virtual DbSet<Payments> Payments { get; set; }
-        public virtual DbSet<Payment_Skyco_Accounts> Payment_Skyco_Accounts { get; set; }
+        public virtual DbSet<StripeSubscribes> StripeSubscribes { get; set; }
         public virtual DbSet<Plans> Plans { get; set; }
         public virtual DbSet<Provinces> Provinces { get; set; }
         public virtual DbSet<Skyco_Accounts> Skyco_Account { get; set; }
@@ -28,7 +26,6 @@ namespace DataModal.DataClasses
         public virtual DbSet<Skyco_Phones> Skyco_Phone { get; set; }
         public virtual DbSet<Skyco_Users> Skyco_User { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<Tokens> Tokens { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

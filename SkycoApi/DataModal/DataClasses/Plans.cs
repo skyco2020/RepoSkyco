@@ -12,6 +12,7 @@ namespace DataModal.DataClasses
     {
         [Key]
         public Int64 PlanId { get; set; }
+        public String idProductStripe { get; set; }
         public Int64 AccountId { get; set; }
         public String TypePlan { get; set; }
         public Decimal Price { get; set; }
@@ -22,10 +23,6 @@ namespace DataModal.DataClasses
         #region Relation
         [ForeignKey("AccountId")]
         public Skyco_Accounts Accounts { get; set; }
-        #endregion
-
-        #region List
-        public List<Payments> Payments { get; set; }
         #endregion
     }
 }

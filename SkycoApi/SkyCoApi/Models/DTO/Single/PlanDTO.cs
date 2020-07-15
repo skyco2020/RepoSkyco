@@ -16,6 +16,7 @@ namespace SkyCoApi.Models.DTO.Single
         }
         #endregion
         public Int64 PlanId { get; set; }
+        public String idProductStripe { get; set; }
         public Int64 AccountId { get; set; }
         public Decimal Price { get; set; }
         public String Description { get; set; }
@@ -28,7 +29,6 @@ namespace SkyCoApi.Models.DTO.Single
         #endregion
 
         #region List
-        public List<PaymentDTO> Payments { get; set; }
         #endregion
 
         #region Override & Hypermedia

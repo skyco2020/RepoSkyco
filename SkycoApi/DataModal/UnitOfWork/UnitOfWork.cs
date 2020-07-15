@@ -67,12 +67,10 @@ namespace DataModal.UnitOfWork
         #region Relation Repository
 
         #region Members 
-        private ICardRepository _CardRepository;
         private ICityRepository _CityRepository;
         private ICountryRepository _CountryRepository;
         private ILocationRepository _LocationRepository;
-        private IPaymentRepository _PaymentRepository;
-        private IPayment_Skyco_AccountRepository _Payment_Skyco_AccountRepository;
+        private IStripeSubscribeRepository _StripeSubscribeRepository;
         private IPlanRepository _PlanRepository;
         private IProvinceRepository _ProvinceRepository;
         private ISkyco_AccountRepository _Skyco_AccountRepository;
@@ -80,28 +78,11 @@ namespace DataModal.UnitOfWork
         private ISkyco_AddressRepository _Skyco_AddressRepository;
         private ISkyco_PhoneRepository _Skyco_PhoneRepository;
         private ISkyco_UserRepository _Skyco_UserRepository;
-        private ITokenRepository _TokenRepository;
 
         #endregion
 
 
         #region Properties
-        public ICardRepository CardRepository
-        {
-            get
-            {
-                if (_CityRepository == null)
-                {
-                    return _CardRepository = new CardRepository(context);
-                }
-                return _CardRepository;
-            }
-
-            set
-            {
-                _CardRepository = value;
-            }
-        }
         public ICityRepository CityRepository
         {
             get
@@ -142,29 +123,17 @@ namespace DataModal.UnitOfWork
             }
             set { _LocationRepository = value; }
         }
-        public IPaymentRepository PaymentRepository
+        public IStripeSubscribeRepository StripeSubscribeRepository
         {
             get
             {
-                if (_PaymentRepository == null)
+                if (_StripeSubscribeRepository == null)
                 {
-                    _PaymentRepository = new PaymentRepository(context);
+                    _StripeSubscribeRepository = new StripeSubscribeRepository(context);
                 }
-                return _PaymentRepository;
+                return _StripeSubscribeRepository;
             }
-            set { _PaymentRepository = value; }
-        }
-        public IPayment_Skyco_AccountRepository Payment_Skyco_AccountRepository
-        {
-            get
-            {
-                if (_Payment_Skyco_AccountRepository == null)
-                {
-                    _Payment_Skyco_AccountRepository = new Payment_Skyco_AccountRepository(context);
-                }
-                return _Payment_Skyco_AccountRepository;
-            }
-            set { _Payment_Skyco_AccountRepository = value; }
+            set { _StripeSubscribeRepository = value; }
         }
         public IPlanRepository PlanRepository
         {
@@ -277,23 +246,6 @@ namespace DataModal.UnitOfWork
             set
             {
                 _Skyco_UserRepository = value;
-            }
-        }
-
-        public ITokenRepository TokenRepository
-        {
-            get
-            {
-                if (_TokenRepository == null)
-                {
-                    return _TokenRepository = new TokenRepository(context);
-                }
-                return _TokenRepository;
-            }
-
-            set
-            {
-                _TokenRepository = value;
             }
         }
 

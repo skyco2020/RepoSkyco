@@ -67,7 +67,7 @@ namespace DataModal.DataClasses
         #endregion
 
         #region List
-        public List<Payment_Skyco_Accounts> Payment_Skyco_Accounts { get; set; }
+        public List<StripeSubscribes> Payment_Skyco_Accounts { get; set; }
         #endregion
     }
 

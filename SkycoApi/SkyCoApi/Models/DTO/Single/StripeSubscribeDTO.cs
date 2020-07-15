@@ -7,24 +7,25 @@ using System.Web;
 
 namespace SkyCoApi.Models.DTO.Single
 {
-    public class Payment_Skyco_AccountDTO : BaseRepresentation
+    public class StripeSubscribeDTO : BaseRepresentation
     {
         #region Constructor
-        public Payment_Skyco_AccountDTO()
+        public StripeSubscribeDTO()
         {
             Rel = Mytemplate.GetMyRelationReference().Rel;
         }
         #endregion
-        public Int64 IdPaymentUser { get; set; }
-        public Int64 idPayment { get; set; }
+        public Int64 idStripeSubscribe { get; set; }
         public Int64 AccountId { get; set; }
-        public DateTime paymentdate { get; set; }
-        public string idstripecard { get; set; }
-        public Decimal Amount { get; set; }
+        public String idPlanPriceStripe { get; set; }
+        public String idStripeCustomer { get; set; }
+        public String idSubscribe { get; set; }
+        public String idCardStripe { get; set; }
+        public String idTokenStripe { get; set; }
+        public DateTime SubscribeDate { get; set; }
         public Int32 state { get; set; }
 
         #region Relation
-        public PaymentDTO Payments { get; set; }
         public Skyco_AccountDTO Account { get; set; }
         #endregion
 
@@ -34,7 +35,7 @@ namespace SkyCoApi.Models.DTO.Single
             get
             {
                 if (_mytemplate == null)
-                    _mytemplate = Payment_Skyco_AccountTemplate.GetInstance();
+                    _mytemplate = StripeSubscribeTemplate.GetInstance();
                 return _mytemplate;
             }
 
@@ -46,12 +47,12 @@ namespace SkyCoApi.Models.DTO.Single
 
         public override Int64 IDRepresentation()
         {
-            return IdPaymentUser;
+            return idStripeSubscribe;
         }
 
         protected override void CreateHypermedia()
         {
-            Href = Payment_Skyco_AccountTemplate.Payment_Skyco_Account.CreateLink(new { id = IdPaymentUser }).Href;
+            Href = StripeSubscribeTemplate.StripeSubscribe.CreateLink(new { id = idStripeSubscribe }).Href;
         }
         #endregion
     }

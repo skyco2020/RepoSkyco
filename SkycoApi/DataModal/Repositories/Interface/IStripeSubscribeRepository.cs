@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataModal.Repositories.Interface
 {
-    public interface ITokenRepository : ISkyCoGenericRepository<Tokens>
+    public interface IStripeSubscribeRepository : ISkyCoGenericRepository<StripeSubscribes>
     {
     }
 }

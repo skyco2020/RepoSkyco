@@ -26,18 +26,12 @@ namespace BusinessServices.Patterns.Factories
             {
                 be = new PaymentIntentBE()
                 {
-                    Price = entity.Price,
+                    IDStripePrice = entity.IDStripePrice,
                     AccountId = entity.AccountId,
-                    amount = entity.amount,
-                    cardnumber = entity.cardnumber,
                     stripeTokenId = entity.stripeTokenId,
                     CardId = entity.CardId,
-                    cvc = entity.cvc,
                     Email = entity.Email,
                     idPaymentIntent = entity.idPaymentIntent,
-                    month = entity.month,
-                    PlanId = entity.PlanId,
-                    year = entity.year,
                     Description = entity.Description,
                     fullname = entity.fullname,
                     state = entity.state
@@ -56,18 +50,12 @@ namespace BusinessServices.Patterns.Factories
             {
                 entity = new PaymentIntent()
                 {
-                    Price = be.Price,
+                    IDStripePrice = be.IDStripePrice,
                     AccountId = be.AccountId,
-                    amount = be.amount,
-                    cardnumber = be.cardnumber,
                     stripeTokenId = be.stripeTokenId,
                     CardId = be.CardId,
-                    cvc = be.cvc,
                     Email = be.Email,
                     idPaymentIntent = be.idPaymentIntent,
-                    month = be.month,
-                    PlanId = be.PlanId,
-                    year = be.year,
                     Description = be.Description,
                     fullname = be.fullname,
                     state = be.state

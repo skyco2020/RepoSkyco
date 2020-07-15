@@ -95,11 +95,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dependency\DependencyResolver.cs" />
-    <Compile Include="Interfaces\ICardServices.cs" />
     <Compile Include="Interfaces\ICityServices.cs" />
     <Compile Include="Interfaces\ICountryServices.cs" />
     <Compile Include="Interfaces\ILocationServices.cs" />
-    <Compile Include="Interfaces\IPaymentServices.cs" />
+    <Compile Include="Interfaces\IStripeSubscribeServices.cs" />
     <Compile Include="Interfaces\IPlanServices.cs" />
     <Compile Include="Interfaces\ISkyco_AccountServices.cs" />
     <Compile Include="Interfaces\IProvinceServices.cs" />
@@ -107,19 +106,14 @@
     <Compile Include="Interfaces\ISkyco_AddressServices.cs" />
     <Compile Include="Interfaces\ISkyco_PhoneServices.cs" />
     <Compile Include="Interfaces\ISkyco_UsersServices.cs" />
-    <Compile Include="Interfaces\ITokenServices.cs" />
     <Compile Include="OwinSecurity\IOwinSecurityService.cs" />
     <Compile Include="OwinSecurity\OwinSecurityServer.cs" />
-    <Compile Include="Patterns\Factories\FactoryCard.cs" />
-    <Compile Include="Patterns\Factories\FactoryPayment.cs" />
     <Compile Include="Patterns\Factories\FactoryPaymentIntent.cs" />
-    <Compile Include="Patterns\Factories\FactoryPayment_Skyco_Account.cs" />
+    <Compile Include="Patterns\Factories\FactoryStripeSubscribe.cs" />
     <Compile Include="Patterns\Factories\FactoryPlan.cs" />
     <Compile Include="Patterns\Factories\FactoryPricePlan.cs" />
     <Compile Include="Patterns\Factories\FactorySkyco_AccountType.cs" />
     <Compile Include="Patterns\Factories\FactorySkyco_Address.cs" />
-    <Compile Include="Patterns\Factories\FactoryToken.cs" />
-    <Compile Include="Services\CardServices.cs" />
     <Compile Include="Services\CityServices.cs" />
     <Compile Include="Services\CountryServices.cs" />
     <Compile Include="Patterns\Factories\FactoryCity.cs" />
@@ -131,7 +125,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Patterns\Factories\FactorySkyco_Phone.cs" />
     <Compile Include="Services\LocationServices.cs" />
-    <Compile Include="Services\PaymentServices.cs" />
+    <Compile Include="Services\StripeSubscribeServices.cs" />
     <Compile Include="Services\PlanServices.cs" />
     <Compile Include="Services\ProvinceServices.cs" />
     <Compile Include="Services\Skyco_AccountServices.cs" />
@@ -141,7 +135,6 @@
     <Compile Include="Services\Skyco_UsersServices.cs" />
     <Compile Include="Services\StripBase.cs" />
     <Compile Include="Services\StripeCardServices.cs" />
-    <Compile Include="Services\TokenServices.cs" />
     <Compile Include="Stripe\StripeInfo.cs" />
   </ItemGroup>
   <ItemGroup />
