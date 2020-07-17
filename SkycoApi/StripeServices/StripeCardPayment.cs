@@ -1,4 +1,5 @@
-﻿using Stripe;
+﻿using Resolver.Exceptions;
+using Stripe;
 using Stripe.Checkout;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,8 @@ namespace StripeServices
     {
 
         #region Create Subscription
-        public static async Task<dynamic> PayAsync(PaymentIntent payment)
-        {
+        public static dynamic PayAsync(PaymentIntent payment, ref Boolean iscompleted)
+        {            
             try
             {
                 #region Secret Key
@@ -60,46 +61,62 @@ namespace StripeServices
                     },
                 },
                 };
-                var service3 = new SubscriptionService();
-                Subscription subscription = service3.Create(subscriptioncreateoption);
+                var subscriptionservice = new SubscriptionService();
+                Subscription subscription = subscriptionservice.Create(subscriptioncreateoption);
                 #endregion
+                iscompleted = true;
                 return subscription;
-
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                iscompleted = false;
+                return ex;
             }           
         }
         #endregion
 
         #region UpdateSubscription
-        public static async Task<dynamic> Update(PaymentIntent payment)
+        public static dynamic Update(PaymentIntent payment, ref Boolean iscompleted)
         {
             try
             {
                 #region Secret Key
                 Key.SecretKey();
                 #endregion
-                var options = new CardUpdateOptions
-                {
-                    Name = "Jenny Rosen",                  
-                    
-                };
-                CardService service = new CardService();
-                 Card updatecard =service.Update(
-                  "cus_HdANU9WSjrJgan",
-                  "card_1H3u2cCoU1sl4udJZFipXGPy",
-                  options
-                );
-                return updatecard;
-            }
-            catch (Exception)
-            {
 
-                throw;
+                #region Customer
+                CustomerUpdateOptions customerption = new CustomerUpdateOptions
+                {
+                    Name = payment.fullname,
+                    Email = payment.Email,
+                    Description = payment.Description,
+                    Source = payment.stripeTokenId
+                };
+                CustomerService customerservice = new CustomerService();
+                Customer custom = customerservice.Update(payment.Customerid,customerption);
+                #endregion
+
+                #region Payment Atach Method
+                PaymentMethodAttachOptions paymentatch = new PaymentMethodAttachOptions
+                {
+                    Customer = custom.Id,
+                };
+                PaymentMethodService paymentmethodservice = new PaymentMethodService();
+                PaymentMethod paymentMethod = paymentmethodservice.Attach(
+                  payment.CardId,
+                  paymentatch
+                );
+                #endregion
+                iscompleted = true;
+                return custom;
+
             }
-           
+            catch (Exception ex)
+            {
+                iscompleted = false;
+                return ex;
+            }
+
         }
         #endregion
 

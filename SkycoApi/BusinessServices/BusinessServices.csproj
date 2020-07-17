@@ -98,6 +98,7 @@
     <Compile Include="Interfaces\ICityServices.cs" />
     <Compile Include="Interfaces\ICountryServices.cs" />
     <Compile Include="Interfaces\ILocationServices.cs" />
+    <Compile Include="Interfaces\IStripeCardServices.cs" />
     <Compile Include="Interfaces\IStripeSubscribeServices.cs" />
     <Compile Include="Interfaces\IPlanServices.cs" />
     <Compile Include="Interfaces\ISkyco_AccountServices.cs" />

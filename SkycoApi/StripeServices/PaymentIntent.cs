@@ -9,6 +9,8 @@ namespace StripeServices
     public class PaymentIntent
     {
         public Int64 idPaymentIntent { get; set; }
+        public String Customerid { get; set; }
+        public String subscriptionId { get; set; }
         public Int64 AccountId { get; set; }
         public String stripeTokenId { get; set; }
         public String CardId { get; set; }

@@ -11,7 +11,7 @@ namespace StripeServices
 {
     public class StripeProduct
     {
-        public String CreateProduct(PlanProduct proplan)
+        public dynamic CreateProduct(PlanProduct proplan)
         {
             try
             {
@@ -56,8 +56,8 @@ namespace StripeServices
                     TransferLookupKey = true,
                 };
                 PriceService Priceservice = new PriceService();
-                Priceservice.Create(Priceoptions);
-                return produc.Id;
+                Price price = Priceservice.Create(Priceoptions);
+                return price;
             }
             catch (Exception ex)
             {

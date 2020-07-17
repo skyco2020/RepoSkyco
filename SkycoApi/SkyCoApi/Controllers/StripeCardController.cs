@@ -1,4 +1,5 @@
 ﻿using BusinessEntities.BE;
+using BusinessServices.Interfaces;
 using BusinessServices.Services;
 using System;
 using System.Collections.Generic;
@@ -13,17 +14,22 @@ namespace SkyCoApi.Controllers
     public class StripeCardController : ApiController
     {
         #region Single
-        private StripeCardServices _services;
+        private IStripeCardServices _services;
 
-        public StripeCardController(StripeCardServices services)
+        public StripeCardController(IStripeCardServices services)
         {
             _services = services;
         }
         #endregion
 
-        public async Task<dynamic> Post(PaymentIntentBE Be)
+        public async Task<IHttpActionResult> Post(PaymentIntentBE Be)
         {
-            return _services.Create(Be);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            _services.Create(Be);
+            return  Created(new Uri(Url.Link("DefaultApi", new { Id = Be.idPaymentIntent })), Be);           
         }
 
         [AllowAnonymous]

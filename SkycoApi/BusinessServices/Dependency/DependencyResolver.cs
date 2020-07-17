@@ -17,7 +17,8 @@ namespace BusinessServices.Dependency
         public void SetUp(IRegisterComponent registerComponent)
         {
             registerComponent.RegisterType<ICityServices, CityServices>();
-            registerComponent.RegisterType<ICountryServices, CountryServices>();
+            registerComponent.RegisterType<ICountryServices, CountryServices>(); 
+            registerComponent.RegisterType<IStripeCardServices, StripeCardServices>(); 
             registerComponent.RegisterType<ILocationServices, LocationServices>();
             registerComponent.RegisterType<IStripeSubscribeServices, StripeSubscribeServices>();
             registerComponent.RegisterType<IPlanServices, PlanServices>();
