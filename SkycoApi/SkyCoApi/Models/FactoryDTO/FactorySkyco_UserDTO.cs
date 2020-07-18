@@ -36,6 +36,7 @@ namespace SkyCoApi.Models.FactoryDTO
                     DateOfBirth = BE.DateOfBirth,
                     Firstname = BE.Firstname,
                     Gender = BE.Gender,
+                    EmailAddress = BE.EmailAddress,
                     Lastname = BE.Lastname,
                     NumberAddress = BE.NumberAddress,
                     UpdatedAt = BE.UpdatedAt,

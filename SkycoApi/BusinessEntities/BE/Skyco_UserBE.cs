@@ -9,7 +9,7 @@ namespace BusinessEntities.BE
         public Int64 UserId { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-
+        public string EmailAddress { get; set; }
         public byte? Gender { get; set; }
         public string Address { get; set; }
         public string NumberAddress { get; set; }

@@ -17,6 +17,8 @@ namespace DataModal.DataClasses
 
         [StringLength(50)]
         public string Lastname { get; set; }
+        [StringLength(30)]
+        public string EmailAddress { get; set; }
 
         public byte? Gender { get; set; }
 

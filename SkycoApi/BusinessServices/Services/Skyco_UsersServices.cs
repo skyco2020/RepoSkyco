@@ -33,45 +33,77 @@ namespace BusinessServices.Services
         private Int64 ProvinceId = 0;
         private Int64 CityId = 0;
         #endregion
-        public long Create(Skyco_UserBE Be)
+        public long Subscribe(Skyco_UserBE Be)
         {
             try
             {
+                Skyco_Users entity = Patterns.Factories.FactorySkyco_User.GetInstance().CreateEntity(Be);               
 
-                if(this.GetLocation(Be.Country, Be.province, Be.city))
+                Expression<Func<DataModal.DataClasses.Skyco_Users, Boolean>> predicate = u => u.EmailAddress == entity.EmailAddress;
+                List<DataModal.DataClasses.Skyco_Users> entitynonerepeat = _unitOfWork.Skyco_UserRepository.GetAllByFilters(predicate, null).ToList();
+
+                // Check if the customer was exist
+                if (entitynonerepeat.Count > 0)
                 {
-                    foreach (var item in Be.Skyco_Account)
-                    {
-                        item.Location.CityId = this.CityId;
-                        item.Location.CountryId = this.CountryId;
-                        item.Location.ProvinceId = this.ProvinceId;
-                    }
-                }
-                Skyco_Users entity = Patterns.Factories.FactorySkyco_User.GetInstance().CreateEntity(Be);
-                String Username = "";
-                String Password = "";
-                String mail = "";
-                if (Be.Skyco_Account != null && Be.Skyco_Account.Count > 0)
-                {
-                    Username = entity.Skyco_Account.FirstOrDefault().Username;
-                    Password = entity.Skyco_Account.FirstOrDefault().PasswordHash;
-                    mail = entity.Skyco_Account.FirstOrDefault().EmailAddress;
-                    Expression<Func<DataModal.DataClasses.Skyco_Accounts, Boolean>> predicate = u => u.Username == Username;
-                    List<DataModal.DataClasses.Skyco_Accounts> entity1 = _unitOfWork.SkycoAccountRepository.GetAllByFilters(predicate, new string[] { "Skyco_User", "Skyco_User.Skyco_Phone" }).ToList();
+                    Expression<Func<DataModal.DataClasses.Skyco_Accounts, Boolean>> predicateuser = u => u.Username == entity.EmailAddress;
+                    List<DataModal.DataClasses.Skyco_Accounts> entity1 = _unitOfWork.SkycoAccountRepository.GetAllByFilters(predicateuser, new string[] { "Skyco_User", "Skyco_User.Skyco_Phone" }).ToList();
+                    
                     if (entity1.Count > 0)
-                    {
-                        String encrypt = MD5Base.GetInstance().Encypt("subscribe");
-                        if (entity1.FirstOrDefault().PasswordHash == encrypt)
-                            throw new ApiBusinessException((Int32)entity1.LastOrDefault().Skyco_User.UserId, "Welcome to Sky co", System.Net.HttpStatusCode.NotFound, "Http");
-                        else if (entity1.FirstOrDefault().Voided == (Int32)StateEnum.Deleted)
-                             throw new ApiBusinessException((Int32)entity1.LastOrDefault().Skyco_User.UserId, "Welcome Back at Sky co", System.Net.HttpStatusCode.NotFound, "Http");
+                        if (entity1.FirstOrDefault().Voided == (Int32)StateEnum.Deleted)
+                            throw new ApiBusinessException((Int32)entity1.LastOrDefault().Skyco_User.UserId, "Welcome Back at Sky co", System.Net.HttpStatusCode.NotFound, "Http");
                         else
                             throw new ApiBusinessException((Int32)entity1.LastOrDefault().Skyco_User.UserId, "There is already an account with this email", System.Net.HttpStatusCode.NotFound, "Http");
-                    }
+                    else
+                        throw new ApiBusinessException((Int32)entitynonerepeat.LastOrDefault().UserId, "Welcome to Sky co", System.Net.HttpStatusCode.NotFound, "Http");                    
                 }
+             
 
                 _unitOfWork.Skyco_UserRepository.Create(entity);
                 _unitOfWork.Commit();                           
+                return entity.UserId;
+
+            }
+            catch (Exception ex)
+            {
+                throw HandlerExceptions.GetInstance().RunCustomExceptions(ex);
+            }
+        }
+
+        public long RegisterUserCompletely(Skyco_UserBE Be)
+        {
+            try
+            {
+                Skyco_Users entity = Patterns.Factories.FactorySkyco_User.GetInstance().CreateEntity(Be);
+
+                Expression<Func<DataModal.DataClasses.Skyco_Accounts, Boolean>> predicateuser = u => u.Username == entity.EmailAddress;
+                List<DataModal.DataClasses.Skyco_Accounts> entity1 = _unitOfWork.SkycoAccountRepository.GetAllByFilters(predicateuser, new string[] { "Skyco_User", "Skyco_User.Skyco_Phone" }).ToList();
+
+                if (entity1.Count > 0)
+                    if (entity1.FirstOrDefault().Voided == (Int32)StateEnum.Deleted)
+                        throw new ApiBusinessException((Int32)entity1.LastOrDefault().Skyco_User.UserId, "There is already an account with this email", System.Net.HttpStatusCode.NotFound, "Http");
+                if (entity.Skyco_Account.Count  > 0)
+                {
+                    if (this.GetLocation(Be))
+                    {
+                        foreach (var item in entity.Skyco_Account)
+                        {
+                            item.Location.CityId = this.CityId;
+                            item.Location.CountryId = this.CountryId;
+                            item.Location.ProvinceId = this.ProvinceId;
+                        }
+                    }
+
+                    foreach (Skyco_Accounts item in entity.Skyco_Account)
+                    {
+                        _unitOfWork.SkycoAccountRepository.Create(item);
+                    }
+                }
+                _unitOfWork.Skyco_UserRepository.Update(entity, new List<String> { "Firstname", "Lastname", "Gender", "Address", "NumberAddress", "DateOfBirth", "UpdatedAt", "UpdatedBy" });
+                _unitOfWork.Commit();
+
+                RegisterUserStateMail registerUserMail = new RegisterUserStateMail(Be.Firstname + " " + Be.Lastname, Be.Skyco_Account[0].Username, Be.Skyco_Account[0].PasswordHash, Be.Skyco_Account[0].EmailAddress);
+                new SimpleMail().SendMail(registerUserMail);
+
                 return entity.UserId;
 
             }
@@ -247,25 +279,60 @@ namespace BusinessServices.Services
             }
         }
         #region Private Method
-        private Boolean GetLocation(String Country, String province, String city)
+        private Boolean GetLocation(Skyco_UserBE Be)
         {
-            Countries country = _unitOfWork.Countryrepository.GetOneByFilters(u => u.CountryName == Country && u.CountryName != null, new string[] { "Provinces", "Provinces.City" });
-            if (country != null)
+            Boolean result = false;
+            try
             {
-                this.CountryId = country.CountryId;
-                if (country.Provinces != null)
+                Countries country = _unitOfWork.Countryrepository.GetOneByFilters(u => u.CountryName.Trim().ToLower() == Be.Country.Trim().ToLower() && u.CountryName.Trim().ToLower() != null, new string[] { "Provinces", "Provinces.City" });
+                if (country != null)
                 {
-                    Provinces pro = country.Provinces.Find(p => p.ProvinceName.Trim().ToLower() == province.Trim().ToLower() && p.ProvinceName != null);
-                    this.ProvinceId = pro.ProvinceId;
-                    if (pro.City != null)
+                    this.CountryId = country.CountryId;
+                    if (country.Provinces != null)
                     {
-                        this.CityId = pro.City.Find(x => x.CityName.Trim().ToLower() == city.Trim().ToLower() && x.CityName!= null).CityId;
-                        return true;
+                        Provinces pro = country.Provinces.Find(p => p.ProvinceName.Trim().ToLower() == Be.province.Trim().ToLower() && p.ProvinceName != null);
+                        this.ProvinceId = country.Provinces[0].ProvinceId;
+                        if (pro.City != null)
+                        {
+                            this.CityId = pro.City.Find(x => x.CityName.Trim().ToLower() == Be.city.Trim().ToLower() && x.CityName != null).CityId;
+                            result = true;
+                        }
+                        else
+                        {
+                            Cities entityCity = Patterns.Factories.FactoryCity.GetInstance().CreateEntity(Be.Skyco_Account[0].Location.Country.Province.FirstOrDefault().City.FirstOrDefault());
+                            _unitOfWork.CityRepository.Create(entityCity);
+                            this.CityId = entityCity.CityId;
+                            result = true;
+                        }
+                    }
+                    else
+                    {
+                        Provinces entityProvinces = Patterns.Factories.FactoryProvince.GetInstance().CreateEntity(Be.Skyco_Account[0].Location.Country.Province.FirstOrDefault());
+                        _unitOfWork.ProvinceRepository.Create(entityProvinces);
+                        this.ProvinceId = entityProvinces.ProvinceId;
+                        this.CityId = entityProvinces.City[0].CityId;
+                        result = true;
                     }
                 }
+                else
+                {
+
+                    Countries entitycountry = Patterns.Factories.FactoryCountry.GetInstance().CreateEntity(Be.Skyco_Account[0].Location.Country);
+                    _unitOfWork.Countryrepository.Create(entitycountry);
+                    this.CountryId = entitycountry.CountryId;
+                    this.ProvinceId = entitycountry.Provinces[0].ProvinceId;
+                    this.CityId = entitycountry.Provinces[0].City[0].CityId;
+                    result = true;
+                }
+                return result;
             }
-            return false;
+            catch (Exception)
+            {
+                return result;
+            }
+          
         }
+
         #endregion
     }
 }

@@ -74,7 +74,7 @@ namespace SkyCoApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            _services.Create(be);
+            be.UserId = _services.Subscribe(be);
             return Created(new Uri(Url.Link("DefaultApi", new { Id = be.UserId })), be); 
         }
 
@@ -99,6 +99,20 @@ namespace SkyCoApi.Controllers
         }
 
         #region Route
+
+        [AllowAnonymous]
+        [System.Web.Http.Route("api/Users/RegisterUserCompletely")]
+        [System.Web.Http.HttpPut]
+        public async Task<IHttpActionResult> RegisterUserCompletely(Skyco_UserBE bE)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            _services.RegisterUserCompletely(bE);
+            return Ok();
+        }
+
         [AllowAnonymous]
         [System.Web.Http.Route("api/Users/SearchByEmail")]
         [System.Web.Http.HttpGet]
