@@ -101,7 +101,7 @@ namespace BusinessServices.Services
                 _unitOfWork.Skyco_UserRepository.Update(entity, new List<String> { "Firstname", "Lastname", "Gender", "Address", "NumberAddress", "DateOfBirth", "UpdatedAt", "UpdatedBy" });
                 _unitOfWork.Commit();
 
-                RegisterUserStateMail registerUserMail = new RegisterUserStateMail(Be.Firstname + " " + Be.Lastname, Be.Skyco_Account[0].Username, Be.Skyco_Account[0].PasswordHash, Be.Skyco_Account[0].EmailAddress);
+                RegisterUserStateMail registerUserMail = new RegisterUserStateMail(Be.Firstname + " " + Be.Lastname, Be.EmailAddress, Be.Skyco_Account[0].PasswordHash, Be.Skyco_Account[0].EmailAddress);
                 new SimpleMail().SendMail(registerUserMail);
 
                 return entity.UserId;

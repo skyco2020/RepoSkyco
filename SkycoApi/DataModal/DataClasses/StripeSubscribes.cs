@@ -17,7 +17,7 @@ namespace DataModal.DataClasses
         public String idStripeCustomer { get; set; }
         public String idSubscribe { get; set; }
         public String idCardStripe { get; set; }
-        public String idTokenStripe { get; set; }
+        //public String idTokenStripe { get; set; }
         public DateTime SubscribeDate{ get; set; }
         public Int32 state { get; set; }
 

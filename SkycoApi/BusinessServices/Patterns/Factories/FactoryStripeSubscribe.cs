@@ -32,7 +32,7 @@ namespace BusinessServices.Patterns.Factories
                     idCardStripe = entity.idCardStripe,
                     idStripeCustomer = entity.idStripeCustomer,
                     idPlanPriceStripe = entity.idPlanPriceStripe,
-                    idTokenStripe = entity.idTokenStripe,
+                    //idTokenStripe = entity.idTokenStripe,
                     SubscribeDate = entity.SubscribeDate,
                     state = entity.state
                 };
@@ -57,7 +57,7 @@ namespace BusinessServices.Patterns.Factories
                     idCardStripe = be.idCardStripe,
                     idStripeCustomer = be.idStripeCustomer,
                     idPlanPriceStripe = be.idPlanPriceStripe,
-                    idTokenStripe = be.idTokenStripe,
+                    //idTokenStripe = be.idTokenStripe,
                     SubscribeDate = be.SubscribeDate,
                     state = be.state
                 };

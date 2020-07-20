@@ -14,7 +14,7 @@ namespace StripeServices
     {
 
         #region Create Subscription
-        public static dynamic PayAsync(PaymentIntent payment, ref Boolean iscompleted)
+        public static dynamic PayAsync(PaymentIntent payment, ref Boolean iscompleted, ref String idStripeCustomer, ref String idSubscribe)
         {            
             try
             {
@@ -65,6 +65,8 @@ namespace StripeServices
                 Subscription subscription = subscriptionservice.Create(subscriptioncreateoption);
                 #endregion
                 iscompleted = true;
+                idStripeCustomer = custom.Id;
+                idSubscribe = subscription.Id;
                 return subscription;
             }
             catch (Exception ex)
@@ -108,6 +110,7 @@ namespace StripeServices
                 );
                 #endregion
                 iscompleted = true;
+
                 return custom;
 
             }

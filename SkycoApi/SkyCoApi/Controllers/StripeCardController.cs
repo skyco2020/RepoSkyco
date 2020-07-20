@@ -28,8 +28,8 @@ namespace SkyCoApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            _services.Create(Be);
-            return  Created(new Uri(Url.Link("DefaultApi", new { Id = Be.idPaymentIntent })), Be);           
+            dynamic plan =_services.Create(Be);
+            return  Created(new Uri(Url.Link("DefaultApi", new { Id = Be.idPaymentIntent })), plan);           
         }
 
         [AllowAnonymous]
