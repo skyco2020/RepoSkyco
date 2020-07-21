@@ -146,14 +146,20 @@ namespace StripeServices
            
         }
         #region Delete Subscription
-        //public static async Task<dynamic> DeleteSub(String subcripId)
-        //{
-        //    #region Secret Key
-        //    Key();
-        //    #endregion
-        //    var service = new SubscriptionService();
-        //    service.Cancel(subcripId);
-        //}
+     
+        public static async Task<dynamic> DeleteSub(String subcripId)
+        {
+            #region Secret Key
+            Key.SecretKey();
+            #endregion
+            SubscriptionItemService service = new SubscriptionItemService();
+            SubscriptionItemDeleteOptions option = new SubscriptionItemDeleteOptions()
+            {
+                ClearUsage = true                
+            };
+            var del =  service.Delete(subcripId, option);
+            return null;
+        }
         #endregion
     }
 }
