@@ -133,7 +133,10 @@ namespace StripeServices
 
                 PriceListOptions options = new PriceListOptions
                 {
-                    Limit = count
+                    Limit = count,
+                    Active = true,
+                    
+                    
                 };
                 PriceService service = new PriceService();
                 StripeList<Price> prices = service.List(options);
@@ -157,9 +160,29 @@ namespace StripeServices
             {
                 ClearUsage = true                
             };
-            var del =  service.Delete(subcripId, option);
-            return null;
+            SubscriptionItem del =  service.Delete(subcripId, option);
+            return del;
         }
         #endregion
+
+        public static Boolean CheckPayMent(String customerId, String subId, string price)
+        {
+            #region Secret Key
+            Key.SecretKey();
+            #endregion          
+
+            var service1 = new SubscriptionService();
+            Subscription Subs = service1.Get(subId);
+            if (Subs.Items.Count() > 0)
+            {
+                DateTime date = Subs.Items.Data.LastOrDefault().Created;
+                if (date.AddMonths(1) >= DateTime.Today)
+                    return true;
+                else
+                    return false;
+            }
+            else
+                return false;
+        }
     }
 }

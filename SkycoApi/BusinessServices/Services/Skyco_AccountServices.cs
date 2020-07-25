@@ -1,9 +1,11 @@
 ﻿using BusinessEntities.BE;
 using BusinessServices.Interfaces;
 using BusinessServices.Patterns.Factories;
+using DataModal.DataClasses;
 using DataModal.UnitOfWork;
 using Resolver.Cryptography;
 using Resolver.Exceptions;
+using StripeServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +49,16 @@ namespace BusinessServices.Services
                 Expression<Func<DataModal.DataClasses.Skyco_Accounts, Boolean>> predicate = u => u.Username == username && u.PasswordHash == Passhash;
                 DataModal.DataClasses.Skyco_Accounts entities = _unitOfWork.SkycoAccountRepository.GetOneByFilters(predicate, new string[] { "Skyco_AccountType", "Location" });
                 if (entities == null)
-                    throw new ApiBusinessException(64, "Wrong username or password", System.Net.HttpStatusCode.NotFound, "Http");
+                    throw new ApiBusinessException((Int32)(entities.AccountId), "Wrong username or password", System.Net.HttpStatusCode.NotFound, "Http");
+               
+                StripeSubscribes stripeentity = _unitOfWork.StripeSubscribeRepository.GetOneByFilters(u => u.AccountId == entities.AccountId);
+                if (stripeentity == null)
+                    throw new ApiBusinessException((Int32)(entities.AccountId), "You need tu complete payment", System.Net.HttpStatusCode.NotFound, "Http");
+                
+                Boolean stripe = StripeCardPayment.CheckPayMent(stripeentity.idStripeCustomer, stripeentity.idSubscribe, stripeentity.idPlanPriceStripe);
+                if (stripe == false)
+                    throw new ApiBusinessException((Int32)(entities.AccountId), "Payment is missing for this month", System.Net.HttpStatusCode.NotFound, "Http");
+
                 return FactorySkyco_Account.GetInstance().CreateBusiness(entities);
             }
             catch (Exception ex)

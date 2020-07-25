@@ -53,7 +53,7 @@ namespace SkyCoApi.Controllers
                     PhoneNumber = identityClaims.FindFirst("PhoneNumber").Value,
                     UserId = Convert.ToInt64(identityClaims.FindFirst("UserId").Value),
                     //AccountType = Convert.ToByte(identityClaims.FindFirst("Role").Value),
-                    PasswordHash = identityClaims.FindFirst("Password").Value,
+                    //PasswordHash = identityClaims.FindFirst("Password").Value,
                     EmailAddress = identityClaims.FindFirst("EmailAddress").Value,
                 };
                 return Ok(mdl);
@@ -82,7 +82,7 @@ namespace SkyCoApi.Controllers
                         UserId = usr.UserId != 0 ? usr.UserId : 0,
                         AccountId = usr.AccountId != 0 ? usr.AccountId : 0,
                         AccountType = usr.AccountType != 0 ? usr.AccountType : 0,
-                        PasswordHash = usr.PasswordHash != null ? usr.PasswordHash : "without PasswordHash"
+                        PasswordHash = usr.PasswordHash != null ? usr.PasswordHash : "without PasswordHash",
                     };
                     String token = TokenGenerator.GenerateTokenJwt(mdl);
                     return Ok(token);
