@@ -49,7 +49,7 @@ namespace BusinessServices.Services
                 Expression<Func<DataModal.DataClasses.Skyco_Accounts, Boolean>> predicate = u => u.Username == username && u.PasswordHash == Passhash;
                 DataModal.DataClasses.Skyco_Accounts entities = _unitOfWork.SkycoAccountRepository.GetOneByFilters(predicate, new string[] { "Skyco_AccountType", "Location" });
                 if (entities == null)
-                    throw new ApiBusinessException((Int32)(entities.AccountId), "Wrong username or password", System.Net.HttpStatusCode.NotFound, "Http");
+                    throw new ApiBusinessException(1234, "Wrong username or password", System.Net.HttpStatusCode.NotFound, "Http");
                
                 StripeSubscribes stripeentity = _unitOfWork.StripeSubscribeRepository.GetOneByFilters(u => u.AccountId == entities.AccountId);
                 if (stripeentity == null)
