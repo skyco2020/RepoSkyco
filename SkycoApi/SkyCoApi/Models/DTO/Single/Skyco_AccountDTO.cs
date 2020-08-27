@@ -25,6 +25,7 @@ namespace SkyCoApi.Models.DTO.Single
         public string PhoneNumber { get; set; }
         public string PassowrdSalt { get; set; }
         public string PasswordHash { get; set; }
+        public string refreshtoken { get; set; }
 
         public byte? AccountType { get; set; }
 

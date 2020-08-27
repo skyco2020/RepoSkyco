@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Web;
 
 namespace SkyCoApi.Controllers.Token
@@ -29,11 +30,12 @@ namespace SkyCoApi.Controllers.Token
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[] {
                 new Claim("Idaccount", account.AccountId.ToString()),
                 new Claim("UserId", account.UserId.ToString()),
-                new Claim("Password", account.PasswordHash),
+                //new Claim("Password", account.PasswordHash),
                 new Claim("username", account.Username),
-                new Claim("Role", account.AccountType.ToString()),
+                //new Claim("Role", account.AccountType.ToString()),
                 new Claim("PhoneNumber", account.PhoneNumber),
-                new Claim("EmailAddress", account.EmailAddress)
+                new Claim("EmailAddress", account.EmailAddress),
+                new Claim("refreshtoken", account.refreshtoken),
             });
 
             // create token to the user 
@@ -48,6 +50,31 @@ namespace SkyCoApi.Controllers.Token
             String jwtTokenString = tokenHandler.WriteToken(jwtSecurityToken);
             //var rd = tokenHandler.ReadJwtToken(jwtTokenString);
             return jwtTokenString;
+        }
+
+        public static string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomNumber);
+                return Convert.ToBase64String(randomNumber);
+            }
+        }
+        public static string GenerateToken(ClaimsIdentity identityClaims, String newrefresh)
+        {
+            Skyco_AccountDTO mdl = new Skyco_AccountDTO()
+            {
+                AccountId = Convert.ToInt64(identityClaims.FindFirst("Idaccount").Value),
+                Username = identityClaims.FindFirst("username").Value,
+                PhoneNumber = identityClaims.FindFirst("PhoneNumber").Value,
+                UserId = Convert.ToInt64(identityClaims.FindFirst("UserId").Value),
+                refreshtoken = newrefresh,
+                EmailAddress = identityClaims.FindFirst("EmailAddress").Value,
+            };
+            String token = TokenGenerator.GenerateTokenJwt(mdl);
+
+            return token;
         }
     }
 }

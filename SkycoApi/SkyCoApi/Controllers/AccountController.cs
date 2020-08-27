@@ -21,6 +21,10 @@ using Resolver.Mailing;
 using Resolver.Enumerations;
 using BusinessServices.Interfaces;
 using BusinessEntities.BE;
+using System.Security.Cryptography;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace SkyCoApi.Controllers
 {
@@ -38,6 +42,8 @@ namespace SkyCoApi.Controllers
         }
         #endregion
 
+        private String[] refreshTokens = {};
+
         [Authorize]
         [HttpGet]
         [Route("api/GetUserClaims")]
@@ -52,8 +58,6 @@ namespace SkyCoApi.Controllers
                     Username = identityClaims.FindFirst("username").Value,
                     PhoneNumber = identityClaims.FindFirst("PhoneNumber").Value,
                     UserId = Convert.ToInt64(identityClaims.FindFirst("UserId").Value),
-                    //AccountType = Convert.ToByte(identityClaims.FindFirst("Role").Value),
-                    //PasswordHash = identityClaims.FindFirst("Password").Value,
                     EmailAddress = identityClaims.FindFirst("EmailAddress").Value,
                 };
                 return Ok(mdl);
@@ -81,11 +85,16 @@ namespace SkyCoApi.Controllers
                         PhoneNumber = usr.PhoneNumber != null ? usr.PhoneNumber : "without PhoneNumber",
                         UserId = usr.UserId != 0 ? usr.UserId : 0,
                         AccountId = usr.AccountId != 0 ? usr.AccountId : 0,
-                        AccountType = usr.AccountType != 0 ? usr.AccountType : 0,
-                        PasswordHash = usr.PasswordHash != null ? usr.PasswordHash : "without PasswordHash",
+                        refreshtoken = TokenGenerator.GenerateRefreshToken(),
                     };
                     String token = TokenGenerator.GenerateTokenJwt(mdl);
-                    return Ok(token);
+                    TokenMD tk = new TokenMD()
+                    {
+                        jwt = token,
+                        refreshToken = mdl.refreshtoken
+                    };
+                    
+                    return Ok(tk);
                 }
                 return Unauthorized();
             }
@@ -94,5 +103,61 @@ namespace SkyCoApi.Controllers
                 throw HandlerExceptions.GetInstance().RunCustomExceptions(ex);
             }
         }
+
+        [Authorize]
+        [HttpPost]
+        [Route("api/refresh")]
+        public IHttpActionResult refresh(TokenMD token)
+        {
+           
+            try
+            {
+                var username = User.Identity.Name;
+                ClaimsIdentity identityClaims = (ClaimsIdentity)User.Identity;
+                String rfrtoken = identityClaims.FindFirst("refreshtoken").Value;
+
+                if (token.refreshToken != rfrtoken)
+                    throw new SecurityTokenException("Invalid refresh token");
+
+                String generatenew = TokenGenerator.GenerateRefreshToken();
+                String tokennew = TokenGenerator.GenerateToken(identityClaims,generatenew);
+
+                TokenMD tk = new TokenMD()
+                {
+                    jwt = tokennew,
+                    refreshToken = generatenew
+                };
+
+                return Ok(tk);
+            }
+            catch (Exception ex)
+            {
+                throw HandlerExceptions.GetInstance().RunCustomExceptions(ex);
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("api/CloseSession")]
+        public IHttpActionResult CloseSession(TokenMD token)
+        {
+
+            try
+            {
+                ClaimsIdentity identityClaims = (ClaimsIdentity)User.Identity;
+                String rfrtoken = identityClaims.FindFirst("refreshtoken").Value;
+                var identity = User.Identity as ClaimsIdentity;
+                var claim = (from c in identity.Claims.ToList()
+                             where c.Value == rfrtoken
+                             select c).FirstOrDefault();
+                identity.RemoveClaim(claim);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                throw HandlerExceptions.GetInstance().RunCustomExceptions(ex);
+            }
+        }       
     }
 }
