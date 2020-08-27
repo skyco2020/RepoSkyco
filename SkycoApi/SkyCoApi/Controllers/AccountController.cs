@@ -127,7 +127,6 @@ namespace SkyCoApi.Controllers
                     jwt = tokennew,
                     refreshToken = generatenew
                 };
-
                 return Ok(tk);
             }
             catch (Exception ex)
@@ -151,7 +150,6 @@ namespace SkyCoApi.Controllers
                              where c.Value == rfrtoken
                              select c).FirstOrDefault();
                 identity.RemoveClaim(claim);
-
                 return Ok();
             }
             catch (Exception ex)
