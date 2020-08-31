@@ -52,11 +52,11 @@ namespace BusinessServices.Services
                     throw new ApiBusinessException(1234, "Wrong username or password", System.Net.HttpStatusCode.NotFound, "Http");
                
                 StripeSubscribes stripeentity = _unitOfWork.StripeSubscribeRepository.GetOneByFilters(u => u.AccountId == entities.AccountId);
-                if (stripeentity == null)
+                if (stripeentity == null && entities.Skyco_AccountType.AccountTypeName.ToLower().Equals("user"))
                     throw new ApiBusinessException((Int32)(entities.AccountId), "You need tu complete payment", System.Net.HttpStatusCode.NotFound, "Http");
                 
                 Boolean stripe = StripeCardPayment.CheckPayMent(stripeentity.idStripeCustomer, stripeentity.idSubscribe, stripeentity.idPlanPriceStripe);
-                if (stripe == false)
+                if (stripe == false && entities.Skyco_AccountType.AccountTypeName.ToLower().Equals("user"))
                     throw new ApiBusinessException((Int32)(entities.AccountId), "Payment is missing for this month", System.Net.HttpStatusCode.NotFound, "Http");
 
                 return FactorySkyco_Account.GetInstance().CreateBusiness(entities);

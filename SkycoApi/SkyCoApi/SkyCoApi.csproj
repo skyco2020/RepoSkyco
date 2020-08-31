@@ -455,6 +455,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModelFactory.cs" />
     <Compile Include="Controllers\PlansController.cs" />
+    <Compile Include="Controllers\RegisterUsersController.cs" />
+    <Compile Include="Controllers\Skyco_AccountTypeServicesController.cs" />
     <Compile Include="Controllers\StripeCardController.cs" />
     <Compile Include="Controllers\Token\TokenGenerator.cs" />
     <Compile Include="Controllers\Token\TokenMD.cs" />
@@ -481,6 +483,7 @@
     <Compile Include="Infraestructure\Skyco_Address.cs" />
     <Compile Include="Infraestructure\Skyco_Phone.cs" />
     <Compile Include="Infraestructure\Skyco_User.cs" />
+    <Compile Include="Models\DTO\Collections\Skyco_AccountTypeDTOCollectionRepresentation.cs" />
     <Compile Include="Models\DTO\Collections\StripeSubscribeDTOCollectionRepresentation.cs" />
     <Compile Include="Models\DTO\Collections\PlanDTOCollectionRepresentation.cs" />
     <Compile Include="Models\DTO\Collections\Skyco_AccountDTOCollectionRepresentation.cs" />
@@ -513,6 +516,7 @@
     <Compile Include="Models\FactoryDTO\FactorySkyco_UserDTO.cs" />
     <Compile Include="Models\FactoryDTO\FactorySkyco_AddressDTO.cs" />
     <Compile Include="Models\Hypermedia\Template\BaseTemplate.cs" />
+    <Compile Include="Models\Hypermedia\Template\Skyco_AccountTypeTemplate.cs" />
     <Compile Include="Models\Hypermedia\Template\StripeSubscribeTemplate.cs" />
     <Compile Include="Models\Hypermedia\Template\PlanTemplate.cs" />
     <Compile Include="Models\Hypermedia\Template\Skyco_AccountTemplate.cs" />

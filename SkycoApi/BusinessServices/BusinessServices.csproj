@@ -98,6 +98,7 @@
     <Compile Include="Interfaces\ICityServices.cs" />
     <Compile Include="Interfaces\ICountryServices.cs" />
     <Compile Include="Interfaces\ILocationServices.cs" />
+    <Compile Include="Interfaces\IRegisterUserServices.cs" />
     <Compile Include="Interfaces\IStripeCardServices.cs" />
     <Compile Include="Interfaces\IStripeSubscribeServices.cs" />
     <Compile Include="Interfaces\IPlanServices.cs" />
@@ -106,7 +107,7 @@
     <Compile Include="Interfaces\ISkyco_AccountTypeServices.cs" />
     <Compile Include="Interfaces\ISkyco_AddressServices.cs" />
     <Compile Include="Interfaces\ISkyco_PhoneServices.cs" />
-    <Compile Include="Interfaces\ISkyco_UsersServices.cs" />
+    <Compile Include="Interfaces\ISkyco_SubscribeServices.cs" />
     <Compile Include="OwinSecurity\IOwinSecurityService.cs" />
     <Compile Include="OwinSecurity\OwinSecurityServer.cs" />
     <Compile Include="Patterns\Factories\FactoryPaymentIntent.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Patterns\Factories\FactorySkyco_Phone.cs" />
     <Compile Include="Services\LocationServices.cs" />
+    <Compile Include="Services\RegisterUserServices.cs" />
     <Compile Include="Services\StripeSubscribeServices.cs" />
     <Compile Include="Services\PlanServices.cs" />
     <Compile Include="Services\ProvinceServices.cs" />
@@ -133,7 +135,7 @@
     <Compile Include="Services\Skyco_AccountTypeServices.cs" />
     <Compile Include="Services\Skyco_AddressServices.cs" />
     <Compile Include="Services\Skyco_PhoneServices.cs" />
-    <Compile Include="Services\Skyco_UsersServices.cs" />
+    <Compile Include="Services\Skyco_SubscribeServices.cs" />
     <Compile Include="Services\StripBase.cs" />
     <Compile Include="Services\StripeCardServices.cs" />
     <Compile Include="Stripe\StripeInfo.cs" />

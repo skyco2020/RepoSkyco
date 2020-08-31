@@ -18,6 +18,7 @@ namespace SkyCoApi.Models.FactoryDTO
             return _factory;
         }
         #endregion
+       
         #region Create DTO
         public Skyco_AccountTypeDTO CreateDTO(Skyco_AccountTypeBE be)
         {

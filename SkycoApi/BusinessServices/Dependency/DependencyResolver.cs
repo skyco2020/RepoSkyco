@@ -21,13 +21,14 @@ namespace BusinessServices.Dependency
             registerComponent.RegisterType<IStripeCardServices, StripeCardServices>(); 
             registerComponent.RegisterType<ILocationServices, LocationServices>();
             registerComponent.RegisterType<IStripeSubscribeServices, StripeSubscribeServices>();
+            registerComponent.RegisterType<IRegisterUserServices, RegisterUserServices>();
             registerComponent.RegisterType<IPlanServices, PlanServices>();
             registerComponent.RegisterType<IProvinceServices, ProvinceServices>();
             registerComponent.RegisterType<ISkyco_AccountServices, Skyco_AccountServices>();
             registerComponent.RegisterType<ISkyco_AccountTypeServices, Skyco_AccountTypeServices>();
             registerComponent.RegisterType<ISkyco_AddressServices, Skyco_AddressServices>();
             registerComponent.RegisterType<ISkyco_PhoneServices, Skyco_PhoneServices>();
-            registerComponent.RegisterType<ISkyco_UsersServices, Skyco_UsersServices>();
+            registerComponent.RegisterType<ISkyco_SubscribeServices, Skyco_SubscribeServices>();
             registerComponent.RegisterType<IOwinSecurityService, OwinSecurityServer>();
         }
     }

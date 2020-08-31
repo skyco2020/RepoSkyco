@@ -59,6 +59,7 @@ namespace SkyCoApi.Controllers
                     PhoneNumber = identityClaims.FindFirst("PhoneNumber").Value,
                     UserId = Convert.ToInt64(identityClaims.FindFirst("UserId").Value),
                     EmailAddress = identityClaims.FindFirst("EmailAddress").Value,
+                    Role = identityClaims.FindFirst("UserRole").Value,
                 };
                 return Ok(mdl);
             }
@@ -85,13 +86,16 @@ namespace SkyCoApi.Controllers
                         PhoneNumber = usr.PhoneNumber != null ? usr.PhoneNumber : "without PhoneNumber",
                         UserId = usr.UserId != 0 ? usr.UserId : 0,
                         AccountId = usr.AccountId != 0 ? usr.AccountId : 0,
+                        Role = usr.Skyco_AccountType.AccountTypeName,
                         refreshtoken = TokenGenerator.GenerateRefreshToken(),
                     };
                     String token = TokenGenerator.GenerateTokenJwt(mdl);
                     TokenMD tk = new TokenMD()
                     {
                         jwt = token,
-                        refreshToken = mdl.refreshtoken
+                        refreshToken = mdl.refreshtoken,
+                        role = usr.Skyco_AccountType.AccountTypeName,
+
                     };
                     
                     return Ok(tk);
@@ -125,7 +129,8 @@ namespace SkyCoApi.Controllers
                 TokenMD tk = new TokenMD()
                 {
                     jwt = tokennew,
-                    refreshToken = generatenew
+                    refreshToken = generatenew,
+                    role = identityClaims.FindFirst("role").Value,
                 };
                 return Ok(tk);
             }

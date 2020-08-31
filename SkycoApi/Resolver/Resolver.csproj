@@ -80,6 +80,7 @@
     <Compile Include="Cryptography\RandomLink.cs" />
     <Compile Include="Enumerations\Currencies.cs" />
     <Compile Include="Enumerations\Gender.cs" />
+    <Compile Include="Enumerations\UserRole.cs" />
     <Compile Include="Enumerations\ListGeneric.cs" />
     <Compile Include="Enumerations\Rol.cs" />
     <Compile Include="Enumerations\RolGeneric.cs" />

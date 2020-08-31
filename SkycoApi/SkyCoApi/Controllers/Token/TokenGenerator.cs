@@ -30,9 +30,8 @@ namespace SkyCoApi.Controllers.Token
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[] {
                 new Claim("Idaccount", account.AccountId.ToString()),
                 new Claim("UserId", account.UserId.ToString()),
-                //new Claim("Password", account.PasswordHash),
                 new Claim("username", account.Username),
-                //new Claim("Role", account.AccountType.ToString()),
+                new Claim("UserRole", account.Role),
                 new Claim("PhoneNumber", account.PhoneNumber),
                 new Claim("EmailAddress", account.EmailAddress),
                 new Claim("refreshtoken", account.refreshtoken),
@@ -69,6 +68,7 @@ namespace SkyCoApi.Controllers.Token
                 Username = identityClaims.FindFirst("username").Value,
                 PhoneNumber = identityClaims.FindFirst("PhoneNumber").Value,
                 UserId = Convert.ToInt64(identityClaims.FindFirst("UserId").Value),
+                Role = identityClaims.FindFirst("Role").Value,
                 refreshtoken = newrefresh,
                 EmailAddress = identityClaims.FindFirst("EmailAddress").Value,
             };

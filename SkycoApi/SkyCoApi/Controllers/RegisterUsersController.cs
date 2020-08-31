@@ -1,9 +1,6 @@
 ﻿using BusinessEntities.BE;
 using BusinessServices.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using Resolver.Enumerations;
-using Resolver.Exceptions;
-using Resolver.Exceptions.Handlers;
 using SkyCoApi.Helpers;
 using SkyCoApi.Models.DTO.Collections;
 using SkyCoApi.Models.DTO.Single;
@@ -19,22 +16,17 @@ using System.Web.Http.Description;
 
 namespace SkyCoApi.Controllers
 {
-    /// <summary>
-    /// customer controller class for testing security token
-    /// </summary>
-    //[Authorize]
-    //[RoutePrefix("api/customers")]
-    public class UsersController : ApiController
+    public class RegisterUsersController : ApiController
     {
         #region Single
-        private ISkyco_SubscribeServices _services;
+        private IRegisterUserServices _services;
 
-        public UsersController(ISkyco_SubscribeServices services)
+        public RegisterUsersController(IRegisterUserServices services)
         {
             _services = services;
         }
         #endregion
-       
+
         [Authorize]
         [System.Web.Http.HttpGet]
         [ResponseType(typeof(Skyco_UserDTOCollectionRepresentation))]
@@ -74,8 +66,8 @@ namespace SkyCoApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            be.UserId = _services.Subscribe(be);
-            return Created(new Uri(Url.Link("DefaultApi", new { Id = be.UserId })), be); 
+            be.UserId = _services.Create(be);
+            return Created(new Uri(Url.Link("DefaultApi", new { Id = be.UserId })), be);
         }
 
         [AllowAnonymous]
@@ -87,7 +79,7 @@ namespace SkyCoApi.Controllers
                 return BadRequest(ModelState);
             }
             _services.Update(bE);
-            return Ok();       
+            return Ok();
         }
         [Authorize]
         [System.Web.Http.HttpDelete]
@@ -95,38 +87,7 @@ namespace SkyCoApi.Controllers
         {
             ClaimsIdentity identityClaims = (ClaimsIdentity)User.Identity;
             _services.Delete(id, identityClaims.FindFirst("username").Value);
-            return Ok();                   
-        }
-
-        #region Route
-
-        [AllowAnonymous]
-        [System.Web.Http.Route("api/Users/RegisterUserCompletely")]
-        [System.Web.Http.HttpPut]
-        public async Task<IHttpActionResult> RegisterUserCompletely(Skyco_UserBE bE)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            _services.RegisterUserCompletely(bE);
             return Ok();
         }
-
-        [AllowAnonymous]
-        [System.Web.Http.Route("api/Users/SearchByEmail")]
-        [System.Web.Http.HttpGet]
-        [ResponseType(typeof(Skyco_UserDTOCollectionRepresentation))]
-        public async Task<IHttpActionResult> GetByE_mail(String email)
-        {
-            Skyco_UserBE be = _services.GetByE_mail(email);
-            Skyco_UserDTO dto = new Skyco_UserDTO();
-            if (be == null)
-                return NotFound();
-            dto = Models.FactoryDTO.FactorySkyco_UserDTO.GetInstance().CreateDTO(be);
-            dto.CreatesMySelfLinks();
-            return Ok(dto);
-        }
-        #endregion
     }
 }

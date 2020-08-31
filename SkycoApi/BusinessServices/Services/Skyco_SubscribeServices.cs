@@ -17,12 +17,12 @@ using System.Threading.Tasks;
 
 namespace BusinessServices.Services
 {
-    public class Skyco_UsersServices : ISkyco_UsersServices
+    public class Skyco_SubscribeServices : ISkyco_SubscribeServices
     {
         #region Single
         private readonly UnitOfWork _unitOfWork;
 
-        public Skyco_UsersServices(UnitOfWork unitOfWork)
+        public Skyco_SubscribeServices(UnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
