@@ -93,9 +93,7 @@ namespace SkyCoApi.Controllers
                     TokenMD tk = new TokenMD()
                     {
                         jwt = token,
-                        refreshToken = mdl.refreshtoken,
-                        role = usr.Skyco_AccountType.AccountTypeName,
-
+                        refreshToken = mdl.refreshtoken
                     };
                     
                     return Ok(tk);
@@ -129,8 +127,7 @@ namespace SkyCoApi.Controllers
                 TokenMD tk = new TokenMD()
                 {
                     jwt = tokennew,
-                    refreshToken = generatenew,
-                    role = identityClaims.FindFirst("role").Value,
+                    refreshToken = generatenew
                 };
                 return Ok(tk);
             }

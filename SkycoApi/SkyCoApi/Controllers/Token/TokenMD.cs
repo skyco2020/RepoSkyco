@@ -9,7 +9,5 @@ namespace SkyCoApi.Controllers.Token
     {
         public String refreshToken { get; set; }
         public  String jwt { get; set; }
-
-        public String role { get; set; }
     }
 }

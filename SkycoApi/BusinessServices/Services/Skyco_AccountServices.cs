@@ -50,14 +50,17 @@ namespace BusinessServices.Services
                 DataModal.DataClasses.Skyco_Accounts entities = _unitOfWork.SkycoAccountRepository.GetOneByFilters(predicate, new string[] { "Skyco_AccountType", "Location" });
                 if (entities == null)
                     throw new ApiBusinessException(1234, "Wrong username or password", System.Net.HttpStatusCode.NotFound, "Http");
-               
-                StripeSubscribes stripeentity = _unitOfWork.StripeSubscribeRepository.GetOneByFilters(u => u.AccountId == entities.AccountId);
-                if (stripeentity == null && entities.Skyco_AccountType.AccountTypeName.ToLower().Equals("user"))
-                    throw new ApiBusinessException((Int32)(entities.AccountId), "You need tu complete payment", System.Net.HttpStatusCode.NotFound, "Http");
-                
-                Boolean stripe = StripeCardPayment.CheckPayMent(stripeentity.idStripeCustomer, stripeentity.idSubscribe, stripeentity.idPlanPriceStripe);
-                if (stripe == false && entities.Skyco_AccountType.AccountTypeName.ToLower().Equals("user"))
-                    throw new ApiBusinessException((Int32)(entities.AccountId), "Payment is missing for this month", System.Net.HttpStatusCode.NotFound, "Http");
+
+                if (entities.Skyco_AccountType.AccountTypeName.ToLower().Equals("user"))
+                {
+                    StripeSubscribes stripeentity = _unitOfWork.StripeSubscribeRepository.GetOneByFilters(u => u.AccountId == entities.AccountId);
+                    if (stripeentity == null)
+                        throw new ApiBusinessException((Int32)(entities.AccountId), "You need tu complete payment", System.Net.HttpStatusCode.NotFound, "Http");
+
+                    Boolean stripe = StripeCardPayment.CheckPayMent(stripeentity.idStripeCustomer, stripeentity.idSubscribe, stripeentity.idPlanPriceStripe);
+                    if (stripe == false)
+                        throw new ApiBusinessException((Int32)(entities.AccountId), "Payment is missing for this month", System.Net.HttpStatusCode.NotFound, "Http");
+                }              
 
                 return FactorySkyco_Account.GetInstance().CreateBusiness(entities);
             }
