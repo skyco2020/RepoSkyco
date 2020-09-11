@@ -106,7 +106,7 @@ namespace SkyCoApi.Controllers
             }
         }
 
-        [Authorize]
+        [AllowAnonymous]
         [HttpPost]
         [Route("api/refresh")]
         public IHttpActionResult refresh(TokenMD token)
