@@ -51,6 +51,7 @@ namespace SkyCoApi.Controllers
         {
             try
             {
+
                 ClaimsIdentity identityClaims = (ClaimsIdentity)User.Identity;
                 Skyco_AccountDTO mdl = new Skyco_AccountDTO()
                 {
