@@ -67,7 +67,9 @@
     <Compile Include="BE\CityBE.cs" />
     <Compile Include="BE\CountryBE.cs" />
     <Compile Include="BE\LocationBE.cs" />
+    <Compile Include="BE\ModelObjBE.cs" />
     <Compile Include="BE\PaymentIntentBE.cs" />
+    <Compile Include="BE\SearchBE.cs" />
     <Compile Include="BE\StripeSubscribeBE.cs" />
     <Compile Include="BE\PlanBE.cs" />
     <Compile Include="BE\PricePlanBE.cs" />

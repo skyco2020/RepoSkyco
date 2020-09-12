@@ -227,6 +227,9 @@
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=106.6.10.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.6.10\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Stripe.net, Version=37.14.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Stripe.net.37.14.0\lib\net461\Stripe.net.dll</HintPath>
     </Reference>
@@ -454,6 +457,7 @@
     <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModelFactory.cs" />
+    <Compile Include="Controllers\MoviesController.cs" />
     <Compile Include="Controllers\PlansController.cs" />
     <Compile Include="Controllers\RegisterUsersController.cs" />
     <Compile Include="Controllers\Skyco_AccountTypeServicesController.cs" />
@@ -495,6 +499,7 @@
     <Compile Include="Models\DTO\Single\CountryDTO.cs" />
     <Compile Include="Models\DTO\Single\CreateRoleBindingModel.cs" />
     <Compile Include="Models\DTO\Single\LocationDTO.cs" />
+    <Compile Include="Models\DTO\Single\MovieDTO.cs" />
     <Compile Include="Models\DTO\Single\StripeSubscribeDTO.cs" />
     <Compile Include="Models\DTO\Single\PlanDTO.cs" />
     <Compile Include="Models\DTO\Single\ProvinceDTO.cs" />
@@ -507,6 +512,7 @@
     <Compile Include="Models\FactoryDTO\FactoryCityDTO.cs" />
     <Compile Include="Models\FactoryDTO\FactoryCountryDTO.cs" />
     <Compile Include="Models\FactoryDTO\FactoryLocationDTO.cs" />
+    <Compile Include="Models\FactoryDTO\FactoryMovieDTO.cs" />
     <Compile Include="Models\FactoryDTO\FactoryStripeSubscribeDTO.cs" />
     <Compile Include="Models\FactoryDTO\FactoryPlanDTO.cs" />
     <Compile Include="Models\FactoryDTO\FactoryProvinceDTO.cs" />

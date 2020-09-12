@@ -24,6 +24,7 @@ namespace BusinessServices.Dependency
             registerComponent.RegisterType<IRegisterUserServices, RegisterUserServices>();
             registerComponent.RegisterType<IPlanServices, PlanServices>();
             registerComponent.RegisterType<IProvinceServices, ProvinceServices>();
+            registerComponent.RegisterType<IMovieServices, MovieServices>();
             registerComponent.RegisterType<ISkyco_AccountServices, Skyco_AccountServices>();
             registerComponent.RegisterType<ISkyco_AccountTypeServices, Skyco_AccountTypeServices>();
             registerComponent.RegisterType<ISkyco_AddressServices, Skyco_AddressServices>();

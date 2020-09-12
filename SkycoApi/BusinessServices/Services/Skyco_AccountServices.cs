@@ -44,7 +44,8 @@ namespace BusinessServices.Services
         public Skyco_AccountBE GetLogin(string username, string userpass)
         {
             try
-            {
+            {                
+                
                 String Passhash = MD5Base.GetInstance().Encypt(userpass);
                 Expression<Func<DataModal.DataClasses.Skyco_Accounts, Boolean>> predicate = u => u.Username == username && u.PasswordHash == Passhash;
                 DataModal.DataClasses.Skyco_Accounts entities = _unitOfWork.SkycoAccountRepository.GetOneByFilters(predicate, new string[] { "Skyco_AccountType", "Location" });

@@ -56,6 +56,8 @@
     <Compile Include="DataClasses\Cities.cs" />
     <Compile Include="DataClasses\Countries.cs" />
     <Compile Include="DataClasses\Locations.cs" />
+    <Compile Include="DataClasses\Perfils.cs" />
+    <Compile Include="DataClasses\Providers.cs" />
     <Compile Include="DataClasses\StripeSubscribes.cs" />
     <Compile Include="DataClasses\Plans.cs" />
     <Compile Include="DataClasses\Provinces.cs" />
