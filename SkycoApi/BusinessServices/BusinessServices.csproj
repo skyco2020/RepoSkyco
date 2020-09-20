@@ -111,6 +111,7 @@
     <Compile Include="Interfaces\ISkyco_SubscribeServices.cs" />
     <Compile Include="OwinSecurity\IOwinSecurityService.cs" />
     <Compile Include="OwinSecurity\OwinSecurityServer.cs" />
+    <Compile Include="Patterns\Factories\FactoryFilms.cs" />
     <Compile Include="Patterns\Factories\FactoryMovies.cs" />
     <Compile Include="Patterns\Factories\FactoryPaymentIntent.cs" />
     <Compile Include="Patterns\Factories\FactoryStripeSubscribe.cs" />

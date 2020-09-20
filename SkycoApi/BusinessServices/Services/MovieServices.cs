@@ -26,10 +26,11 @@ namespace BusinessServices.Services
 
             List<SearchBE> listbe = new List<SearchBE>();
             if(entities != null)
-                foreach (Search item in entities.Search)
-                {
-                    listbe.Add(Patterns.Factories.FactoryMovies.GetInstance().CreateBusiness(item));
-                }
+                if(entities.Search != null)
+                    foreach (Search item in entities.Search)
+                    {
+                        listbe.Add(Patterns.Factories.FactoryMovies.GetInstance().CreateBusiness(item));
+                    }
             return listbe;
         }
 
@@ -38,5 +39,17 @@ namespace BusinessServices.Services
             throw new NotImplementedException();
         }
 
+        public List<MovieBE> GetListMovie()
+        {
+            List<Movie> entities = _unitOfWork.GetListMovie();
+
+            List<MovieBE> listbe = new List<MovieBE>();
+            if (entities.Count > 0)
+                foreach (Movie item in entities)
+                {
+                    listbe.Add(Patterns.Factories.FactoryFilms.GetInstance().CreateBusiness(item));
+                }
+            return listbe;
+        }
     }
 }

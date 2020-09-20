@@ -1,4 +1,5 @@
 ﻿using BusinessEntities.BE;
+using StreamingVideo.Class;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace BusinessServices.Interfaces
     {
         SearchBE GetById(String Id);
         List<SearchBE> GetAll(Int32 state);
+        List<MovieBE> GetListMovie();
     }
 }

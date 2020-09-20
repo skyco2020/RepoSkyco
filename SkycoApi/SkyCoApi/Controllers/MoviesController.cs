@@ -35,5 +35,21 @@ namespace SkyCoApi.Controllers
             }           
             return Ok(listdoto);
         }
+
+        [AllowAnonymous]
+        [System.Web.Http.HttpGet]
+        [Route("api/GetAllMovie")]
+        public async Task<IHttpActionResult> GetAllMovie()
+        {
+            var count = 0;
+            IQueryable<MovieBE> query = _services.GetListMovie().AsQueryable();
+            List<MovieAzureDTO> listdoto = new List<MovieAzureDTO>();
+            foreach (MovieBE item in query)
+            {
+                listdoto.Add(Models.FactoryDTO.FactoryMovieAzureDTO.GetInstance().CreateDTO(item));
+            }
+            return Ok(listdoto);
+        }
+
     }
 }

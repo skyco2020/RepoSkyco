@@ -32,6 +32,7 @@ namespace SkyCoApi.Controllers
     /// login controller class for authenticate users
     /// </summary>
     /// 
+    [AllowAnonymous]
     public class AccountController : BaseApiController
     {
         #region Single
