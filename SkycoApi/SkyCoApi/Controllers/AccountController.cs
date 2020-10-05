@@ -25,6 +25,7 @@ using System.Security.Cryptography;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using SkyCoApi.Helpers;
 
 namespace SkyCoApi.Controllers
 {
@@ -41,6 +42,7 @@ namespace SkyCoApi.Controllers
         {
             _services = services;
         }
+        WebApiApplication wba = new WebApiApplication();
         #endregion
 
         private String[] refreshTokens = {};
@@ -97,6 +99,8 @@ namespace SkyCoApi.Controllers
                         jwt = token,
                         refreshToken = mdl.refreshtoken
                     };
+                    HelperModelLog.user = acc.Username;
+                    HelperModelLog.state = "Login";
                     
                     return Ok(tk);
                 }
@@ -110,10 +114,9 @@ namespace SkyCoApi.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("api/refresh")]
-        public IHttpActionResult refresh(TokenMD token)
-        {
-           
+        [Route("api/Refresh")]
+        public IHttpActionResult Refresh(TokenMD token)
+        {           
             try
             {
                 var username = User.Identity.Name;
@@ -139,21 +142,21 @@ namespace SkyCoApi.Controllers
             }
         }
 
-        [Authorize]
+        [AllowAnonymous]
         [HttpPost]
         [Route("api/CloseSession")]
         public IHttpActionResult CloseSession(TokenMD token)
         {
-
             try
             {
                 ClaimsIdentity identityClaims = (ClaimsIdentity)User.Identity;
-                String rfrtoken = identityClaims.FindFirst("refreshtoken").Value;
-                var identity = User.Identity as ClaimsIdentity;
-                var claim = (from c in identity.Claims.ToList()
-                             where c.Value == rfrtoken
+                HelperModelLog.state = "Close";
+                ClaimsIdentity identity = User.Identity as ClaimsIdentity;
+                Claim claim = (from c in identity.Claims.ToList()
+                             where c.Value == token.refreshToken
                              select c).FirstOrDefault();
-                identity.RemoveClaim(claim);
+                if(claim != null)
+                    HelperModelLog.user = claim.Subject.FindFirst("EmailAddress").Value;
                 return Ok();
             }
             catch (Exception ex)

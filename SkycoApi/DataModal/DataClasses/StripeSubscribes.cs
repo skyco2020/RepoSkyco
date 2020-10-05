@@ -19,6 +19,7 @@ namespace DataModal.DataClasses
         public String idCardStripe { get; set; }
         //public String idTokenStripe { get; set; }
         public DateTime SubscribeDate{ get; set; }
+        public Int32 countscreen { get; set; }
         public Int32 state { get; set; }
 
         #region Relation

@@ -44,7 +44,7 @@ namespace SkyCoApi.Infraestructure
         #endregion
 
         #region List
-        public List<Location> Location { get; set; }
+        public List<Locations> Location { get; set; }
         #endregion
     }
 }

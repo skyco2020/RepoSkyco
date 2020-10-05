@@ -78,6 +78,7 @@ namespace DataModal.UnitOfWork
         private ISkyco_AddressRepository _Skyco_AddressRepository;
         private ISkyco_PhoneRepository _Skyco_PhoneRepository;
         private ISkyco_UserRepository _Skyco_UserRepository;
+        private IPerfilRepository _PerfilRepository;
 
         #endregion
 
@@ -246,6 +247,23 @@ namespace DataModal.UnitOfWork
             set
             {
                 _Skyco_UserRepository = value;
+            }
+        }
+
+        public IPerfilRepository PerfilRepository
+        {
+            get
+            {
+                if (_PerfilRepository == null)
+                {
+                    return _PerfilRepository = new PerfilRepository(context);
+                }
+                return _PerfilRepository;
+            }
+
+            set
+            {
+                _PerfilRepository = value;
             }
         }
 

@@ -99,6 +99,7 @@
     <Compile Include="Interfaces\ICountryServices.cs" />
     <Compile Include="Interfaces\ILocationServices.cs" />
     <Compile Include="Interfaces\IMovieServices.cs" />
+    <Compile Include="Interfaces\IPerfilServices.cs" />
     <Compile Include="Interfaces\IRegisterUserServices.cs" />
     <Compile Include="Interfaces\IStripeCardServices.cs" />
     <Compile Include="Interfaces\IStripeSubscribeServices.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Patterns\Factories\FactoryFilms.cs" />
     <Compile Include="Patterns\Factories\FactoryMovies.cs" />
     <Compile Include="Patterns\Factories\FactoryPaymentIntent.cs" />
+    <Compile Include="Patterns\Factories\FactoryPerfil.cs" />
     <Compile Include="Patterns\Factories\FactoryStripeSubscribe.cs" />
     <Compile Include="Patterns\Factories\FactoryPlan.cs" />
     <Compile Include="Patterns\Factories\FactoryPricePlan.cs" />
@@ -131,6 +133,7 @@
     <Compile Include="Patterns\Factories\FactorySkyco_Phone.cs" />
     <Compile Include="Services\LocationServices.cs" />
     <Compile Include="Services\MovieServices.cs" />
+    <Compile Include="Services\PerfilServices.cs" />
     <Compile Include="Services\RegisterUserServices.cs" />
     <Compile Include="Services\StripeSubscribeServices.cs" />
     <Compile Include="Services\PlanServices.cs" />

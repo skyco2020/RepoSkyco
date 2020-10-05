@@ -2,6 +2,7 @@
 using BusinessServices.Interfaces;
 using DataModal.DataClasses;
 using DataModal.UnitOfWork;
+using Resolver.Enumerations;
 using Resolver.Exceptions;
 using StripeServices;
 using System;
@@ -39,7 +40,7 @@ namespace BusinessServices.Services
                     StripeSubscribes entitystripe = Transform(str, Be);
                     _unitOfWork.StripeSubscribeRepository.Create(entitystripe);
                     _unitOfWork.Commit();
-                    return typeplan;
+                    return stripe.Plan;
                 }
                 else
                     throw new ApiBusinessException(64, stripe.Message, System.Net.HttpStatusCode.NotFound, "Http");
@@ -90,7 +91,8 @@ namespace BusinessServices.Services
                 idStripeCustomer = custom.CustomerId,
                 idSubscribe = custom.Id,
                 SubscribeDate = Convert.ToDateTime(DateTime.Now),
-                state = (Int32)Resolver.Enumerations.StateEnum.Activated
+                state = (Int32)Resolver.Enumerations.StateEnum.Activated,
+                countscreen = ListGeneric.GetInstance().GetScreen(custom.Plan.Metadata["Type Plan"])
             };
 
             return cust;

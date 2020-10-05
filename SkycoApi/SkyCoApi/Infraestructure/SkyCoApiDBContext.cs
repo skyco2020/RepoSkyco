@@ -18,11 +18,11 @@ namespace SkyCoApi.Infraestructure
 
         public virtual DbSet<City> City { get; set; }
         public virtual DbSet<Country> Country { get; set; }
-        public virtual DbSet<Location> Location { get; set; }
-        public virtual DbSet<Skyco_Account> Skyco_Account { get; set; }   
+        public virtual DbSet<Locations> Location { get; set; }
+        public virtual DbSet<Skyco_Accounts> Skyco_Account { get; set; }   
         public virtual DbSet<Provinces> Provinces { get; set; }
-        public virtual DbSet<Skyco_User> Skyco_User { get; set; }
-        public virtual DbSet<Skyco_AccountType> Skyco_AccountType { get; set; }
+        public virtual DbSet<Skyco_Users> Skyco_User { get; set; }
+        public virtual DbSet<Skyco_AccountTypes> Skyco_AccountType { get; set; }
         public virtual DbSet<Skyco_Address> Skyco_Address { get; set; }
         public virtual DbSet<Skyco_Phone> Skyco_Phone { get; set; }
 

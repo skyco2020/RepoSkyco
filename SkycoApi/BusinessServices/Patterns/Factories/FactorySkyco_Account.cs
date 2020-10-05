@@ -54,6 +54,14 @@ namespace BusinessServices.Patterns.Factories
                     VoidedBy = entity.VoidedBy,
                     Skyco_AccountType = entity.Skyco_AccountType != null ? FactorySkyco_AccountType.GetInstance().CreateBusiness(entity.Skyco_AccountType) : null,
                 };
+                if (entity.Perfils != null)
+                {
+                    BE.Perfils = new List<PerfilBE>();
+                    foreach (Perfils item in entity.Perfils)
+                    {
+                        BE.Perfils.Add(FactoryPerfil.GetInstance().CreateBusiness(item));
+                    }
+                }
                 return BE;
             };
             return BE = new Skyco_AccountBE();
@@ -90,6 +98,15 @@ namespace BusinessServices.Patterns.Factories
                     VoidedAt = BE.VoidedAt,
                     VoidedBy = BE.VoidedBy
                 };
+
+                if (BE.Perfils != null)
+                {
+                    entity.Perfils = new List<Perfils>();
+                    foreach (PerfilBE item in BE.Perfils)
+                    {
+                        entity.Perfils.Add(FactoryPerfil.GetInstance().CreateEntity(item));
+                    }
+                }
                 return entity;
             }
             return entity = new Skyco_Accounts();

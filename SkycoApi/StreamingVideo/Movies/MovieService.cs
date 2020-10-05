@@ -22,6 +22,42 @@ namespace StreamingVideo.Movies
         public  ModelObj GetMovie()
         {
 
+            //var client1 = new RestClient("https://imdb8.p.rapidapi.com/title/auto-complete?q=game%20of%20thr");
+            //var request1 = new RestRequest(Method.GET);
+            //request1.AddHeader("x-rapidapi-host", "imdb8.p.rapidapi.com");
+            //request1.AddHeader("x-rapidapi-key", "1101c7f371msh30f8a15044739c5p1f0a58jsn19d567032559");
+            //IRestResponse response1 = client1.Execute(request1);
+
+            var client1 = new RestClient("https://imdb8.p.rapidapi.com/actors/get-all-filmography?nconst=nm0001667");
+            var request1 = new RestRequest(Method.GET);
+            request1.AddHeader("x-rapidapi-host", "imdb8.p.rapidapi.com");
+            request1.AddHeader("x-rapidapi-key", "1101c7f371msh30f8a15044739c5p1f0a58jsn19d567032559");
+            IRestResponse response1 = client1.Execute(request1);
+
+            var client2 = new RestClient("https://imdb8.p.rapidapi.com/actors/get-all-videos?region=US&nconst=nm0001667");
+            var request2 = new RestRequest(Method.GET);
+            request2.AddHeader("x-rapidapi-host", "imdb8.p.rapidapi.com");
+            request2.AddHeader("x-rapidapi-key", "1101c7f371msh30f8a15044739c5p1f0a58jsn19d567032559");
+            IRestResponse response2 = client2.Execute(request2);
+
+            var client3 = new RestClient("https://bing-video-search1.p.rapidapi.com/videos/search?q=%3Crequired%3E");
+            var request3 = new RestRequest(Method.GET);
+            request3.AddHeader("x-rapidapi-host", "bing-video-search1.p.rapidapi.com");
+            request3.AddHeader("x-rapidapi-key", "1101c7f371msh30f8a15044739c5p1f0a58jsn19d567032559");
+            IRestResponse response3 = client3.Execute(request3);
+
+            var client4 = new RestClient("https://getvideo.p.rapidapi.com/?url=https%253A%252F%252Fwww.youtube.com%252Fwatch%253Fv%253DnfWlot6h_JM");
+            var request4 = new RestRequest(Method.GET);
+            request4.AddHeader("x-rapidapi-host", "getvideo.p.rapidapi.com");
+            request4.AddHeader("x-rapidapi-key", "1101c7f371msh30f8a15044739c5p1f0a58jsn19d567032559");
+            IRestResponse response4 = client4.Execute(request4);
+
+            var client5 = new RestClient("https://getvideo.p.rapidapi.com/supported-sites/");
+            var request5 = new RestRequest(Method.GET);
+            request5.AddHeader("x-rapidapi-host", "getvideo.p.rapidapi.com");
+            request5.AddHeader("x-rapidapi-key", "1101c7f371msh30f8a15044739c5p1f0a58jsn19d567032559");
+            IRestResponse response5 = client5.Execute(request5);
+
             string apiKey = "1832462d";
             string baseUri = $"http://www.omdbapi.com/?apikey={apiKey}";
 
@@ -34,7 +70,7 @@ namespace StreamingVideo.Movies
             //AzureMovieServices nf = new AzureMovieServices();
             //nf.GetMovie();
             var request = WebRequest.Create(sb.ToString());
-            request.Timeout = 1000;
+            //request.Timeout = 1000;
             request.Method = "GET";
             request.ContentType = "application/json";
 
@@ -70,7 +106,7 @@ namespace StreamingVideo.Movies
             {
                 String url = GetUriToken("simplemovie");
                 CloudBlobContainer container = new CloudBlobContainer(new Uri(url));
-                var prin = container.GetBlockBlobReference("principal");
+                //var prin = container.GetBlockBlobReference("principal");
                 List<string> blobs = new List<string>();
                 List<IListBlobItem> list = container.ListBlobs().ToList();
                 List<Movie> mov = new List<Movie>();

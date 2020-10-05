@@ -25,6 +25,7 @@ namespace DataModal.DataClasses
         public virtual DbSet<Skyco_Addresses> Skyco_Address { get; set; }
         public virtual DbSet<Skyco_Phones> Skyco_Phone { get; set; }
         public virtual DbSet<Skyco_Users> Skyco_User { get; set; }
+        public virtual DbSet<Perfils> Perfils { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

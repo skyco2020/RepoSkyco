@@ -78,7 +78,7 @@ namespace BusinessServices.Services
         public CityBE GetById(long Id)
         {
             Expression<Func<DataModal.DataClasses.Cities, Boolean>> predicate = u => u.CityId == Id && u.Voided == (byte)StateEnum.Activated;
-            Cities entity = _unitOfWork.CityRepository.GetOneByFilters(predicate, new string[] { "City" });
+            Cities entity = _unitOfWork.CityRepository.GetOneByFilters(predicate, null);
             CityBE be = null;
             if (entity != null)
             {

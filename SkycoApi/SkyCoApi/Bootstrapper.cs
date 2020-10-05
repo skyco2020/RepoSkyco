@@ -17,7 +17,7 @@ namespace SkyCoApi
         return container;
     }
 
-    private static IUnityContainer BuildUnityContainer()
+    public static IUnityContainer BuildUnityContainer()
     {
       var container = new UnityContainer();
 

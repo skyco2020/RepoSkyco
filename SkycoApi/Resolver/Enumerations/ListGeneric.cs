@@ -43,5 +43,20 @@ namespace Resolver.Enumerations
                     return (Int32)(Resolver.Enumerations.Gender.Other);
             }
         }
+
+        public Int32 GetScreen(String screen)
+        {
+            switch (screen.ToLower())
+            {
+                case "plan one":
+                    return 1;
+                case "plan two screens":
+                    return 2;
+                case "plan four screens":
+                    return 4;
+                default:
+                    return 0;
+            }
+        }
     }
 }

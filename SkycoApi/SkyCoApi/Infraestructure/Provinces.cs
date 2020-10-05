@@ -43,7 +43,7 @@ namespace SkyCoApi.Infraestructure
 
         #region List
         public virtual ICollection<City> City { get; set; }
-        public virtual ICollection<Location> Location { get; set; }
+        public virtual ICollection<Locations> Location { get; set; }
         #endregion
 
     }

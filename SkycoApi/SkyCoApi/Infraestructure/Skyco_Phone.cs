@@ -43,7 +43,7 @@ namespace SkyCoApi.Infraestructure
 
         #region Relation
         [ForeignKey("UserId")]
-        public Skyco_User Skyco_User { get; set; }
+        public Skyco_Users Skyco_User { get; set; }
         #endregion
 
     }

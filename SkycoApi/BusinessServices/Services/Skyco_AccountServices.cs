@@ -30,7 +30,7 @@ namespace BusinessServices.Services
             try
             {
                 Expression<Func<DataModal.DataClasses.Skyco_Accounts, Boolean>> predicate = u => u.UserId == Id;
-                DataModal.DataClasses.Skyco_Accounts entities = _unitOfWork.SkycoAccountRepository.GetOneByFilters(predicate, new string[] { "Skyco_AccountType", "Location"});
+                DataModal.DataClasses.Skyco_Accounts entities = _unitOfWork.SkycoAccountRepository.GetOneByFilters(predicate, new string[] { "Skyco_AccountType", "Location", "Perfils" });
                 if (entities != null)
                     return FactorySkyco_Account.GetInstance().CreateBusiness(entities);
                 return null;
@@ -48,13 +48,17 @@ namespace BusinessServices.Services
                 
                 String Passhash = MD5Base.GetInstance().Encypt(userpass);
                 Expression<Func<DataModal.DataClasses.Skyco_Accounts, Boolean>> predicate = u => u.Username == username && u.PasswordHash == Passhash;
-                DataModal.DataClasses.Skyco_Accounts entities = _unitOfWork.SkycoAccountRepository.GetOneByFilters(predicate, new string[] { "Skyco_AccountType", "Location" });
+                DataModal.DataClasses.Skyco_Accounts entities = _unitOfWork.SkycoAccountRepository.GetOneByFilters(predicate, new string[] { "Skyco_AccountType", "Location", "Perfils" });
                 if (entities == null)
                     throw new ApiBusinessException(1234, "Wrong username or password", System.Net.HttpStatusCode.NotFound, "Http");
 
-                if (entities.Skyco_AccountType.AccountTypeName.ToLower().Equals("user"))
+                if (!entities.Skyco_AccountType.AccountTypeName.ToLower().Equals("user"))
                 {
                     StripeSubscribes stripeentity = _unitOfWork.StripeSubscribeRepository.GetOneByFilters(u => u.AccountId == entities.AccountId);
+                    //if (stripeentity.countscreen)
+                    //{
+
+                    //}
                     if (stripeentity == null)
                         throw new ApiBusinessException((Int32)(entities.AccountId), "You need tu complete payment", System.Net.HttpStatusCode.NotFound, "Http");
 

@@ -47,14 +47,14 @@ namespace SkyCoApi.Models.Hypermedia.Template
 
         public override Link GetMyRelationReference()
         {
-            return Skyco_PhonesRelation;
+            return PlansRelation;
         }
         #endregion
 
         #region Routes
         public static Link GetPlans { get { return new Link("ref", baseaddress + "/Plans"); } }
         public static Link Plan { get { return new Link("self", baseaddress + "/Plans/{id}"); } }
-        public static Link Skyco_PhonesRelation { get { return new Link("Plan", baseaddress + "/Plans/{id}"); } }
+        public static Link PlansRelation { get { return new Link("Plan", baseaddress + "/Plans/{id}"); } }
         public static Link UpdatePlan { get { return new Link("update", baseaddress + "/Plans/{id}"); } }
         public static Link DeletePlan { get { return new Link("delete", baseaddress + "/Plans/{id}"); } }
         public static Link GetPlanPagination { get { return new Link("Plans", baseaddress + "/Plans/{?page}"); } }

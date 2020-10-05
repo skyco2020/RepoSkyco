@@ -27,6 +27,7 @@ namespace BusinessServices.Dependency
             registerComponent.RegisterType<IMovieServices, MovieServices>();
             registerComponent.RegisterType<ISkyco_AccountServices, Skyco_AccountServices>();
             registerComponent.RegisterType<ISkyco_AccountTypeServices, Skyco_AccountTypeServices>();
+            registerComponent.RegisterType<IPerfilServices, PerfilServices>();
             registerComponent.RegisterType<ISkyco_AddressServices, Skyco_AddressServices>();
             registerComponent.RegisterType<ISkyco_PhoneServices, Skyco_PhoneServices>();
             registerComponent.RegisterType<ISkyco_SubscribeServices, Skyco_SubscribeServices>();

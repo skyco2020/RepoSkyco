@@ -46,6 +46,7 @@ namespace BusinessEntities.BE
 
         #region List
         public List<StripeSubscribeBE> Payment_Skyco_Accounts { get; set; }
+        public List<PerfilBE> Perfils { get; set; }
         #endregion
     }
 }
