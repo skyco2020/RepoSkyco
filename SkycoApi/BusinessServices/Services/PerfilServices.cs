@@ -28,6 +28,9 @@ namespace BusinessServices.Services
             try
             {
                 Perfils entity = Patterns.Factories.FactoryPerfil.GetInstance().CreateEntity(Be);
+                List<DataModal.DataClasses.Perfils> perfils = _unitOfWork.PerfilRepository.GetAllByFilters(u => u.AccountId == entity.AccountId, null).ToList();
+                if (perfils.Count >= 4)
+                    throw new ApiBusinessException(3001, "Can't add more profil", System.Net.HttpStatusCode.BadRequest, "Http");
                 _unitOfWork.PerfilRepository.Create(entity);
                 _unitOfWork.Commit();
                 return entity.idPerfil;

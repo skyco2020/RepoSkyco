@@ -30,6 +30,7 @@ namespace SkyCoApi.Models.FactoryDTO
                     AccountId = be.AccountId,
                     complete = be.complete,
                     name = be.name,
+                    passperfil = be.passperfil,
                     typeperfil = be.typeperfil,
                     state = be.state
                 };

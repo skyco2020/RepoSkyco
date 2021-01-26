@@ -13,7 +13,7 @@ namespace StripeServices
     public static class StripeCardPayment
     {
 
-        #region Create Subscription
+        #region Create Subscription old
         public static dynamic PayAsync(PaymentIntent payment, ref Boolean iscompleted, ref String idStripeCustomer, ref String idSubscribe)
         {            
             try
@@ -74,6 +74,89 @@ namespace StripeServices
                 iscompleted = false;
                 return ex;
             }           
+        }
+        #endregion
+
+        #region Create Subscription no
+        public static async Task<dynamic> PayAsync2(PaymentIntent payment)
+        {
+            try
+            {
+                #region Secret Key
+                Key.SecretKey();
+                #endregion
+                #region Create option
+                var optionstoken = new TokenCreateOptions
+                {
+                    //Card = new CreditCardOptions
+                    //{
+                    //    Number = payment.cardnumber,
+                    //    ExpMonth = payment.month,
+                    //    ExpYear = payment.year,
+                    //    Cvc = payment.cvc
+                    //}
+                };
+                Token stripetoken = new Token();
+                try
+                {
+                    var servicetoken = new TokenService();
+                     stripetoken = await servicetoken.CreateAsync(optionstoken);
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
+                #endregion
+
+                #region Customer
+                CustomerCreateOptions customerption = new CustomerCreateOptions
+                {
+                    Name = payment.fullname,
+                    Email = payment.Email,
+                    Description = payment.Description,
+                    Source = stripetoken.Id
+                };
+                CustomerService customerservice = new CustomerService();
+                Customer custom = customerservice.Create(customerption);
+                #endregion
+
+                #region Payment Atach Method
+                PaymentMethodAttachOptions paymentatch = new PaymentMethodAttachOptions
+                {
+                    Customer = custom.Id,
+                };
+                PaymentMethodService paymentmethodservice = new PaymentMethodService();
+                PaymentMethod paymentMethod = paymentmethodservice.Attach(
+                  stripetoken.Card.Id,
+                  paymentatch
+                );
+                #endregion
+
+                #region Subscription Create
+                SubscriptionCreateOptions subscriptioncreateoption = new SubscriptionCreateOptions
+                {
+                    Customer = custom.Id,
+                    Items = new List<SubscriptionItemOptions>
+                {
+                    new SubscriptionItemOptions
+                    {
+                        //Price = "price_1H3XxiCoU1sl4udJRQZm1Y1P",
+                        Price = payment.IDStripePrice,
+                        Quantity = 1,
+
+                    },
+                },
+                };
+                var subscriptionservice = new SubscriptionService();
+                Subscription subscription = subscriptionservice.Create(subscriptioncreateoption);
+                #endregion
+                return subscription;
+            }
+            catch (Exception ex)
+            {
+                return ex;
+            }
         }
         #endregion
 

@@ -33,7 +33,7 @@ namespace BusinessServices.Services
         private Int64 ProvinceId = 0;
         private Int64 CityId = 0;
         #endregion
-        public long Subscribe(Skyco_UserBE Be)
+        public Skyco_UserBE Subscribe(Skyco_UserBE Be)
         {
             try
             {
@@ -49,18 +49,30 @@ namespace BusinessServices.Services
                     List<DataModal.DataClasses.Skyco_Accounts> entity1 = _unitOfWork.SkycoAccountRepository.GetAllByFilters(predicateuser, new string[] { "Skyco_User", "Skyco_User.Skyco_Phone" }).ToList();
                     
                     if (entity1.Count > 0)
-                        if (entity1.FirstOrDefault().Voided == (Int32)StateEnum.Deleted)
-                            throw new ApiBusinessException((Int32)entity1.LastOrDefault().Skyco_User.UserId, "Welcome Back at Sky co", System.Net.HttpStatusCode.NotFound, "Http");
+                        if (entity1.FirstOrDefault().Voided == (Int32)StateEnum.Deleted){
+                            Be.UserId = entity1.LastOrDefault().Skyco_User.UserId;
+                            Be.message = "Welcome Back at Makaya";
+                            return Be;
+                        }
                         else
-                            throw new ApiBusinessException((Int32)entity1.LastOrDefault().Skyco_User.UserId, "There is already an account with this email", System.Net.HttpStatusCode.NotFound, "Http");
+                        {
+                            Be.UserId = entity1.LastOrDefault().Skyco_User.UserId;
+                            Be.message = "There is already an account with this email";
+                            return Be;
+                        }
+                            
                     else
-                        throw new ApiBusinessException((Int32)entitynonerepeat.LastOrDefault().UserId, "Welcome to Sky co", System.Net.HttpStatusCode.NotFound, "Http");                    
+                    {
+                        Be.UserId = entitynonerepeat.LastOrDefault().UserId;
+                        Be.message = "Welcome to Makaya";
+                        return Be;
+                    }                       
                 }
-             
-
                 _unitOfWork.Skyco_UserRepository.Create(entity);
-                _unitOfWork.Commit();                           
-                return entity.UserId;
+                _unitOfWork.Commit();
+                Be.UserId = entity.UserId;
+                Be.message = "successs";
+                return Be;
 
             }
             catch (Exception ex)

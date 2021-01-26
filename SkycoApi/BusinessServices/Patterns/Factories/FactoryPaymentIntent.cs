@@ -34,7 +34,12 @@ namespace BusinessServices.Patterns.Factories
                     idPaymentIntent = entity.idPaymentIntent,
                     Description = entity.Description,
                     fullname = entity.fullname,
-                    state = entity.state
+                    state = entity.state,
+                    cardnumber = entity.cardnumber,
+                    cvc = entity.cvc,
+                    month = entity.month,
+                    value = entity.value,
+                    year = entity.year
                 };               
                 return be;
             }
@@ -58,7 +63,12 @@ namespace BusinessServices.Patterns.Factories
                     idPaymentIntent = be.idPaymentIntent,
                     Description = be.Description,
                     fullname = be.fullname,
-                    state = be.state
+                    state = be.state,
+                    cardnumber = be.cardnumber,
+                    cvc = be.cvc,
+                    month = be.month,
+                    value = be.value,
+                    year = be.year
                 };                
                 return entity;
 

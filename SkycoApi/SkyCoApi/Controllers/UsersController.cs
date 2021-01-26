@@ -74,7 +74,7 @@ namespace SkyCoApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            be.UserId = _services.Subscribe(be);
+            _services.Subscribe(be);
             return Created(new Uri(Url.Link("DefaultApi", new { Id = be.UserId })), be); 
         }
 

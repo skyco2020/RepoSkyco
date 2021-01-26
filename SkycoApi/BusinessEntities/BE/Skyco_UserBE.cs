@@ -29,6 +29,7 @@ namespace BusinessEntities.BE
         public string Country { get; set; }
 
         public string province { get; set; }
+        public string message { get; set; }
 
         public string city { get; set; }
 

@@ -19,6 +19,13 @@ namespace StripeServices
         public String Description { get; set; }
 
         public String IDStripePrice { get; set; }
+        #region new
+        public String cardnumber { get; set; }
+        public Int32 month { get; set; }
+        public Int32 year { get; set; }
+        public String cvc { get; set; }
+        public Int32 value { get; set; }
+        #endregion
         public Int32 state { get; set; }
     }
 }

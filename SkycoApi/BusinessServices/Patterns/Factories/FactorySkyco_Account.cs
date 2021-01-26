@@ -43,7 +43,7 @@ namespace BusinessServices.Patterns.Factories
                     LastLoginDate = entity.LastLoginDate,
                     LocationId = entity.LocationId,
                     Location = entity.Location != null ? FactoryLocation.GetInstance().CreateBusiness(entity.Location) : null,
-                    PasswordHash = MD5Base.GetInstance().Decrypt(entity.PasswordHash),
+                    PasswordHash = entity.PasswordHash,
                     PhoneNumber = entity.PhoneNumber,
                     UpdatedAt = entity.UpdatedAt,
                     UpdatedBy = entity.UpdatedBy,

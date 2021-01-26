@@ -1,5 +1,6 @@
 ﻿using BusinessEntities.BE;
 using DataModal.DataClasses;
+using Resolver.Cryptography;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace BusinessServices.Patterns.Factories
                 {
                     idPerfil = entity.idPerfil,
                     AccountId = entity.AccountId,
+                    passperfil = entity.passperfil,
                     complete = entity.complete,
                     name = entity.name,
                     typeperfil = entity.typeperfil,
@@ -52,6 +54,7 @@ namespace BusinessServices.Patterns.Factories
                     AccountId = be.AccountId,
                     complete = be.complete,
                     name = be.name,
+                    passperfil = MD5Base.GetInstance().Encypt(be.passperfil),
                     typeperfil = be.typeperfil,
                     state = be.state
                 };
