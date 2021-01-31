@@ -289,8 +289,8 @@
     <Reference Include="RestSharp, Version=106.6.10.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.6.10\lib\net452\RestSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Stripe.net, Version=37.14.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stripe.net.37.14.0\lib\net461\Stripe.net.dll</HintPath>
+    <Reference Include="Stripe.net, Version=39.33.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stripe.net.39.33.0\lib\net461\Stripe.net.dll</HintPath>
     </Reference>
     <Reference Include="Swashbuckle.AspNetCore.Swagger, Version=5.3.3.0, Culture=neutral, PublicKeyToken=62657d7474907593, processorArchitecture=MSIL">
       <HintPath>..\packages\Swashbuckle.AspNetCore.Swagger.5.3.3\lib\netstandard2.0\Swashbuckle.AspNetCore.Swagger.dll</HintPath>

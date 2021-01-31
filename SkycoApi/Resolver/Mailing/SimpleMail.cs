@@ -31,10 +31,10 @@ namespace Resolver.Mailing
             SmtpClient smtp = new SmtpClient();
             smtp.Host = MailConfiguration.GetInstance().AppSettings["mail_host"];
             smtp.Port = Convert.ToInt32(MailConfiguration.GetInstance().AppSettings["mail_port"]);
+            smtp.EnableSsl = true;
             smtp.UseDefaultCredentials = false;
             smtp.Credentials = new System.Net.NetworkCredential(account, password);// Enter seders User name and password
 
-            smtp.EnableSsl = true;
             smtp.Send(mail);
         }
     }

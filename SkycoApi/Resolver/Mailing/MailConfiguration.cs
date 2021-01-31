@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,8 +53,9 @@ namespace Resolver.Mailing
             {
                 if (this.configPath == null)
                 {
-
-                    this.configPath = ConfigurationManager.AppSettings["MAIL_PATH"];
+                    string path = AppDomain.CurrentDomain.BaseDirectory;
+                    this.configPath = path.Remove(path.Length - 9) + @"Resolver\Mailing\Mail.config";
+                    //this.configPath = ConfigurationManager.AppSettings["MAIL_PATH"];
                 }
                 return this.configPath;
             }

@@ -32,6 +32,7 @@ namespace BusinessServices.Services
                 String idSubscribe = "";
 
                 PaymentIntent entity = Patterns.Factories.FactoryPaymentIntent.GetInstance().CreateEntity(Be);
+                var mp = StripeCardPayment.PayNewAsync(entity);
                 dynamic stripe = StripeCardPayment.PayAsync(entity, ref iscompleted, ref idStripeCustomer, ref idSubscribe);
                 //dynamic stripe = StripeCardPayment.PayAsync(entity);
                 if (iscompleted)

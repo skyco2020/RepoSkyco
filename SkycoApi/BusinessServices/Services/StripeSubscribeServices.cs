@@ -1,14 +1,12 @@
 ﻿using Autofac.Core;
 using BusinessEntities.BE;
 using BusinessServices.Interfaces;
-using BusinessServices.Stripe;
 using DataModal.DataClasses;
 using DataModal.UnitOfWork;
 using NUnit.Framework;
 using Resolver.Enumerations;
 using Resolver.Exceptions;
 using Resolver.QueryableExtensions;
-using ServiceStack.Stripe.Types;
 using Stripe;
 using StripeServices;
 using System;

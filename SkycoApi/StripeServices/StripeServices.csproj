@@ -90,7 +90,6 @@
     <Compile Include="StripeProduct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StripeCardPayment.cs" />
-    <Compile Include="StripeGateway.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

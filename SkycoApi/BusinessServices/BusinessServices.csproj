@@ -65,8 +65,8 @@
     <Reference Include="Stripe.Client.Sdk, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Stripe.Client.Sdk.1.0.13\lib\net45\Stripe.Client.Sdk.dll</HintPath>
     </Reference>
-    <Reference Include="Stripe.net, Version=37.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stripe.net.37.6.0\lib\net461\Stripe.net.dll</HintPath>
+    <Reference Include="Stripe.net, Version=39.33.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stripe.net.39.33.0\lib\net461\Stripe.net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -143,9 +143,7 @@
     <Compile Include="Services\Skyco_AddressServices.cs" />
     <Compile Include="Services\Skyco_PhoneServices.cs" />
     <Compile Include="Services\Skyco_SubscribeServices.cs" />
-    <Compile Include="Services\StripBase.cs" />
     <Compile Include="Services\StripeCardServices.cs" />
-    <Compile Include="Stripe\StripeInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
