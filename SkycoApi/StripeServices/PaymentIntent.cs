@@ -18,7 +18,7 @@ namespace StripeServices
         public String Email { get; set; }
         public String Description { get; set; }
 
-        public String IDStripePrice { get; set; }
+        public String iDPlanPrice { get; set; }
         #region new
         public String cardnumber { get; set; }
         public Int32 month { get; set; }

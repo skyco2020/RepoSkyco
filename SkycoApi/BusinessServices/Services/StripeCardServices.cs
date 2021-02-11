@@ -32,20 +32,21 @@ namespace BusinessServices.Services
                 String idSubscribe = "";
 
                 PaymentIntent entity = Patterns.Factories.FactoryPaymentIntent.GetInstance().CreateEntity(Be);
-                var mp = StripeCardPayment.PayNewAsync(entity);
-                dynamic stripe = StripeCardPayment.PayAsync(entity, ref iscompleted, ref idStripeCustomer, ref idSubscribe);
+                dynamic stripe = StripeCardPayment.PayNewAsync(entity);
+                return null;
+                //dynamic stripe = StripeCardPayment.PayAsync(entity, ref iscompleted, ref idStripeCustomer, ref idSubscribe);
                 //dynamic stripe = StripeCardPayment.PayAsync(entity);
-                if (iscompleted)
-                {
-                    dynamic str = stripe;
-                    var typeplan = stripe.Plan;
-                    StripeSubscribes entitystripe = Transform(str, Be);
-                    _unitOfWork.StripeSubscribeRepository.Create(entitystripe);
-                    _unitOfWork.Commit();
-                    return stripe.Plan;
-                }
-                else
-                    throw new ApiBusinessException(64, stripe.Message, System.Net.HttpStatusCode.NotFound, "Http");
+                //if (iscompleted)
+                //{
+                //    dynamic str = stripe;
+                //    //var typeplan = stripe.Plan;
+                //    StripeSubscribes entitystripe = Transform(str, Be);
+                //    _unitOfWork.StripeSubscribeRepository.Create(entitystripe);
+                //    _unitOfWork.Commit();
+                //    return stripe;
+                //}
+                //else
+                //    throw new ApiBusinessException(64, stripe.Message, System.Net.HttpStatusCode.NotFound, "Http");
             }
             catch (Exception ex)
             {
@@ -88,13 +89,13 @@ namespace BusinessServices.Services
             StripeSubscribes cust = new StripeSubscribes()
             {
                 AccountId = _unitOfWork.SkycoAccountRepository.GetOneByFilters(u => u.UserId == Be.AccountId).AccountId,
-                idCardStripe = Be.CardId,
-                idPlanPriceStripe = Be.IDStripePrice,
+                //idCardStripe = Be.CardId,
+                idPlanPriceStripe = Be.iDPlanPrice,
                 idStripeCustomer = custom.CustomerId,
                 idSubscribe = custom.Id,
                 SubscribeDate = Convert.ToDateTime(DateTime.Now),
                 state = (Int32)Resolver.Enumerations.StateEnum.Activated,
-                countscreen = ListGeneric.GetInstance().GetScreen(custom.Plan.Metadata["Type Plan"])
+                countscreen = ListGeneric.GetInstance().GetScreen(custom.Items.Data[0].Plan.Metadata["Type Plan"])
             };
 
             return cust;

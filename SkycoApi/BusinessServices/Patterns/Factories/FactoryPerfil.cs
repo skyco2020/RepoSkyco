@@ -29,7 +29,7 @@ namespace BusinessServices.Patterns.Factories
                 {
                     idPerfil = entity.idPerfil,
                     AccountId = entity.AccountId,
-                    passperfil = entity.passperfil,
+                    passperfil = entity.passperfil!= null ? MD5Base.GetInstance().Decrypt(entity.passperfil) : entity.passperfil,
                     complete = entity.complete,
                     name = entity.name,
                     typeperfil = entity.typeperfil,

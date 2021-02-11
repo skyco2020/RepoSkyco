@@ -765,6 +765,10 @@
       <Project>{0fbe64ba-c24c-4d31-b479-de461176b310}</Project>
       <Name>Resolver</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StripeServices\StripeServices.csproj">
+      <Project>{6d350ca7-7895-457a-b2fd-83c7db9fa376}</Project>
+      <Name>StripeServices</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

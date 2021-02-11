@@ -1,6 +1,7 @@
 ﻿using BusinessEntities.BE;
 using BusinessServices.Interfaces;
 using BusinessServices.Services;
+using StripeServices.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace SkyCoApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-             dynamic plan =_services.Create(Be);
+             dynamic plan =_services.PayAsync(Be);
             return  Created(new Uri(Url.Link("DefaultApi", new { Id = Be.idPaymentIntent })), plan);           
         }
 

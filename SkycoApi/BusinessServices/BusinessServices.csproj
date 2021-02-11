@@ -101,7 +101,6 @@
     <Compile Include="Interfaces\IMovieServices.cs" />
     <Compile Include="Interfaces\IPerfilServices.cs" />
     <Compile Include="Interfaces\IRegisterUserServices.cs" />
-    <Compile Include="Interfaces\IStripeCardServices.cs" />
     <Compile Include="Interfaces\IStripeSubscribeServices.cs" />
     <Compile Include="Interfaces\IPlanServices.cs" />
     <Compile Include="Interfaces\ISkyco_AccountServices.cs" />
@@ -114,7 +113,6 @@
     <Compile Include="OwinSecurity\OwinSecurityServer.cs" />
     <Compile Include="Patterns\Factories\FactoryFilms.cs" />
     <Compile Include="Patterns\Factories\FactoryMovies.cs" />
-    <Compile Include="Patterns\Factories\FactoryPaymentIntent.cs" />
     <Compile Include="Patterns\Factories\FactoryPerfil.cs" />
     <Compile Include="Patterns\Factories\FactoryStripeSubscribe.cs" />
     <Compile Include="Patterns\Factories\FactoryPlan.cs" />
@@ -143,7 +141,6 @@
     <Compile Include="Services\Skyco_AddressServices.cs" />
     <Compile Include="Services\Skyco_PhoneServices.cs" />
     <Compile Include="Services\Skyco_SubscribeServices.cs" />
-    <Compile Include="Services\StripeCardServices.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

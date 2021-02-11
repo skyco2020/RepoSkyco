@@ -84,8 +84,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IStripeCardServices.cs" />
     <Compile Include="Key.cs" />
     <Compile Include="Model\PlanProduct.cs" />
+    <Compile Include="Patterns\Factories\FactoryPaymentIntent.cs" />
     <Compile Include="PaymentIntent.cs" />
     <Compile Include="StripeProduct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,6 +97,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessEntities\BusinessEntities.csproj">
+      <Project>{124ad04b-4310-4488-a2a0-dd78a5379d58}</Project>
+      <Name>BusinessEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataModal\DataModal.csproj">
+      <Project>{78682fba-ee97-4e25-bc71-6b1876f20f68}</Project>
+      <Name>DataModal</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Resolver\Resolver.csproj">
       <Project>{0fbe64ba-c24c-4d31-b479-de461176b310}</Project>
       <Name>Resolver</Name>

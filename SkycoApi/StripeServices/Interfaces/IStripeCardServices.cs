@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessServices.Interfaces
+namespace StripeServices.Interfaces
 {
     public interface IStripeCardServices
     {
-        dynamic Create(PaymentIntentBE Be);
+        Task <dynamic> PayAsync(PaymentIntentBE Be);
         dynamic Update(PaymentIntentBE Be);
         Task<dynamic> GetAllPricePlan(int count);
     }

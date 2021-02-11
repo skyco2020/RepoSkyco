@@ -2,6 +2,8 @@
 using BusinessServices.OwinSecurity;
 using BusinessServices.Services;
 using Resolver;
+using StripeServices;
+using StripeServices.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -18,9 +20,9 @@ namespace BusinessServices.Dependency
         {
             registerComponent.RegisterType<ICityServices, CityServices>();
             registerComponent.RegisterType<ICountryServices, CountryServices>(); 
-            registerComponent.RegisterType<IStripeCardServices, StripeCardServices>(); 
             registerComponent.RegisterType<ILocationServices, LocationServices>();
             registerComponent.RegisterType<IStripeSubscribeServices, StripeSubscribeServices>();
+            registerComponent.RegisterType<IStripeCardServices, StripeCardPayment>();
             registerComponent.RegisterType<IRegisterUserServices, RegisterUserServices>();
             registerComponent.RegisterType<IPlanServices, PlanServices>();
             registerComponent.RegisterType<IProvinceServices, ProvinceServices>();

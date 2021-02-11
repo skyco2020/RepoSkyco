@@ -48,7 +48,7 @@ namespace Resolver.Enumerations
         {
             switch (screen.ToLower())
             {
-                case "plan one":
+                case "Plan one Screen":
                     return 1;
                 case "plan two screens":
                     return 2;

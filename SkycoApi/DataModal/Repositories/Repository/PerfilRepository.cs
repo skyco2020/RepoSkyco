@@ -27,6 +27,7 @@ namespace DataModal.Repositories.Repository
         {
             Perfils perf = dbcontext.Perfils.Find(entity.idPerfil);
             perf.name = entity.name;
+            perf.passperfil = entity.passperfil;
             perf.complete = entity.complete;
             dbcontext.Perfils.Attach(perf);
             base.Update(perf, modifiedfields);

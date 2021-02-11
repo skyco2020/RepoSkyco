@@ -10,13 +10,11 @@ namespace BusinessEntities.BE
     {
         public Int64 idPaymentIntent { get; set; }
         public Int64 AccountId { get; set; }
-        public String stripeTokenId { get; set; }
-        public String CardId { get; set; }
+        public String iDPlanPrice { get; set; }
         public String fullname { get; set; }
-        public String Email { get; set; }
-        public String Description { get; set; }
+        public String email { get; set; }
+        public String description { get; set; }
 
-        public String IDStripePrice { get; set; }
 
         #region new
         public String cardnumber { get; set; }

@@ -1,12 +1,11 @@
 ﻿using BusinessEntities.BE;
-using StripeServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessServices.Patterns.Factories
+namespace StripeServices.Patterns.Factories
 {
     public class FactoryPaymentIntent
     {
@@ -26,13 +25,11 @@ namespace BusinessServices.Patterns.Factories
             {
                 be = new PaymentIntentBE()
                 {
-                    IDStripePrice = entity.IDStripePrice,
+                    iDPlanPrice = entity.iDPlanPrice,
                     AccountId = entity.AccountId,
-                    stripeTokenId = entity.stripeTokenId,
-                    CardId = entity.CardId,
-                    Email = entity.Email,
+                    email = entity.Email,
                     idPaymentIntent = entity.idPaymentIntent,
-                    Description = entity.Description,
+                    description = entity.Description,
                     fullname = entity.fullname,
                     state = entity.state,
                     cardnumber = entity.cardnumber,
@@ -40,7 +37,7 @@ namespace BusinessServices.Patterns.Factories
                     month = entity.month,
                     value = entity.value,
                     year = entity.year
-                };               
+                };
                 return be;
             }
             return null;
@@ -55,13 +52,11 @@ namespace BusinessServices.Patterns.Factories
             {
                 entity = new PaymentIntent()
                 {
-                    IDStripePrice = be.IDStripePrice,
+                    iDPlanPrice = be.iDPlanPrice,
                     AccountId = be.AccountId,
-                    stripeTokenId = be.stripeTokenId,
-                    CardId = be.CardId,
-                    Email = be.Email,
+                    Email = be.email,
                     idPaymentIntent = be.idPaymentIntent,
-                    Description = be.Description,
+                    Description = be.description,
                     fullname = be.fullname,
                     state = be.state,
                     cardnumber = be.cardnumber,
@@ -69,7 +64,7 @@ namespace BusinessServices.Patterns.Factories
                     month = be.month,
                     value = be.value,
                     year = be.year
-                };                
+                };
                 return entity;
 
             }

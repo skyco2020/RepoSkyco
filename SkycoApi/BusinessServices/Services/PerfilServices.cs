@@ -104,7 +104,7 @@ namespace BusinessServices.Services
                     throw new ApiBusinessException(2001, "Entity is not complete", System.Net.HttpStatusCode.NotFound, "Http");
 
                 Perfils entity = Patterns.Factories.FactoryPerfil.GetInstance().CreateEntity(Be);
-                _unitOfWork.PerfilRepository.Update(entity, new List<String> { "name", "complete"});
+                _unitOfWork.PerfilRepository.Update(entity, new List<String> { "name", "complete", "passperfil" });
                 _unitOfWork.Commit();
 
                 return true;
