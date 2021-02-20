@@ -71,6 +71,8 @@
     <Compile Include="BE\MovieBE.cs" />
     <Compile Include="BE\PaymentIntentBE.cs" />
     <Compile Include="BE\PerfilBE.cs" />
+    <Compile Include="BE\ProductBE.cs" />
+    <Compile Include="BE\PruductStripeBE.cs" />
     <Compile Include="BE\SearchBE.cs" />
     <Compile Include="BE\StripeSubscribeBE.cs" />
     <Compile Include="BE\PlanBE.cs" />

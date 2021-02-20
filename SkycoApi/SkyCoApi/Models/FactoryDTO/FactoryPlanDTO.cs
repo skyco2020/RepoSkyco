@@ -25,17 +25,18 @@ namespace SkyCoApi.Models.FactoryDTO
                 dto = new PlanDTO()
                 {
                     AccountId = be.AccountId,
-                    idProductStripe = be.idProductStripe,
+                    idProduct = be.idProduct,
                     Description = be.Description,
+                    idplanstripe = be.idplanstripe,
                     PlanId = be.Id,
                     TypePlan = be.TypePlan,
                     PlanDate = be.PlanDate,
                     Price = be.Price,
                     state = be.state,
+                    Products = be.Products != null ? FactoryProductDTO.GetInstance().CreateDTO(be.Products) : null,
                     Accounts = be.Accounts != null ? FactorySkyco_AccountDTO.GetInstance().CreateDTO(be.Accounts) : null
                 };
                 return dto;
-
             }
             return dto = null;
         }

@@ -22,7 +22,7 @@ namespace SkyCoApi.Controllers.Token
             String secretKey = ConfigurationManager.AppSettings["JWT_SECRET_KEY"];
             String audienceToken = ConfigurationManager.AppSettings["JWT_AUDIENCE_TOKEN"];
             String issuerToken = ConfigurationManager.AppSettings["JWT_ISSUER_TOKEN"];
-            String expireTime = ConfigurationManager.AppSettings["JWT_EXPIRE_MINUTES"];
+            String expireTime = ConfigurationManager.AppSettings["JWT_EXPIRE_DAYS"];
 
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(secretKey));
             SigningCredentials signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
@@ -44,7 +44,7 @@ namespace SkyCoApi.Controllers.Token
                 issuer: issuerToken,
                 subject: claimsIdentity,
                 notBefore: DateTime.UtcNow,
-                expires: DateTime.UtcNow.AddMinutes(Convert.ToInt32(expireTime)),
+                expires: DateTime.UtcNow.AddDays(Convert.ToInt32(expireTime)),
                 signingCredentials: signingCredentials);
             String jwtTokenString = tokenHandler.WriteToken(jwtSecurityToken);
             //var rd = tokenHandler.ReadJwtToken(jwtTokenString);

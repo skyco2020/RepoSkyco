@@ -57,6 +57,7 @@
     <Compile Include="DataClasses\Countries.cs" />
     <Compile Include="DataClasses\Locations.cs" />
     <Compile Include="DataClasses\Perfils.cs" />
+    <Compile Include="DataClasses\Products.cs" />
     <Compile Include="DataClasses\Providers.cs" />
     <Compile Include="DataClasses\StripeSubscribes.cs" />
     <Compile Include="DataClasses\Plans.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="GenericRepository\SkyCoGenericRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Interface\IPerfilRepository.cs" />
+    <Compile Include="Repositories\Interface\IProductRepository.cs" />
     <Compile Include="Repositories\Interface\IStripeSubscribeRepository.cs" />
     <Compile Include="Repositories\Interface\IPlanRepository.cs" />
     <Compile Include="Repositories\Interface\ISkyco_AccountRepository.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Repositories\Repository\CountryRepository.cs" />
     <Compile Include="Repositories\Repository\LocationRepository.cs" />
     <Compile Include="Repositories\Repository\PerfilRepository.cs" />
+    <Compile Include="Repositories\Repository\ProductRepository .cs" />
     <Compile Include="Repositories\Repository\StripeSubscribeRepository.cs" />
     <Compile Include="Repositories\Repository\PlanRepository.cs" />
     <Compile Include="Repositories\Repository\Skyco_AccountRepository.cs" />

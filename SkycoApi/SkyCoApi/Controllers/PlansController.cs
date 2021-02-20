@@ -4,6 +4,7 @@ using Resolver.Enumerations;
 using SkyCoApi.Helpers;
 using SkyCoApi.Models.DTO.Collections;
 using SkyCoApi.Models.DTO.Single;
+using StripeServices.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,26 +20,26 @@ namespace SkyCoApi.Controllers
     public class PlansController : ApiController
     {
         #region Single
-        private IPlanServices _services;
+        private IPlanServiceStripe _services;
 
-        public PlansController(IPlanServices services)
+        public PlansController(IPlanServiceStripe services)
         {
             _services = services;
         }
         #endregion
 
-        [Authorize]
+        [AllowAnonymous]
         [System.Web.Http.HttpGet]
         [ResponseType(typeof(PlanDTOCollectionRepresentation))]
         public async Task<IHttpActionResult> GetById(long id)
         {
-            PlanBE be = _services.GetById(id);
-            PlanDTO dto = new PlanDTO();
-            if (be == null)
-                return NotFound();
-            dto = Models.FactoryDTO.FactoryPlanDTO.GetInstance().CreateDTO(be);
-            dto.CreatesMySelfLinks();
-            return Ok(dto);
+            //PlanBE be = _services.Retrieveplan(id);
+            //PlanDTO dto = new PlanDTO();
+            //if (be == null)
+            //    return NotFound();
+            //dto = Models.FactoryDTO.FactoryPlanDTO.GetInstance().CreateDTO(be);
+            //dto.CreatesMySelfLinks();
+            return Ok(_services.Retrieveplan(id));
         }
 
         [AllowAnonymous]
@@ -47,7 +48,7 @@ namespace SkyCoApi.Controllers
         public async Task<IHttpActionResult> GetAll(Int32 state = (Int32)StateEnum.Activated, int page = 1, Int32 top = 12, String orderby = nameof(PlanDTO.PlanId), String ascending = "asc")
         {
             var count = 0;
-            IQueryable<PlanBE> query = _services.GetAll(state, page, top, orderby, ascending, ref count).AsQueryable();
+            IQueryable<PlanBE> query = _services.RetrieveAllplan(state, page, top, orderby, ascending, ref count).AsQueryable();
             List<PlanDTO> listdoto = new List<PlanDTO>();
             foreach (PlanBE item in query)
             {
@@ -58,6 +59,7 @@ namespace SkyCoApi.Controllers
             PlanDTOCollectionRepresentation dt = new PlanDTOCollectionRepresentation(listdoto.ToList(), FilterHelper.GenerateFilter(myfilters, top, orderby, ascending), page, count, top);
             return Ok(dt);
         }
+       
         [AllowAnonymous]
         [System.Web.Http.HttpPost]
         public async Task<IHttpActionResult> Post(PlanBE be)
@@ -66,27 +68,27 @@ namespace SkyCoApi.Controllers
             {
                 return BadRequest(ModelState);
             }
-            _services.Create(be);
+            _services.CreatePlan(be);
             return Created(new Uri(Url.Link("DefaultApi", new { Id = be.Id })), be);
         }
 
+        //[AllowAnonymous]
+        //[System.Web.Http.HttpPut]
+        //public async Task<IHttpActionResult> Put(PlanBE bE)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
+        //    _services.Update(bE);
+        //    return Ok();
+        //}
         [AllowAnonymous]
-        [System.Web.Http.HttpPut]
-        public async Task<IHttpActionResult> Put(PlanBE bE)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            _services.Update(bE);
-            return Ok();
-        }
-        [Authorize]
         [System.Web.Http.HttpDelete]
-        public async Task<IHttpActionResult> Delete(Int64 id)
+        public async Task<IHttpActionResult> Delete(String id)
         {
-            ClaimsIdentity identityClaims = (ClaimsIdentity)User.Identity;
-            _services.Delete(id, identityClaims.FindFirst("username").Value);
+            //ClaimsIdentity identityClaims = (ClaimsIdentity)User.Identity;
+            _services.DeletePlan(id);
             return Ok();
         }
     }

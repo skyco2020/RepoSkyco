@@ -15,9 +15,9 @@ namespace SkyCoApi.Controllers
     public class StripeCardController : ApiController
     {
         #region Single
-        private IStripeCardServices _services;
+        private ISubscribrStripeCardPaymentServices _services;
 
-        public StripeCardController(IStripeCardServices services)
+        public StripeCardController(ISubscribrStripeCardPaymentServices services)
         {
             _services = services;
         }
@@ -38,6 +38,21 @@ namespace SkyCoApi.Controllers
         public async Task<dynamic> GetAll(int count = 3)
         {           
             return Ok(_services.GetAllPricePlan(count));
+        }
+
+        [System.Web.Http.Route("api/StripeCard/Retrievecard")]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> Retrievecard(Int64 accoutId)
+        {
+            return Ok(_services.Retrievecard(accoutId));
+        }
+
+        [System.Web.Http.Route("api/StripeCard/Retrievesubscription")]
+        [System.Web.Http.HttpGet]
+        public async Task<IHttpActionResult> Retrievesubscription(Int64 accoutId)
+        {
+            return Ok(_services.Retrievesubscription(accoutId));
+
         }
     }
 }

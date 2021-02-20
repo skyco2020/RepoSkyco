@@ -6,6 +6,7 @@ using DataModal.UnitOfWork;
 using Resolver.Cryptography;
 using Resolver.Exceptions;
 using StripeServices;
+using StripeServices.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,7 +63,7 @@ namespace BusinessServices.Services
                     if (stripeentity == null)
                         throw new ApiBusinessException((Int32)(entities.AccountId), "You need tu complete payment", System.Net.HttpStatusCode.NotFound, "Http");
 
-                    Boolean stripe = StripeCardPayment.CheckPayMent(stripeentity.idStripeCustomer, stripeentity.idSubscribe, stripeentity.idPlanPriceStripe);
+                    Boolean stripe = CheckPaymentService.CheckPayMent(stripeentity.idSubscribe);
                     if (stripe == false)
                         throw new ApiBusinessException((Int32)(entities.AccountId), "Payment is missing for this month", System.Net.HttpStatusCode.NotFound, "Http");
                 }              

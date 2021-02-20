@@ -27,13 +27,13 @@ namespace BusinessServices.Patterns.Factories
                 be = new PlanBE()
                 {
                     AccountId = entity.AccountId,
-                    idProductStripe = entity.idProductStripe,
+                    idProduct = entity.idProduct,
                     Description = entity.Description,
                     Id = entity.PlanId,
                     TypePlan = entity.TypePlan,
                     PlanDate = entity.PlanDate,
-                    Price = entity.Price,
-                    state = entity.state,
+                    Price = (Int64)entity.Price,
+                    state = entity.State,
                     Accounts = entity.Accounts != null ? FactorySkyco_Account.GetInstance().CreateBusiness(entity.Accounts) : null
                 };
 
@@ -52,13 +52,13 @@ namespace BusinessServices.Patterns.Factories
                 entity = new Plans()
                 {
                     AccountId = be.AccountId,
-                    idProductStripe = be.idProductStripe,
+                    idProduct = be.idProduct,
                     Description = be.Description,
                     PlanId = be.Id,
                     TypePlan = be.TypePlan,
                     PlanDate = be.PlanDate,
                     Price = be.Price,
-                    state = be.state,
+                    State = be.state,
                 };
                 return entity;
 

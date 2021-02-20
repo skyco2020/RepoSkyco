@@ -72,6 +72,7 @@ namespace DataModal.UnitOfWork
         private ILocationRepository _LocationRepository;
         private IStripeSubscribeRepository _StripeSubscribeRepository;
         private IPlanRepository _PlanRepository;
+        private IProductRepository _ProductRepository;
         private IProvinceRepository _ProvinceRepository;
         private ISkyco_AccountRepository _Skyco_AccountRepository;
         private ISkyco_AccountTypeRepository _Skyco_AccountTypeRepository;
@@ -147,6 +148,18 @@ namespace DataModal.UnitOfWork
                 return _PlanRepository;
             }
             set { _PlanRepository = value; }
+        }
+        public IProductRepository ProductRepository
+        {
+            get
+            {
+                if (_ProductRepository == null)
+                {
+                    _ProductRepository = new ProductRepository(context);
+                }
+                return _ProductRepository;
+            }
+            set { _ProductRepository = value; }
         }
         public IProvinceRepository ProvinceRepository
         {

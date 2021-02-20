@@ -11,7 +11,7 @@ namespace StripeServices
 {
     public class StripeProduct
     {
-        public dynamic CreateProduct(PlanProduct proplan)
+        public dynamic CreateProduct(PlanStripe proplan)
         {
             try
             {

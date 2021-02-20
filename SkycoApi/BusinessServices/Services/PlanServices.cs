@@ -45,12 +45,12 @@ namespace BusinessServices.Services
         {
             try
             {
-                Expression<Func<DataModal.DataClasses.Plans, Boolean>> predicate = u => u.PlanId == Id && u.state == (Int32)StateEnum.Activated;
+                Expression<Func<DataModal.DataClasses.Plans, Boolean>> predicate = u => u.PlanId == Id && u.State == (Int32)StateEnum.Activated;
                 Plans entity = _unitOfWork.PlanRepository.GetOneByFilters(predicate, null);
                 if (entity == null)
                     throw new ApiBusinessException(1000, "Entity not found", System.Net.HttpStatusCode.NotFound, "Http");
 
-                entity.state = (byte)StateEnum.Deleted;
+                entity.State = (byte)StateEnum.Deleted;
                 entity.PlanDate = DateTime.Now;
                 _unitOfWork.PlanRepository.Delete(entity, new List<string>() { "state", "PlanDate"});
                 _unitOfWork.Commit();
@@ -65,7 +65,7 @@ namespace BusinessServices.Services
 
         public List<PlanBE> GetAll(int state, int page, int top, string orderBy, string ascending, ref int count)
         {
-            Expression<Func<DataModal.DataClasses.Plans, Boolean>> predicate = u => u.state == state;
+            Expression<Func<DataModal.DataClasses.Plans, Boolean>> predicate = u => u.State == state;
             IQueryable<DataModal.DataClasses.Plans> entities = _unitOfWork.PlanRepository.GetAllByFilters(predicate, new string[] { "Accounts" });
 
             count = entities.Count();
@@ -88,7 +88,7 @@ namespace BusinessServices.Services
 
         public PlanBE GetById(long Id)
         {
-            Expression<Func<DataModal.DataClasses.Plans, Boolean>> predicate = u => u.PlanId == Id && u.state == (Int32)StateEnum.Activated;
+            Expression<Func<DataModal.DataClasses.Plans, Boolean>> predicate = u => u.PlanId == Id && u.State == (Int32)StateEnum.Activated;
             Plans entity = _unitOfWork.PlanRepository.GetOneByFilters(predicate, new string[] { "Accounts" });
             PlanBE be = null;
             if (entity != null)

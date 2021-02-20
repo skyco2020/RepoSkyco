@@ -16,7 +16,8 @@ namespace SkyCoApi.Models.DTO.Single
         }
         #endregion
         public Int64 PlanId { get; set; }
-        public String idProductStripe { get; set; }
+        public Int64 idProduct { get; set; }
+        public String idplanstripe { get; set; }        
         public Int64 AccountId { get; set; }
         public Decimal Price { get; set; }
         public String Description { get; set; }
@@ -26,6 +27,7 @@ namespace SkyCoApi.Models.DTO.Single
 
         #region Relation
         public Skyco_AccountDTO Accounts { get; set; }
+        public ProductDTO Products { get; set; }
         #endregion
 
         #region List

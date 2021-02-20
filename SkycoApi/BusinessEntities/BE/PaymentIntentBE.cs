@@ -10,6 +10,7 @@ namespace BusinessEntities.BE
     {
         public Int64 idPaymentIntent { get; set; }
         public Int64 AccountId { get; set; }
+        public String TypePlan { get; set; }        
         public String iDPlanPrice { get; set; }
         public String fullname { get; set; }
         public String email { get; set; }
