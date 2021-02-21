@@ -29,7 +29,7 @@ namespace DataModal.Repositories.Repository
             Products prod = dbcontext.Products.Find(entity.idProduct);
             prod.name = entity.name;
             prod.urlimg = entity.urlimg;
-            prod.Description = entity.Description;
+            prod.description = entity.description;
 
             dbcontext.Products.Attach(prod);
             base.Update(prod, modifiedfields);    

@@ -1,6 +1,7 @@
 ﻿using BusinessEntities.BE;
 using DataModal.DataClasses;
 using DataModal.UnitOfWork;
+using Resolver.Enumerations;
 using Resolver.Exceptions;
 using Resolver.QueryableExtensions;
 using Stripe;
@@ -96,56 +97,86 @@ namespace StripeServices.Services
 
         #region Create a product
 
-        public async Task<dynamic> CreateProduct(PruductStripeBE prod)
+        public Int64 CreateProduct(ProductBE prod)
         {
             #region Secret Key
             Key.SecretKey();
             #endregion
-            var options = new ProductCreateOptions
+            try
             {
-                Name = prod.name,
-                Description = prod.description,
-                Active = prod.active,
-                Metadata = new Dictionary<string, string>
+                Products entity = Patterns.Factories.FactoryProduct.GetInstance().CreateEntity(prod);
+                var options = new ProductCreateOptions
                 {
-                    { "product", prod.name },
-                },
-
-
-            };
-            ProductService service = new ProductService();
-            Product product = service.Create(options);
-            return product;
+                    Name = entity.name,
+                    Description = entity.description,
+                    Active = entity.active,
+                    Metadata = new Dictionary<string, string>
+                    {
+                        { "product", entity.name },
+                    },
+                };
+                ProductService service = new ProductService();
+                Product product = service.Create(options);
+                entity.idproductStripe = product.Id;
+                return this.Insert(entity); ;
+            }
+            catch (Exception ex)
+            {
+                throw HandlerExceptions.GetInstance().RunCustomExceptions(ex);
+            }
+           
         }
         #endregion
 
-        #region Update Delete
+        #region Delete
 
-        //public async Task<dynamic> DeletePlan(PlanProduct plan)
-        //{
-        //    #region Secret Key
-        //    Key.SecretKey();
-        //    #endregion
+        public Boolean DeleteProduct(Int64 idproduct)
+        {
+            #region Secret Key
+            Key.SecretKey();
+            #endregion
+            try
+            {
+                Expression<Func<DataModal.DataClasses.Products, Boolean>> predicate = u => u.idProduct == idproduct && u.active == true;
+                Products entity = _unitOfWork.ProductRepository.GetOneByFilters(predicate, null);
+                if (entity == null)
+                    throw new ApiBusinessException(2000, "Entity not found", System.Net.HttpStatusCode.NotFound, "Http");
 
-        //    PlanCreateOptions options = new PlanCreateOptions
-        //    {
-        //        Amount = plan.Price,
-        //        Currency = "usd",
-        //        Interval = "month",
-        //        Product = plan.idProductStripe,
-        //    };
-        //    var service = new PlanService();
-        //    Plan plancreate = service.Create(options);
-        //    return plancreate;
-        //}
+                ProductService service = new ProductService();
+                Product productcreate = service.Delete(entity.idproductStripe);
+
+                this.DeletePlanBD(entity);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw HandlerExceptions.GetInstance().RunCustomExceptions(ex);
+            }
+           
+        }
         #endregion
 
         #region Private Method
-        private void Insert(Products prod)
+        private Int64 Insert(Products prod)
         {
             try
             {
                 _unitOfWork.ProductRepository.Create(prod);
+                _unitOfWork.Commit();
+                return prod.idProduct;
+            }
+            catch (Exception ex)
+            {
+                throw HandlerExceptions.GetInstance().RunCustomExceptions(ex);
+            }
+
+        }
+        private void DeletePlanBD(Products entity)
+        {
+            try
+            {  
+                entity.active = false;
+                _unitOfWork.ProductRepository.Delete(entity, new List<string>() { "active"});
                 _unitOfWork.Commit();
             }
             catch (Exception ex)
@@ -154,7 +185,6 @@ namespace StripeServices.Services
             }
 
         }
-
         #endregion
     }
 }

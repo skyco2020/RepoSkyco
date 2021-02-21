@@ -11,7 +11,7 @@ namespace SkyCoApi.Models.DTO.Single
         public Int64 AccountId { get; set; }
         public String idproductStripe { get; set; }
         public String name { get; set; }
-        public String Description { get; set; }
+        public String description { get; set; }
         public String urlimg { get; set; }
         public Boolean active { get; set; }
 

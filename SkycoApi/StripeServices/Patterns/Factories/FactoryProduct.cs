@@ -27,7 +27,7 @@ namespace StripeServices.Patterns.Factories
                 be = new ProductBE()
                 {
                     AccountId = entity.AccountId,
-                    Description = entity.Description,
+                    description = entity.description,
                     idproductStripe = entity.idproductStripe,
                     Id = entity.idProduct,
                     name = entity.name,
@@ -51,7 +51,7 @@ namespace StripeServices.Patterns.Factories
                 entity = new Products()
                 {
                     AccountId = be.AccountId,
-                    Description = be.Description,
+                    description = be.description,
                     idproductStripe = be.idproductStripe,
                     idProduct = be.Id,
                     name = be.name,

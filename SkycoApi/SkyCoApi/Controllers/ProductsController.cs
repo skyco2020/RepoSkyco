@@ -40,5 +40,24 @@ namespace SkyCoApi.Controllers
             return Ok(listdoto);
         }
 
+        [AllowAnonymous]
+        [System.Web.Http.HttpPost]
+        public async Task<IHttpActionResult> Post(ProductBE be)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            _services.CreateProduct(be);
+            return Created(new Uri(Url.Link("DefaultApi", new { Id = be.Id })), be);
+        }
+
+        [AllowAnonymous]
+        [System.Web.Http.HttpDelete]
+        public async Task<IHttpActionResult> Delete(Int64 id)
+        {
+            _services.DeleteProduct(id);
+            return Ok();
+        }
     }
 }

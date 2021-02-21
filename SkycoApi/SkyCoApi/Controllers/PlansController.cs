@@ -84,11 +84,12 @@ namespace SkyCoApi.Controllers
         //    return Ok();
         //}
         [AllowAnonymous]
-        [System.Web.Http.HttpDelete]
-        public async Task<IHttpActionResult> Delete(String id)
+        [Route("api/Plans/Delete")]
+        [System.Web.Http.HttpPost]
+        public async Task<IHttpActionResult> Delete(PlanBE data)
         {
             //ClaimsIdentity identityClaims = (ClaimsIdentity)User.Identity;
-            _services.DeletePlan(id);
+            _services.DeletePlan(data.idplanstripe, data.Motive);
             return Ok();
         }
     }

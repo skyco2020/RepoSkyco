@@ -18,8 +18,9 @@ namespace DataModal.Repositories.Repository
         public override void Delete(Plans entity, List<string> modifiedfields)
         {
             Plans plan = dbcontext.Plans.Find(entity.PlanId);
-            plan.State = entity.State;
+            plan.state = entity.state;
             plan.PlanDate = entity.PlanDate;
+            plan.Motive = entity.Motive;
 
             dbcontext.Plans.Attach(plan);
             base.Delete(plan, modifiedfields);

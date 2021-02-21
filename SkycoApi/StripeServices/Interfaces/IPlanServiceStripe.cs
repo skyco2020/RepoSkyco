@@ -14,6 +14,6 @@ namespace StripeServices.Interfaces
         Task<dynamic> Retrieveplan(Int64 accoutId);
         Task<dynamic> CreatePlan(PlanBE plan);
         Task<dynamic> UpdatePlan(String priceid, Int64 order_id);
-        Task<dynamic> DeletePlan(String PlanId);
+        Task<dynamic> DeletePlan(String idplanstripe, String motive);
     }
 }

@@ -10,5 +10,7 @@ namespace StripeServices.Interfaces
     public interface IProductServiceStripe
     {
         List<ProductBE> RetrieveAllProduct(bool active, int page, int top, string orderBy, string ascending, ref int count);
+        Boolean DeleteProduct(Int64 idproduct);
+        Int64 CreateProduct(ProductBE prod);
     }
 }

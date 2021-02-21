@@ -18,8 +18,9 @@ namespace DataModal.DataClasses
         public String TypePlan { get; set; }
         public Decimal Price { get; set; }
         public String Description { get; set; }
+        public String Motive { get; set; }
         public DateTime PlanDate { get; set; }
-        public Int32 State { get; set; }
+        public Int32 state { get; set; }
 
         #region Relation
         [ForeignKey("AccountId")]

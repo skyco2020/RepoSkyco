@@ -32,10 +32,11 @@ namespace StripeServices.Patterns.Factories
                     idplanstripe = entity.idplanstripe,
                     Description = entity.Description,
                     Id = entity.PlanId,
+                    Motive = entity.Motive,
                     TypePlan = entity.TypePlan,
                     PlanDate = entity.PlanDate,
                     Price = (Int64)entity.Price,
-                    state = entity.State,
+                    state = entity.state,
                     Products = entity.Products != null ? FactoryProduct.GetInstance().CreateBusiness(entity.Products) : null,
                     Accounts = entity.Accounts != null ? FactorySkyco_Account.GetInstance().CreateBusiness(entity.Accounts) : null
                 };
@@ -59,10 +60,11 @@ namespace StripeServices.Patterns.Factories
                     idplanstripe = be.idplanstripe,
                     Description = be.Description,
                     PlanId = be.Id,
+                    Motive = be.Motive,
                     TypePlan = be.TypePlan,
                     PlanDate = be.PlanDate,
                     Price = be.Price,
-                    State = be.state,
+                    state = be.state,
                 };
                 return entity;
 

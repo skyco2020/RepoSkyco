@@ -14,6 +14,7 @@ namespace BusinessEntities.BE
         public String TypePlan { get; set; }
         public Int64 Price { get; set; }
         public String Description { get; set; }
+        public String Motive { get; set; }
         public DateTime PlanDate { get; set; }
         public Boolean State { get; set; }
 

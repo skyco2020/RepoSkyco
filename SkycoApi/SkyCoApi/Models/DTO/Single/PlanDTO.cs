@@ -23,6 +23,7 @@ namespace SkyCoApi.Models.DTO.Single
         public String Description { get; set; }
         public String TypePlan { get; set; }
         public DateTime PlanDate { get; set; }
+        public String Motive { get; set; }
         public Int32 state { get; set; }
 
         #region Relation

@@ -32,7 +32,7 @@ namespace StripeServices.Services
         {
 
             
-            Expression<Func<DataModal.DataClasses.Plans, Boolean>> predicate = u => u.State == state;
+            Expression<Func<DataModal.DataClasses.Plans, Boolean>> predicate = u => u.state == state;
             IQueryable<DataModal.DataClasses.Plans> entities = _unitOfWork.PlanRepository.GetAllByFilters(predicate, new string[] { "Accounts","Products" });
 
             count = entities.Count();
@@ -134,17 +134,24 @@ namespace StripeServices.Services
 
         #region Delete Plan
 
-        public async Task<dynamic> DeletePlan(String PlanId)
+        public async Task<dynamic> DeletePlan(String idplanstripe, String motive)
         {
             #region Secret Key
             Key.SecretKey();
             #endregion
+            try
+            {              
+                PlanService service = new PlanService();
+                Plan delplan = service.Delete(idplanstripe);
 
-            PlanService service = new PlanService();
-            Plan delplan = service.Delete(PlanId);
-
-            this.DeletePlanBD(PlanId);
-            return delplan;
+                this.DeletePlanBD(idplanstripe, motive);
+                return delplan;
+            }
+            catch (Exception ex)
+            {
+                throw HandlerExceptions.GetInstance().RunCustomExceptions(ex);
+            }
+           
         }
         #endregion
 
@@ -163,18 +170,19 @@ namespace StripeServices.Services
 
         }
 
-        private void DeletePlanBD(String PlanId)
+        private void DeletePlanBD(String PlanId, String motive)
         {
             try
             {
-                Expression<Func<DataModal.DataClasses.Plans, Boolean>> predicate = u => u.idplanstripe == PlanId && u.State == (Int32)StateEnum.Activated;
+                Expression<Func<DataModal.DataClasses.Plans, Boolean>> predicate = u => u.idplanstripe == PlanId && u.state == (Int32)StateEnum.Activated;
                 Plans entity = _unitOfWork.PlanRepository.GetOneByFilters(predicate, null);
                 if (entity == null)
                     throw new ApiBusinessException(1000, "Entity not found", System.Net.HttpStatusCode.NotFound, "Http");
 
-                entity.State = (byte)StateEnum.Deleted;
+                entity.state = (byte)StateEnum.Deleted;
                 entity.PlanDate = DateTime.Now;
-                _unitOfWork.PlanRepository.Delete(entity, new List<string>() { "state", "PlanDate" });
+                entity.Motive = motive;
+                _unitOfWork.PlanRepository.Delete(entity, new List<string>() { "state", "PlanDate", "Motive" });
                 _unitOfWork.Commit();
             }
             catch (Exception ex)

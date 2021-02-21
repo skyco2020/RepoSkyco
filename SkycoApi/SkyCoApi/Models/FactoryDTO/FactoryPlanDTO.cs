@@ -31,6 +31,7 @@ namespace SkyCoApi.Models.FactoryDTO
                     PlanId = be.Id,
                     TypePlan = be.TypePlan,
                     PlanDate = be.PlanDate,
+                    Motive = be.Motive,
                     Price = be.Price,
                     state = be.state,
                     Products = be.Products != null ? FactoryProductDTO.GetInstance().CreateDTO(be.Products) : null,

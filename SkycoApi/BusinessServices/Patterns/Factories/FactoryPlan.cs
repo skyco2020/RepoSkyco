@@ -33,7 +33,7 @@ namespace BusinessServices.Patterns.Factories
                     TypePlan = entity.TypePlan,
                     PlanDate = entity.PlanDate,
                     Price = (Int64)entity.Price,
-                    state = entity.State,
+                    state = entity.state,
                     Accounts = entity.Accounts != null ? FactorySkyco_Account.GetInstance().CreateBusiness(entity.Accounts) : null
                 };
 
@@ -58,7 +58,7 @@ namespace BusinessServices.Patterns.Factories
                     TypePlan = be.TypePlan,
                     PlanDate = be.PlanDate,
                     Price = be.Price,
-                    State = be.state,
+                    state = be.state,
                 };
                 return entity;
 
