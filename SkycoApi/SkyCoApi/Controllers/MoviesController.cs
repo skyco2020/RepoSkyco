@@ -38,17 +38,17 @@ namespace SkyCoApi.Controllers
 
         [AllowAnonymous]
         [System.Web.Http.HttpGet]
-        [Route("api/GetAllMovie")]
+        [Route("api/Movies/GetAllMovie")]
         public async Task<IHttpActionResult> GetAllMovie()
         {
-            var count = 0;
-            IQueryable<MovieBE> query = _services.GetListMovie().AsQueryable();
-            List<MovieAzureDTO> listdoto = new List<MovieAzureDTO>();
-            foreach (MovieBE item in query)
-            {
-                listdoto.Add(Models.FactoryDTO.FactoryMovieAzureDTO.GetInstance().CreateDTO(item));
-            }
-            return Ok(listdoto);
+            //var count = 0;
+            MovieBE query = _services.GetAllMovie();
+            //List<MovieAzureDTO> listdoto = new List<MovieAzureDTO>();
+            //foreach (MovieBE item in query)
+            //{
+            //    listdoto.Add(Models.FactoryDTO.FactoryMovieAzureDTO.GetInstance().CreateDTO(item));
+            //}
+            return Ok(query);
         }
 
     }

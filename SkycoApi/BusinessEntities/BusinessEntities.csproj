@@ -64,9 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BE\BaseBE.cs" />
+    <Compile Include="BE\BaseVideoBE.cs" />
     <Compile Include="BE\CityBE.cs" />
     <Compile Include="BE\CountryBE.cs" />
+    <Compile Include="BE\HitBE.cs" />
+    <Compile Include="BE\LargeBE.cs" />
     <Compile Include="BE\LocationBE.cs" />
+    <Compile Include="BE\MediumBE.cs" />
     <Compile Include="BE\ModelObjBE.cs" />
     <Compile Include="BE\MovieBE.cs" />
     <Compile Include="BE\PaymentIntentBE.cs" />
@@ -74,6 +78,7 @@
     <Compile Include="BE\ProductBE.cs" />
     <Compile Include="BE\PruductStripeBE.cs" />
     <Compile Include="BE\SearchBE.cs" />
+    <Compile Include="BE\SmallBE.cs" />
     <Compile Include="BE\StripeSubscribeBE.cs" />
     <Compile Include="BE\PlanBE.cs" />
     <Compile Include="BE\PricePlanBE.cs" />
@@ -83,6 +88,8 @@
     <Compile Include="BE\Skyco_AddressBE.cs" />
     <Compile Include="BE\Skyco_PhoneBE.cs" />
     <Compile Include="BE\Skyco_UserBE.cs" />
+    <Compile Include="BE\TinyBE.cs" />
+    <Compile Include="BE\VideoBE.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

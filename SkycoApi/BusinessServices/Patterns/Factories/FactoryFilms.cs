@@ -27,7 +27,17 @@ namespace BusinessServices.Patterns.Factories
                 be = new MovieBE()
                 {
                     urlmovie = entity.urlmovie,
+                    total = entity.total,
+                    totalHits = entity.totalHits
                 };
+                if (entity.hits.Count > 0)
+                {
+                    be.hits = new List<HitBE>();
+                    foreach (var item in entity.hits)
+                    {
+                        be.hits.Add(FactoryHit.GetInstance().CreateBusiness(item));
+                    }
+                }
                 return be;
             }
             return null;

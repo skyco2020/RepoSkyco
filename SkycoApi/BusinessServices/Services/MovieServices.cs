@@ -39,17 +39,20 @@ namespace BusinessServices.Services
             throw new NotImplementedException();
         }
 
-        public List<MovieBE> GetListMovie()
+        public MovieBE GetAllMovie()
         {
-            List<Movie> entities = _unitOfWork.GetListMovie();
-
-            List<MovieBE> listbe = new List<MovieBE>();
-            if (entities.Count > 0)
-                foreach (Movie item in entities)
-                {
-                    listbe.Add(Patterns.Factories.FactoryFilms.GetInstance().CreateBusiness(item));
-                }
-            return listbe;
+            try
+            {
+                Movie entities = _unitOfWork.GetAllMovie();
+                MovieBE listbe = new MovieBE();
+                if (entities != null)
+                    return Patterns.Factories.FactoryFilms.GetInstance().CreateBusiness(entities);
+                return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }                
         }
     }
 }

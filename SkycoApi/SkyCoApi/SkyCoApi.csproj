@@ -569,6 +569,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\CountriesController.cs" />
+    <Compile Include="Controllers\FileDownloadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ModelFactory.cs" />
     <Compile Include="Controllers\MoviesController.cs" />
@@ -584,6 +585,14 @@
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="ErrorHelper\JsonCustomException.cs" />
+    <Compile Include="File\MimeMultipartFilter.cs" />
+    <Compile Include="File\DocumentHandling.cs" />
+    <Compile Include="File\DocumentValidation.cs" />
+    <Compile Include="File\FileConfig.cs" />
+    <Compile Include="File\FileHandling.cs" />
+    <Compile Include="File\FileResult.cs" />
+    <Compile Include="File\FileValidation.cs" />
+    <Compile Include="File\UploadMultipartFormProvider.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -720,7 +729,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="MyMovies\" />
+    <Folder Include="MyFiles\" />
     <Folder Include="Providers\" />
   </ItemGroup>
   <ItemGroup>

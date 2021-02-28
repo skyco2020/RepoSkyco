@@ -64,6 +64,50 @@ namespace StreamingVideo.Movies
 
         }
 
+        public Movie GetAllMovie()
+        {           
+
+            String URL = "https://pixabay.com/api/videos/?key=19225679-589718ac01031a964104548e7";
+
+            string apiKey = "1832462d";
+            string baseUri = $"http://www.omdbapi.com/?apikey={apiKey}";
+
+            string name = "maniac";
+            string type = "series";
+
+            var sb = new StringBuilder(URL);
+            var request = WebRequest.Create(sb.ToString());
+            request.Method = "GET";
+            request.ContentType = "application/json";
+
+            string result = string.Empty;
+            Movie mv = new Movie();
+            try
+            {
+                using (var response = request.GetResponse())
+                {
+                    using (var stream = response.GetResponseStream())
+                    {
+                        using (var reader = new StreamReader(stream, Encoding.UTF8))
+                        {
+                            result = reader.ReadToEnd();
+                        }
+                    }
+                }
+                mv = JsonConvert.DeserializeObject<Movie>(result);
+                return mv;
+            }
+            catch (WebException e)
+            {
+                return null;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+
+        }
+
         public List<Movie> GetListMovie()
         {
             try

@@ -12,6 +12,7 @@ namespace BusinessServices.Interfaces
     {
         SearchBE GetById(String Id);
         List<SearchBE> GetAll(Int32 state);
-        List<MovieBE> GetListMovie();
+        MovieBE GetAllMovie();
+
     }
 }
